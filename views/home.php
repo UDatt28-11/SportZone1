@@ -194,13 +194,15 @@
                             <div
                                 class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
                                 <?php if($sanPham['gia_khuyen_mai']) { ?>
-                                <div class="product-price text-title"><?= formatPrice( $sanPham['gia_san_pham']); ?>
+                                <div class="product-price text-title">
+                                    <?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
                                 </div>
                                 <div class="product-origin-price caption1 text-secondary2">
-                                    <del>><?= formatPrice($sanPham['gia_khuyen_mai']); ?></del>
+                                    <del>><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
                                 </div>
                                 <?php } else {?>
-                                <div class="product-price text-title"><?= formatPrice( $sanPham['gia_san_pham']); ?>
+                                <div class="product-price text-title">
+                                    <?= formatPrice( $sanPham['gia_san_pham']) . 'VNĐ'; ?>
                                 </div>
                                 <?php } ?>
                                 <div
