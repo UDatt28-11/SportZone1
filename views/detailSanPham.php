@@ -431,7 +431,7 @@
                                     </div>
                                     <div class="user">
                                         <div class="flex items-center gap-2">
-                                            <div class="text-title">Khách Hàng</div>
+                                            <div class="text-title"><?= $binhLuan['ho_ten'] ?></div>
                                             <div class="span text-line">-</div>
                                             <div class="rate flex">
                                                 <i class="ph-fill ph-star text-xs text-yellow"></i>
