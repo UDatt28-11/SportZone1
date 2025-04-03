@@ -1,7 +1,69 @@
-<?php require_once 'header.php'; ?>
-<?php require_once 'menu.php'; ?>
+<?php require_once 'layout/header.php'; ?>
+<?php require_once 'layout/menu.php'; ?>
 
-
+<!-- Slider -->
+<div
+    class="slider-block style-one bg-linear xl:h-[860px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
+    <div class="slider-main h-full w-full">
+        <div class="swiper swiper-slider h-full relative">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slider-item h-full w-full relative">
+                        <div class="container w-full h-full flex items-center relative">
+                            <div class="text-content basis-1/2">
+                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
+                                <div class="text-display md:mt-5 mt-2">
+                                    Bộ sưu tập giảm giá mùa hè
+                                </div>
+                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
+                                </a>
+                            </div>
+                            <div class="sub-img absolute sm:w-1/2 w-3/5 2xl:-right-[60px] -right-[16px] bottom-0">
+                                <img src="./assets/images/slider/bg1-1.png" alt="bg1-1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slider-item h-full w-full relative">
+                        <div class="container w-full h-full flex items-center relative">
+                            <div class="text-content basis-1/2">
+                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
+                                <div class="text-display md:mt-5 mt-2">
+                                    Xu hướng của thời đại
+                                </div>
+                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
+                                </a>
+                            </div>
+                            <div class="sub-img absolute w-1/2 2xl:-right-[60px] -right-[0] sm:-bottom-[60px] bottom-0">
+                                <img src="./assets/images/slider/bg3-1.png" alt="bg1-2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slider-item h-full w-full relative">
+                        <div class="container w-full h-full flex items-center relative">
+                            <div class="text-content basis-1/2">
+                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
+                                <div class="text-display md:mt-5 mt-2">
+                                    Phong cách thể thao bốn mùa
+                                </div>
+                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
+                                </a>
+                            </div>
+                            <div
+                                class="sub-img absolute sm:w-1/2 w-2/3 2xl:-right-[60px] -right-[36px] sm:bottom-0 -bottom-[30px]">
+                                <img src="./assets/images/slider/bg1-3.png" alt="bg1-3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
 <div class="what-new-block filter-product-block md:pt-20 pt-10">
     <div class="container">
         <div class="heading flex flex-col items-center text-center">
@@ -34,10 +96,22 @@
                 <div class="product-item grid-type" data-item="11">
                     <div class="product-main cursor-pointer block">
                         <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
+                            <?php 
+                                    $ngayNhap = new DateTime($sanPham['ngay_nhap']);
+                                    $ngayHienTai = new DateTime();
+                                    $tinhNgay = $ngayHienTai->diff($ngayNhap);
+                                    if($tinhNgay->days <= 7){
+                                        ?>
                             <div
                                 class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
                                 New
                             </div>
+
+                            <?php } else { ?>
+                            <div
+                                class="product-tag text-button-uppercase text-white bg-red px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                Giảm Giá</div>
+                            <?php }  ?>
                             <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                 <div
                                     class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
@@ -56,15 +130,18 @@
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700"
-                                    src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
-                                <img class="w-full h-full object-cover duration-700"
-                                    src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">
+                                    <img class="w-full h-full object-cover duration-700"
+                                        src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                    <img class="w-full h-full object-cover duration-700"
+                                        src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                </a>
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
                                 <div
                                     class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
-                                    Xem Chi Tiết
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
+                                        Chi Tiết</a>
                                 </div>
                                 <div
                                     class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
@@ -91,7 +168,7 @@
                                 </div>
                             </div>
                             <div class="product-name text-title duration-300">
-                                Off-the-Shoulder Blouse
+                                <?= $sanPham['ten_san_pham'] ?>
                             </div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
@@ -116,10 +193,16 @@
 
                             <div
                                 class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
-                                <div class="product-price text-title">$32.00</div>
-                                <div class="product-origin-price caption1 text-secondary2">
-                                    <del>$40.00</del>
+                                <?php if($sanPham['gia_khuyen_mai']) { ?>
+                                <div class="product-price text-title"><?= formatPrice( $sanPham['gia_san_pham']); ?>
                                 </div>
+                                <div class="product-origin-price caption1 text-secondary2">
+                                    <del>><?= formatPrice($sanPham['gia_khuyen_mai']); ?></del>
+                                </div>
+                                <?php } else {?>
+                                <div class="product-price text-title"><?= formatPrice( $sanPham['gia_san_pham']); ?>
+                                </div>
+                                <?php } ?>
                                 <div
                                     class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
                                     -20%
@@ -1559,7 +1642,7 @@
                 <div class="list-product flex items-center w-full gap-4"></div>
                 <div class="block-button flex flex-col gap-4 flex-shrink-0">
                     <a href="compare.html" class="button-main whitespace-nowrap">
-                        So Sánh Sản Phẩms</a>
+                        So Sánh Sản Phẩm</a>
                     <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">
                         Clear All Products
                     </div>
@@ -1813,4 +1896,4 @@
     </div>
 </div>
 <!--End Modal -->
-<?php require_once 'footer.php'; ?>
+<?php require_once 'layout/footer.php'; ?>

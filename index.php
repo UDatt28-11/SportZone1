@@ -11,6 +11,10 @@ require_once './models/SanPham.php';
 require_once './controllers/HomeController.php';
 // Route
 $act = $_GET['act'] ?? '/';
+
 match($act){
+    
     '/' => (new HomeController())->home(), // route trang chủ
+    
+    'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
 };

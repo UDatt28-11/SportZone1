@@ -57,7 +57,7 @@
                     <i class="icon-category text-2xl"></i>
                 </div>
                 <div class="left flex items-center gap-16">
-                    <a href="index.html"
+                    <a href="<?= BASE_URL ?>"
                         class="flex items-center max-lg:absolute max-lg:left-1/2 max-lg:-translate-x-1/2">
                         <div class="heading4">Sport Zone</div>
                     </a>
@@ -1122,68 +1122,5 @@
         </div>
     </div>
 
-    <!-- Slider -->
-    <div
-        class="slider-block style-one bg-linear xl:h-[860px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
-        <div class="slider-main h-full w-full">
-            <div class="swiper swiper-slider h-full relative">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="slider-item h-full w-full relative">
-                            <div class="container w-full h-full flex items-center relative">
-                                <div class="text-content basis-1/2">
-                                    <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                    <div class="text-display md:mt-5 mt-2">
-                                        Bộ sưu tập giảm giá mùa hè
-                                    </div>
-                                    <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                    </a>
-                                </div>
-                                <div class="sub-img absolute sm:w-1/2 w-3/5 2xl:-right-[60px] -right-[16px] bottom-0">
-                                    <img src="./assets/images/slider/bg1-1.png" alt="bg1-1" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="slider-item h-full w-full relative">
-                            <div class="container w-full h-full flex items-center relative">
-                                <div class="text-content basis-1/2">
-                                    <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                    <div class="text-display md:mt-5 mt-2">
-                                        Xu hướng của thời đại
-                                    </div>
-                                    <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                    </a>
-                                </div>
-                                <div
-                                    class="sub-img absolute w-1/2 2xl:-right-[60px] -right-[0] sm:-bottom-[60px] bottom-0">
-                                    <img src="./assets/images/slider/bg3-1.png" alt="bg1-2" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="slider-item h-full w-full relative">
-                            <div class="container w-full h-full flex items-center relative">
-                                <div class="text-content basis-1/2">
-                                    <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                    <div class="text-display md:mt-5 mt-2">
-                                        Phong cách thể thao bốn mùa
-                                    </div>
-                                    <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                    </a>
-                                </div>
-                                <div
-                                    class="sub-img absolute sm:w-1/2 w-2/3 2xl:-right-[60px] -right-[36px] sm:bottom-0 -bottom-[30px]">
-                                    <img src="./assets/images/slider/bg1-3.png" alt="bg1-3" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </div>
+
 </div>
