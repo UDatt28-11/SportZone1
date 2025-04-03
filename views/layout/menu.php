@@ -123,20 +123,20 @@
                                 </div>
                             </li>
                             <li class="h-full">
-                                <a href="#!"
+                                <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Danh Mục
                                 </a>
 
                             </li>
                             <li class="h-full relative">
-                                <a href="#!"
+                                <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Tin Tức
                                 </a>
                             </li>
                             <li class="h-full relative">
-                                <a href="#!"
+                                <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Pages
                                 </a>
