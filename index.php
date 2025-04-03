@@ -13,4 +13,5 @@ require_once './controllers/HomeController.php';
 $act = $_GET['act'] ?? '/';
 match($act){
     '/' => (new HomeController())->home(), // route trang chủ
+    
 };
