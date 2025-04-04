@@ -1,4 +1,3 @@
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
@@ -32,6 +31,7 @@
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="<?= BASE_URL_ADMIN . '?act=danh-muc'?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -51,34 +51,45 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
-                    
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>Quản lý tài khoản</p>
-                        <i class="fas fa-angle-left right"></i>
-                    </a>
 
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri'?>" class="nav-link">
-                                <i class="nav-icon far fa-user"></i>
-                                <p>Tài khoản quản trị</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang'?>" class="nav-link">
-                                <i class="nav-icon far fa-user"></i>
-                                <p>Tài khoản khách hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon far fa-user"></i>
-                                <p>Quản lý tài khoản cá nhân</p>
-                            </a>
-                        </li>
-                    </ul>
+                    <a href="<?= url(  '?act=don-hang')?>" class="nav-link">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>
+                            Đơn Hàng
+                        </p>
+                    </a>
                 </li>
+
+
+                <a href="" class="nav-link">
+
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Quản lý tài khoản</p>
+                    <i class="fas fa-angle-left right"></i>
+                </a>
+
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri'?>" class="nav-link">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Tài khoản quản trị</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang'?>" class="nav-link">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Tài khoản khách hàng</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Quản lý tài khoản cá nhân</p>
+                        </a>
+                    </li>
+                </ul>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
