@@ -14,3 +14,5 @@ $act = $_GET['act'] ?? '/';
 match($act){
     '/' => (new HomeController())->home(), // route trang chủ
 };
+
+var_dump(url());
