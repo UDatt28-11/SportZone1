@@ -53,8 +53,7 @@
                                         <td><?= $sanPham['ten_san_pham'] ?></td>
                                         <td>
                                             <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 100px"
-                                                alt=""
-                                                onerror="this.onerror=null; this.src='https://cutepetshop.vn/wp-content/uploads/2023/05/11-buc-hinh-nen-thu-cung-dang-yeu-3.jpg'">
+                                                alt="" onerror="this.onerror=null; this.src=''">
                                         </td>
                                         <td><?= $sanPham['gia_san_pham'] ?></td>
                                         <td><?= $sanPham['so_luong'] ?></td>

@@ -65,9 +65,6 @@ class AdminSanPhamController
             if (empty($gia_san_pham)) {
                 $errors['gia_san_pham'] = 'giá sản phẩm không được để trống';
             }
-            if (empty($gia_khuyen_mai)) {
-                $errors['gia_khuyen_mai'] = 'giá khuyến mãi sản phẩm không được để trống';
-            }
             if (empty($so_luong)) {
                 $errors['so_luong'] = 'số lượng sản phẩm không được để trống';
             }
@@ -84,14 +81,12 @@ class AdminSanPhamController
                 $errors['hinh_anh'] = 'Phải chọn ảnh sản phẩm';
             }
 
-            $_SESSION['error'] = $errors;
-
+            // $_SESSION['error'] = $errors;
 
             // Nếu ko có lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {
                 // Nếu ko có lỗi thì tiến hành thêm sản phẩm
                 // var_dump('Oke');
-
                 $san_pham_id = $this->modelSanPham->insertSanPham(
                     $ten_san_pham,
                     $gia_san_pham,
@@ -188,9 +183,6 @@ class AdminSanPhamController
             }
             if (empty($gia_san_pham)) {
                 $errors['gia_san_pham'] = 'giá sản phẩm không được để trống';
-            }
-            if (empty($gia_khuyen_mai)) {
-                $errors['gia_khuyen_mai'] = 'giá khuyến mãi sản phẩm không được để trống';
             }
             if (empty($so_luong)) {
                 $errors['so_luong'] = 'số lượng sản phẩm không được để trống';
