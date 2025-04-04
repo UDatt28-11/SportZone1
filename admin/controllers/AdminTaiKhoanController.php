@@ -141,4 +141,75 @@ public function resetPassword(){
         require_once './views/taikhoan/khachhang/editKhachHang.php';
         deleteSessionError();
     }
+
+    public function postEditKhachHang()
+    {
+    // Hàm này dùng để xử lý thêm dữ liệu
+
+        // Kiểm tra xem dữ liệu có phải đc submit lên không
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy ra dữ liệu
+            $khach_hang_id = $_POST['id'] ?? '';
+
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $ngay_sinh = $_POST['ngay_sinh'] ?? '';
+            $gioi_tinh = $_POST['gioi_tinh'] ??  '';
+            $dia_chi = $_POST['dia_chi'] ??  '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
+
+            // Tạo 1 mảng trống để chứa dữ liệu
+            $errors = [];
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Họ Và Tên không được để trống';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Email không được để trống';
+            }
+            if (empty($so_dien_thoai)) {
+                $errors['so_dien_thoai'] = 'Số điện thoại không được để trống';
+            }
+            if (empty($ngay_sinh)) {
+                $errors['ngay_sinh'] = 'Ngày sinh không được để trống';
+            }
+            
+            if (empty($gioi_tinh)) {
+                $errors['gioi_tinh'] = 'Giới tính không được để trống';
+            }
+            if (empty($trang_thai)) {
+                $errors['gioi_tinh'] = 'Vui lòng chọn trạng thái tài khoản';
+            }
+            $_SESSION['error'] = $errors;
+            // Nếu ko có lỗi thì tiến hành thêm tai khoản
+            if (empty($errors)) {
+               
+                $this->modelTaiKhoan->updateKhachHang(
+                                                     $khach_hang_id,
+                                                             $ho_ten,
+                                                              $email,
+                                                                $ngay_sinh,
+                                                                $gioi_tinh,
+                                                                $dia_chi,
+                                                               $so_dien_thoai,
+                                                                $trang_thai);
+
+                header("Location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang');
+                exit();
+            } else {
+                // Trả về form và lỗi
+                $_SESSION['flash']= true;
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-khach-hang&id_khach_hang='.$khach_hang_id);
+                exit();
+            }
+        }
+    }
+
+    public function detailKhachHang(){
+        $id_khach_hang = $_GET['id_khach_hang'];
+        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+        // var_dump($quanTri);die();
+        require_once './views/taikhoan/khachhang/detailKhachHang.php';
+        deleteSessionError();
+    }
 }
