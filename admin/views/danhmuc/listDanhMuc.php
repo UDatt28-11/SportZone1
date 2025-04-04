@@ -28,8 +28,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="<?= BASE_URL_ADMIN . '?act=form-them-danh-muc' ?>">
-                <button class="btn btn-success">Thêm danh mục</button>
+              <a href="<?= url('?act=form-them-danh-muc') ?>">
+                <button type="submit" class="btn btn-success">Thêm danh mục</button>
               </a>
             </div>
             <!-- /.card-header -->

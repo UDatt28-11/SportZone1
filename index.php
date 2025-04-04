@@ -23,3 +23,4 @@ match($act){
     // 'check-login' => (new HomeController())->postLogin(),
     //Test nhánh 
 };
+
