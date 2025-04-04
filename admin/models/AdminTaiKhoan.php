@@ -89,4 +89,46 @@ public function resetPassword($id, $mat_khau){
             echo "lỗi" . $e->getMessage();
         }
     }
+
+    public function updateKhachHang(
+                    $khach_hang_id,
+                    $ho_ten,
+                    $email,
+                    $ngay_sinh,
+                    $gioi_tinh,
+                    $dia_chi,
+                    $so_dien_thoai,
+                    $trang_thai){
+        // var_dump($quan_tri_id, $ho_ten, $email, $so_dien_thoai, $trang_thai);die();
+    try {
+        $sql = 'UPDATE tai_khoans SET
+                ho_ten = :ho_ten,
+                email = :email,
+                ngay_sinh = :ngay_sinh,
+                gioi_tinh = :gioi_tinh,
+                dia_chi = :dia_chi,
+                so_dien_thoai = :so_dien_thoai, 
+                trang_thai = :trang_thai
+                WHERE id = :id';
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute([
+            ':ho_ten' => $ho_ten,
+            ':email' => $email,
+            ':ngay_sinh' => $ngay_sinh,
+            ':gioi_tinh' => $gioi_tinh,
+            ':dia_chi' => $dia_chi,
+            ':so_dien_thoai' => $so_dien_thoai,
+            ':trang_thai' => $trang_thai,
+            ':id' =>  $khach_hang_id,
+            
+
+        ]);
+
+        return true;
+    } catch (Exception $e) {
+        echo "lỗi" . $e->getMessage();
+    }
+}   
 }

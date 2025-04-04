@@ -46,37 +46,37 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($listDonHang as $key => $donHang) : ?>
-                                        <tr>
-                                            <td><?= $key + 1 ?></td>
-                                            <td><?= $donHang['ma_don_hang'] ?></td>
-                                            <td><?= $donHang['ten_nguoi_nhan'] ?></td>
-                                            <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
-                                            <td><?= $donHang['ngay_dat'] ?></td>
-                                            <td><?= $donHang['tong_tien'] ?></td>
-                                            <td><?= $donHang['ten_trang_thai'] ?></td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a
-                                                        href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                                                        <button class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                                    </a>
-                                                    <a 
-                                                        id="check"
-                                                        <?php
+
+                                    <tr>
+                                        <td><?= $key + 1 ?></td>
+                                        <td><?= $donHang['ma_don_hang'] ?></td>
+                                        <td><?= $donHang['ten_nguoi_nhan'] ?></td>
+                                        <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
+                                        <td><?= $donHang['ngay_dat'] ?></td>
+                                        <td><?= $donHang['tong_tien'] ?></td>
+                                        <td><?= $donHang['ten_trang_thai'] ?></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a
+                                                    href="<?= BASE_URL_ADMIN .'?act=chi-tiet-don-hang&id_don_hang='. $donHang['id'] ?>">
+                                                    <button class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                                </a>
+                                                <a id="check" <?php
+
                                                         if($donHang['trang_thai_id'] == 9 || $donHang['trang_thai_id'] == 10 || $donHang['trang_thai_id'] == 11) {
                                                             echo 'onclick="return checkTrangThai('.$donHang['trang_thai_id'].')"';
                                                         } else {
                                                             echo 'href="' . BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] . '"';
-                                                        }?>
-                                                        
-                                                    >
-                                                        <input type="number" name="" id="trang_thai_id" hidden value="<?= $donHang['trang_thai_id'] ?>">
-                                                        <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
-                                                    </a>
-                                                </div>
+                                                        }?>>
+                                                    <input type="number" name="" id="trang_thai_id" hidden
+                                                        value="<?= $donHang['trang_thai_id'] ?>">
+                                                    <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
+                                                </a>
+                                            </div>
 
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
+
                                     <?php endforeach ?>
                                 </tbody>
                                 <tfoot>
@@ -113,41 +113,37 @@
 
 <!-- Page specific script -->
 <script>
-    
-    // document.getElementById("trang_thai_id").addEventListener("click", function(event) {
-        //     event.preventDefault(); // Chặn điều hướng
-        // });
-        
-        
-    const trangThaiId = document.getElementById('trang_thai_id').value;
-    function checkTrangThai(trangThaiId) {
-        if (trangThaiId == 9 || trangThaiId == 10 || trangThaiId == 11) {
-            alert('Đơn hàng đã hoàn thành hoặc đã hủy không thể chỉnh sửa!');
-        } else {
-            // document.getElementById("check").href. = `<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>`;
-            return true;
-        }
-    }
+const trangThaiId = document.getElementById('trang_thai_id').value;
 
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+function checkTrangThai(trangThaiId) {
+    if (trangThaiId == 9 || trangThaiId == 10 || trangThaiId == 11) {
+        alert('Đơn hàng đã hoàn thành hoặc đã hủy không thể chỉnh sửa!');
+    } else {
+        // document.getElementById("check").href. = `<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>`;
+        return true;
+    }
+}
+
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
+});
+
 </script>
-<!-- Code injected by live-server -->
+
 
 </body>
 
