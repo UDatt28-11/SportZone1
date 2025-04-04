@@ -52,6 +52,7 @@
 
                 <li class="nav-item">
 
+
                     <a href="<?= url(  '?act=don-hang')?>" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
@@ -59,10 +60,15 @@
                         </p>
                     </a>
                 </li>
-
-
+                    <a href="" class="nav-link">
+                    
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Quản lý tài khoản</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                </li>
+          
                 <a href="" class="nav-link">
-
                     <i class="nav-icon fas fa-user"></i>
                     <p>Quản lý tài khoản</p>
                     <i class="fas fa-angle-left right"></i>

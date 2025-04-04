@@ -46,6 +46,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($listDonHang as $key => $donHang) : ?>
+
                                     <tr>
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $donHang['ma_don_hang'] ?></td>
@@ -61,6 +62,7 @@
                                                     <button class="btn btn-primary"><i class="far fa-eye"></i></button>
                                                 </a>
                                                 <a id="check" <?php
+
                                                         if($donHang['trang_thai_id'] == 9 || $donHang['trang_thai_id'] == 10 || $donHang['trang_thai_id'] == 11) {
                                                             echo 'onclick="return checkTrangThai('.$donHang['trang_thai_id'].')"';
                                                         } else {
@@ -74,6 +76,7 @@
 
                                         </td>
                                     </tr>
+
                                     <?php endforeach ?>
                                 </tbody>
                                 <tfoot>
@@ -110,11 +113,6 @@
 
 <!-- Page specific script -->
 <script>
-// document.getElementById("trang_thai_id").addEventListener("click", function(event) {
-//     event.preventDefault(); // Chặn điều hướng
-// });
-
-
 const trangThaiId = document.getElementById('trang_thai_id').value;
 
 function checkTrangThai(trangThaiId) {
@@ -143,8 +141,9 @@ $(function() {
         "responsive": true,
     });
 });
+
 </script>
-<!-- Code injected by live-server -->
+
 
 </body>
 

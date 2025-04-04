@@ -17,9 +17,6 @@
                 <div class="col-sm-6">
                     <h1>Quản lý danh mục sản phẩm</h1>
                 </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Main content -->
     <section class="content">
