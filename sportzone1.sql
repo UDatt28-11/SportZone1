@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 27, 2025 at 03:23 PM
+-- Generation Time: Apr 03, 2025 at 04:47 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `binh_luans` (
 --
 
 INSERT INTO `binh_luans` (`id`, `san_pham_id`, `tai_khoan_id`, `noi_dung`, `ngay_dang`, `trang_thai`) VALUES
-(1, 1, 3, 'Sản phẩm này còn hàng khoogn shop', '2024-07-28', 2),
+(1, 42, 3, 'Sản phẩm này còn hàng không shop', '2024-07-28', 2),
 (2, 1, 3, 'Shop ơi rep tin nhắn em', '2024-07-28', 2),
 (3, 37, 3, 'Ship hỏa tốc thì bao giờ có', '2024-07-27', 2),
 (4, 37, 3, 'Shop ơi rep tin nhắn em', '2024-07-28', 2);
@@ -130,9 +130,8 @@ CREATE TABLE `danh_mucs` (
 --
 
 INSERT INTO `danh_mucs` (`id`, `ten_danh_muc`, `mo_ta`) VALUES
-(1, 'Chó ta', 'Danh mục chó ta'),
-(2, 'Mèo tây', 'Danh mục sản phẩm mèo tây'),
-(5, 'Mèo ai cập', 'Mèo này không lông');
+(2, 'Yoga', 'Danh mục sản phẩm giày Yoga'),
+(5, 'Giày thể thao', 'Giày Quốc Tế');
 
 -- --------------------------------------------------------
 
@@ -210,14 +209,21 @@ INSERT INTO `hinh_anh_san_phams` (`id`, `san_pham_id`, `link_hinh_anh`) VALUES
 (35, 40, './uploads/1721063917z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
 (36, 40, './uploads/1721063945z5553545947549_fe27cf0f6c8e943ebc7295844477c00a.jpg'),
 (39, 40, './uploads/1721063984z5550783400601_4adbc42c6bb8a9cbdfbb15961721eb20.jpg'),
-(44, 37, './uploads/1721196058z5550783400537_7b8dd570891f48acf52e343a14cbce75.jpg'),
-(45, 37, './uploads/1721196058z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
-(46, 37, './uploads/1721196058z5553545947549_fe27cf0f6c8e943ebc7295844477c00a.jpg'),
-(47, 1, './uploads/1723255527product-1.jpg'),
-(48, 1, './uploads/1723255527product-3.jpg'),
-(49, 1, './uploads/1723255527product-7.jpg'),
-(50, 1, './uploads/1723255527product-9.jpg'),
-(51, 1, './uploads/1723255542product-details-img4.jpg');
+(52, 41, './uploads/1743389448nike đen.webp'),
+(53, 41, './uploads/1743389448nike đen2.webp'),
+(57, 41, './uploads/174338962519.webp'),
+(60, 44, './uploads/1743693290AIR+MAX+DN8 .3.png'),
+(61, 44, './uploads/1743693290AIR+MAX+DN8.2.png'),
+(62, 44, './uploads/1743693290AIR+MAX+DN8.png'),
+(63, 45, './uploads/1743693976AIR+MAX+DN8+AMD+(GS).png'),
+(64, 45, './uploads/1743693630AIR+MAX+DN8 .3.png'),
+(65, 45, './uploads/1743693553AIR+MAX+DN8.png'),
+(66, 46, './uploads/1743693648AIR+MAX+DN8 .3.png'),
+(67, 46, './uploads/1743693648AIR+MAX+DN8+AMD+(GS).png'),
+(68, 46, './uploads/1743693212AIR+MAX+DN8.png'),
+(69, 42, './uploads/1743693602AIR+MAX+DN8+AMD+(GS).png'),
+(70, 42, './uploads/1743693585AIR+MAX+DN8.png'),
+(71, 42, './uploads/1743693602AIR+MAX+DN8.2.png');
 
 -- --------------------------------------------------------
 
@@ -263,12 +269,11 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `ten_san_pham`, `gia_san_pham`, `gia_khuyen_mai`, `hinh_anh`, `so_luong`, `luot_xem`, `ngay_nhap`, `mo_ta`, `danh_muc_id`, `trang_thai`) VALUES
-(1, 'Chó phú quốc', '10000000.00', '9000000.00', './uploads/1723191063product-details-img5.jpg', 10, 10, '2024-07-10', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst.', 1, 2),
-(2, 'Mèo anh lông dài', '2000000.00', NULL, './uploads/1723191069product-7.jpg', 9, 1000, '2024-07-09', 'Mèo anh lông dài thuần chủng', 2, 1),
-(33, 'Chó phú quốc', '99999999.99', '10000000.00', './uploads/1723191111product-details-img2.jpg', 10, 0, '2024-07-12', 'Chó phú quốc siêu khôn', 1, 1),
-(34, 'Mèo anh lông dài', '10000000.00', '900000.00', './uploads/1723191119product-17.jpg', 5, 0, '2024-08-04', 'Mèo anh lông hơi ngắn', 2, 1),
-(36, 'Sản phẩm abc23', '213.00', '132.00', './uploads/1723191077product-details-img4.jpg', 123, 0, '2024-07-14', '1345', 1, 2),
-(37, 'Sản phẩm abc', '12345.00', NULL, './uploads/1723191561product-7.jpg', 123, 0, '2024-08-07', '123', 1, 1);
+(41, 'Giày thể thao Nike', '15000.00', NULL, './uploads/174338944819.webp', 1000, 0, '2025-03-04', 'Nike là một trong những thương hiệu thể thao nổi tiếng nhất trên thế giới. Từ học sinh tiểu học cho đến các vận động viên chuyên nghiệp, không ai có thể phủ nhận sức hấp dẫn của Nike. Nếu bạn khảo sát xem có bao nhiêu người đã hoặc đang sở hữu các sản phẩm của Nike, thì con số này sẽ khiến bạn bất ngờ háo hức.', 1, 1),
+(42, 'AIR+MAX+DN9', '1000000.00', '890000.00', './uploads/1743689460AIR+MAX+DN8.2.png', 100, 0, '2025-01-07', 'Nike bắt đầu hành trình khởi nghiệp từ năm 2017, khi thành lập một cửa hàng giày thể thao tại quận Tân Bình với tiêu chí mang đến cho khách hàng những đôi giày chất lượng, êm ái, thoải mái.', 5, 1),
+(44, 'AIR+MAX+DN8', '1000000.00', '890000.00', './uploads/1743569761AIR+MAX+DN8.png', 1000, 0, '2025-04-02', 'Giày AIR+MAX+DN8', 5, 1),
+(45, 'AIR+MAX+DN7', '3000000.00', '1999000.00', './uploads/1743689404AIR+MAX+DN8+AMD+(GS).png', 200, 0, '2025-04-16', 'Giày JORDAN+CMFT+ERA', 5, 1),
+(46, 'AIR+MAX+DN6', '1200000.00', '999000.00', './uploads/1743689423AIR+MAX+DN8 .3.png', 200, 0, '2025-04-07', 'Giày NIKE+VOMERO+18 Việt', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -295,7 +300,7 @@ CREATE TABLE `tai_khoans` (
 --
 
 INSERT INTO `tai_khoans` (`id`, `ho_ten`, `anh_dai_dien`, `ngay_sinh`, `email`, `so_dien_thoai`, `gioi_tinh`, `dia_chi`, `mat_khau`, `chuc_vu_id`, `trang_thai`) VALUES
-(1, 'Nguyễn Đức Anh', NULL, '2004-09-28', 'anhnd120@fpt.edu.vn', '0829998923', 1, 'Số 1 Hà Nội', '$2y$10$knF8cMRUOMbAfZxHSad0SOU3Hc5gTZ3y8kR8SU.9EEKBb7XCDphBG', 1, 1),
+(1, 'Nguyễn Đức Anh', './uploads/174338944819.webp', '2004-09-28', 'anhnd120@fpt.edu.vn', '0829998923', 1, 'Số 1 Hà Nội', '$2y$10$knF8cMRUOMbAfZxHSad0SOU3Hc5gTZ3y8kR8SU.9EEKBb7XCDphBG', 1, 1),
 (2, 'Tạ văn định', NULL, '2003-07-09', 'dinhtv7@gmail.com', '', 1, '', '$2y$10$ntoxTQE3bvDnyU1bkwdSIOA1oHiGcXZ.sx/ktZi3peyQOHtiQKpVi', 1, 1),
 (3, 'Tạ trần bình1', './uploads/1723191077product-details-img4.jpg', '2004-10-01', 'binh1102@gmail.com', '0829998929', 2, 'Số 1 Ba Đình', '$2y$10$GFkpcB0SPAMeXqMf2weDC.TfCZr8cMJIKRnjK4VNmTMsbuqtBdCHO', 2, 1),
 (4, 'Nguyễn Văn Mạnh1', NULL, '0000-00-00', 'jennifer.nienow@example.org', '', 1, '', '$2y$10$z2aKAIEMQpcgut54QvjoZ.EINVCFSlk6K/H04mCd.7lNkregVkjqK', 1, 1),
@@ -438,7 +443,7 @@ ALTER TABLE `chuc_vus`
 -- AUTO_INCREMENT for table `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `don_hangs`
@@ -456,7 +461,7 @@ ALTER TABLE `gio_hangs`
 -- AUTO_INCREMENT for table `hinh_anh_san_phams`
 --
 ALTER TABLE `hinh_anh_san_phams`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `phuong_thuc_thanh_toans`
@@ -468,7 +473,7 @@ ALTER TABLE `phuong_thuc_thanh_toans`
 -- AUTO_INCREMENT for table `san_phams`
 --
 ALTER TABLE `san_phams`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tai_khoans`
