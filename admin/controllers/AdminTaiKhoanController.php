@@ -135,7 +135,7 @@ public function resetPassword(){
     }
 
     public function formEditKhachHang(){
-        $id_khach_hang = $_GET['id_Khach_hang'];
+        $id_khach_hang = $_GET['id_khach_hang'];
         $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
         // var_dump($quanTri);die();
         require_once './views/taikhoan/khachhang/editKhachHang.php';
