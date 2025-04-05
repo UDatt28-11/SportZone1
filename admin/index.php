@@ -48,6 +48,8 @@ match($act){
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
 
+      // route bình luận
+      'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
     // route đon hàng
 
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),

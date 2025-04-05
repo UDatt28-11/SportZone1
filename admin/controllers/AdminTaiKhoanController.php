@@ -2,9 +2,13 @@
 session_start();
 class AdminTaiKhoanController{
    public $modelTaiKhoan;
+   public $modelDonHang;
+   public $modelSanPham;
 
     public function __construct(){
          $this->modelTaiKhoan = new AdminTaiKhoan();
+         $this->modelDonHang = new AdminDonHang();
+        $this->modelSanPham = new AdminSanPham();
     }
     public function danhSachQuanTri(){
         $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan(1);
@@ -208,7 +212,9 @@ public function resetPassword(){
     public function detailKhachHang(){
         $id_khach_hang = $_GET['id_khach_hang'];
         $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
-        // var_dump($quanTri);die();
+        $listDonHang  = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
+        
         require_once './views/taikhoan/khachhang/detailKhachHang.php';
         deleteSessionError();
     }
