@@ -6,6 +6,8 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 //Require toàn bộ file Controllers
 require_once './controllers/AdminDanhMucController.php'; 
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/mauSacControlor.php';
+require_once './controllers/kichCoController.php'; 
 
 require_once './controllers/AdminDonHangController.php';
 
@@ -13,16 +15,18 @@ require_once './controllers/AdminDonHangController.php';
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
+require_once './models/adminMauSac.php';
+require_once './models/adminKichCo.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
 //Require toàn bộ file Models
-require_once './models/AdminDanhMuc.php';
-require_once './models/AdminSanPham.php';
-require_once './models/AdminTaiKhoan.php';
+// require_once './models/AdminDanhMuc.php';
+// require_once './models/AdminSanPham.php';
+// require_once './models/AdminTaiKhoan.php';
 
 //Router
-$act = $_GET['act'] ?? '/';
+$act = $_GET['act'] ?? 'san-pham';
 
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
@@ -47,6 +51,24 @@ match($act){
     'sua-album-anh-san-pham' => (new AdminSanPhamController())->postEditAnhSanPham(),
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
+
+    //route Màu sắc
+    'list-mau-sac' => (new MauSacController())->danhSachMauSac(),
+    'form-them-mau-sac' => (new MauSacController())->formAddMauSac(),
+    'them-mau-sac' => (new MauSacController())->postAddMauSac(),
+    'form-sua-mau-sac' => (new MauSacController())->formEditMauSac(),
+    'sua-mau-sac' => (new MauSacController())->postEditMauSac(),
+    'xoa-mau-sac' => (new MauSacController())->deleteMauSac(),
+
+    //route Kích cỡ
+    'list-kich-co' => (new KichCoController())->danhSachKichCo(),
+    'form-them-kich-co' => (new KichCoController())->formAddKichCo(),
+    'them-kich-co' => (new KichCoController())->postAddKichCo(),
+    'form-sua-kich-co' => (new KichCoController())->formEditKichCo(),
+    'sua-kich-co' => (new KichCoController())->postEditKichCo(),
+    'xoa-kich-co' => (new KichCoController())->deleteKichCo(),
+
+
 
     // route đon hàng
 
