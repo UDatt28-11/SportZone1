@@ -1,4 +1,5 @@
 <?php
+// session_start();
 //Require file common
 require_once '../commons/env.php'; // Khai báo biến môi trường  
 require_once '../commons/function.php'; // Hàm hỗ trợ   
@@ -21,16 +22,21 @@ require_once './models/adminKichCo.php';
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
 //Require toàn bộ file Models
-// require_once './models/AdminDanhMuc.php';
-// require_once './models/AdminSanPham.php';
-// require_once './models/AdminTaiKhoan.php';
+
+require_once './models/AdminDanhMuc.php';
+require_once './models/AdminSanPham.php';
+require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminDonHang.php';
+
 
 //Router
 $act = $_GET['act'] ?? 'san-pham';
 
+if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
+  checkLoginAdmin();
+}
+
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
-
 match($act){
     // route trang chủ
     '/' => (new AdminBaoCaoThongKeController())->home(),
@@ -52,6 +58,7 @@ match($act){
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
 
+
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),
     'form-them-mau-sac' => (new MauSacController())->formAddMauSac(),
@@ -70,6 +77,10 @@ match($act){
 
 
 
+
+      // route bình luận
+      'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+
     // route đon hàng
 
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
@@ -77,7 +88,6 @@ match($act){
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
     // 'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),
-
 
     // route tài khoản
     'list-tai-khoan-quan-tri' => (new AdminTaiKhoanController())->danhSachQuanTri(),
@@ -91,11 +101,13 @@ match($act){
     
     // route khách hàng
     'list-tai-khoan-khach-hang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
-    'form-them-khach-hang' => (new AdminTaiKhoanController())->formAddKhachHang(),
-    'them-khach-hang' => (new AdminTaiKhoanController())->postAddTaiKhoan(),
     'form-sua-khach-hang' => (new AdminTaiKhoanController())->formEditKhachHang(),
     'sua-khach-hang' => (new AdminTaiKhoanController())->postEditKhachHang(),
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
-
+    
+    // Route Auth
+    'login-admin' => (new AdminTaiKhoanController())->formLogin(),
+    'check-login-admin' => (new AdminTaiKhoanController())->login(),
+    'logout-admin' => (new AdminTaiKhoanController())->logout(),
     default => $act,
 };
