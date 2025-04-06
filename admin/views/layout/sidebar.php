@@ -41,14 +41,44 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="<?= BASE_URL_ADMIN . '?act=san-pham'?>" class="nav-link">
-                        <i class="nav-icon fas fa-volleyball-ball"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-box-open"></i>
                         <p>
-                            Sản Phẩm
+                            Quản lý sản phẩm
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview pl-3">
+                        <li class="nav-item">
+                            <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
+                                <i class="nav-icon fas fa-volleyball-ball"></i>
+                                <p>Sản phẩm</p>
+                            </a>
+                        </li>
+                        <!-- Gợi ý mở rộng -->
+                        <li class="nav-item">
+                            <a href="<?= BASE_URL_ADMIN . '?act=list-mau-sac' ?>" class="nav-link">
+                                <i class="fas fa-palette nav-icon"></i>
+                                <p>Màu sắc sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= BASE_URL_ADMIN . '?act=list-kich-co' ?>" class="nav-link">
+                                <i class="bi bi-arrows-fullscreen"></i>
+                                <p>Kích cỡ sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= BASE_URL_ADMIN . '?act=hinh-anh-bien-the' ?>" class="nav-link">
+                                <i class="fas fa-images nav-icon"></i>
+                                <p>Ảnh biến thể</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+                
 
                 <li class="nav-item">
 
@@ -60,7 +90,7 @@
                     </a>
                 </li>
 
-                </li>
+
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
