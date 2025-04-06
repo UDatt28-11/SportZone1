@@ -253,10 +253,14 @@ public function resetPassword(){
                     $_SESSION['flash'] = true;
     
                     header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
-                    exit();
-                    
+                    exit(); 
                 }
             }
         }
-    
+    public function logout(){
+        if (isset($_SESSION['user_admin'])) {
+            unset($_SESSION['user_admin']);
+            header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
+        }
+    }
 }

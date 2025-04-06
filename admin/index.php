@@ -26,6 +26,10 @@ require_once './models/AdminDonHang.php';
 //Router
 $act = $_GET['act'] ?? '/';
 
+if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
+  checkLoginAdmin();
+}
+
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 match($act){
     // route trang chủ
@@ -77,6 +81,6 @@ match($act){
     // Route Auth
     'login-admin' => (new AdminTaiKhoanController())->formLogin(),
     'check-login-admin' => (new AdminTaiKhoanController())->login(),
-    // 'logout-admin' => (new AdminTaiKhoanController())->logout(),
+    'logout-admin' => (new AdminTaiKhoanController())->logout(),
     default => $act,
 };
