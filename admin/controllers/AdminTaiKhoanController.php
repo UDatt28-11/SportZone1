@@ -2,9 +2,13 @@
 session_start();
 class AdminTaiKhoanController{
    public $modelTaiKhoan;
+   public $modelDonHang;
+   public $modelSanPham;
 
     public function __construct(){
          $this->modelTaiKhoan = new AdminTaiKhoan();
+         $this->modelDonHang = new AdminDonHang();
+        $this->modelSanPham = new AdminSanPham();
     }
     public function danhSachQuanTri(){
         $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan(1);
@@ -208,8 +212,51 @@ public function resetPassword(){
     public function detailKhachHang(){
         $id_khach_hang = $_GET['id_khach_hang'];
         $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
-        // var_dump($quanTri);die();
+        $listDonHang  = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
+        
         require_once './views/taikhoan/khachhang/detailKhachHang.php';
         deleteSessionError();
     }
+    
+    public function formLogin(){
+        require_once './views/auth/formLogin.php';
+        deleteSessionError();
+        exit(); 
+        }
+    
+    public function login(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // lấy email và pass gửi lên từ form 
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                
+                // var_dump($email);die;
+    
+                // Xử lý kiểm tra thông tin đăng nhập
+                $user = $this->modelTaiKhoan->checkLogin($email, $password);
+    
+                if ($user == $email) { // Trường hợp đăng nhập thành công
+                    // Lưu thông tin vào session 
+                    $_SESSION['user_admin'] = $user;
+                    echo "<script type='text/javascript'>
+                    alert('Đăng nhập Admin thành công');
+                    window.location.href = '" . BASE_URL_ADMIN . "';
+                     </script>";
+                    // header("Location: " . BASE_URL_ADMIN);
+                    exit();
+                }else{
+                    // Lỗi thì lưu lỗi vào session
+                    $_SESSION['error'] = $user;
+                    // var_dump($_SESSION['error']);die;
+    
+                    $_SESSION['flash'] = true;
+    
+                    header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
+                    exit();
+                    
+                }
+            }
+        }
+    
 }
