@@ -52,7 +52,7 @@
                                     <p class="text-danger"><?= $_SESSION['error']['kich_co'] ?></p>
                                     <?php } ?>
                                 </div>
-
+                                
                             </div>
 
                             <div class="card-footer">

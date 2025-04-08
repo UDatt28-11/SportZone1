@@ -25,10 +25,11 @@ class AdminSanPham {
         }
     }
 
-    public function insertSanPham($ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh){
+    public function insertSanPham($ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh, $colors){
         try {
-            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_khuyen_mai, so_luong, ngay_nhap, danh_muc_id, trang_thai, mo_ta, hinh_anh)
-                    VALUES (:ten_san_pham, :gia_san_pham, :gia_khuyen_mai, :so_luong, :ngay_nhap, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
+            $this->conn->beginTransaction();
+            $sql = 'INSERT INTO san_phams (ten_san_pham, gia_san_pham, gia_khuyen_mai, so_luong, danh_muc_id, trang_thai, mo_ta, hinh_anh)
+                    VALUES (:ten_san_pham, :gia_san_pham, :gia_khuyen_mai, :so_luong, :danh_muc_id, :trang_thai, :mo_ta, :hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -37,36 +38,127 @@ class AdminSanPham {
                 ':gia_san_pham' => $gia_san_pham,
                 ':gia_khuyen_mai' => $gia_khuyen_mai,
                 ':so_luong' => $so_luong,
-                ':ngay_nhap' => $ngay_nhap,
                 ':danh_muc_id' => $danh_muc_id,
                 ':trang_thai' => $trang_thai,
                 ':mo_ta' => $mo_ta,
                 ':hinh_anh' => $hinh_anh,
             ]);
 
+            $productId = $this->conn->lastInsertId();
+
+            $this->createBienThe($productId, $colors, $gia_khuyen_mai);
+
+            $this->conn->commit();
+            return $productId;
             // Lấy id sản phẩm vừa thêm
-            return $this->conn->lastInsertId();
+            // return $this->conn->lastInsertId();
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    private function createBienThe($productId, $colors, $price) {
+        try {
+            // Lấy danh sách màu sắc từ DB
+            $sizes = $this->conn->query("SELECT * FROM kich_co_sp")->fetchAll(PDO::FETCH_COLUMN);
+    
+            // Chuẩn bị câu lệnh INSERT
+            $stmt = $this->conn->prepare("INSERT INTO bien_the_sp (sp_id, mau_id, size_id, ton_kho, don_gia) 
+                                          VALUES (?, ?, ?, 0, ?)");
+    
+            foreach ($colors as $colorId) {
+                // Thêm biến thể cho mỗi size
+                foreach ($sizes as $sizeId) {
+                    $stmt->execute([$productId, $colorId, $sizeId, $price]);
+                }
+            }
+        } catch (Exception $e) {
+            throw new Exception("Lỗi khi tạo biến thể: " . $e->getMessage());
+        }
+    }
+    public function getAllBienTheFromSP($productId){
+        try {
+            $sql = 'SELECT bien_the_sp.*, kich_co_sp.kich_co, mau_sp.mau_sac
+                    FROM bien_the_sp
+                    INNER JOIN kich_co_sp ON bien_the_sp.size_id = kich_co_sp.id
+                    INNER JOIN mau_sp ON bien_the_sp.mau_id = mau_sp.id
+                    WHERE bien_the_sp.sp_id = :san_pham_id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':san_pham_id'=>$productId]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function getAllMauCuaBienThe($id){
+        try {
+            $sql = "SELECT pc.id, pc.mau_sac 
+                    FROM bien_the_sp pv  
+                    JOIN mau_sp pc ON pv.mau_id = pc.id  
+                    WHERE pv.sp_id = :san_pham_id
+                    GROUP BY pc.id;
+                    ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':san_pham_id'=>$id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+
+        }
+    }
+    public function addMauBienThe($san_pham_id, $mau_id, $size_id, $don_gia){
+        try{
+            $this->conn->beginTransaction();
+            $sql = "INSERT INTO bien_the_sp (sp_id, mau_id, size_id, ton_kho, don_gia) VALUES (:san_pham_id, :mau_id, :size_id, 0, :don_gia)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':san_pham_id'=>$san_pham_id, ':mau_id'=>$mau_id, ':size_id'=>$size_id, ':don_gia'=>$don_gia]);
+            $this->conn->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function deleteMauCuaBienThe($productId, $colorId){
+        try{
+            $sql = "DELETE FROM bien_the_sp WHERE sp_id = :san_pham_id AND
+            mau_id = :mau_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':san_pham_id'=>$productId, ':mau_id'=>$colorId]);
+            return true;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
         }
     }
 
 
-    public function insertAlbumAnhSanPham($san_pham_id, $link_hinh_anh){
+    public function insertGoiAnhSanPham($san_pham_id , $mau_id , $link_hinh_anh){
         try {
-            $sql = 'INSERT INTO hinh_anh_san_phams (san_pham_id, link_hinh_anh)
-                    VALUES (:san_pham_id, :link_hinh_anh)';
+            $sql = 'INSERT INTO hinh_anh_san_phams (id_san_pham, mau_id , link_hinh_anh )
+                    VALUES (:id_san_pham, :mau_id, :link_hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
-                ':san_pham_id' => $san_pham_id,
+                ':id_san_pham' => $san_pham_id,
+                ':mau_id' => $mau_id,
                 ':link_hinh_anh' => $link_hinh_anh,
             ]);
 
             // Lấy id sản phẩm vừa thêm
             return true;
         } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function getGoiAnhMauSanPham($id,$id_color){
+        try {
+            $sql = "SELECT * FROM hinh_anh_san_phams WHERE id_san_pham = :id_san_pham and mau_id = :mau_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id_san_pham'=>$id, ':mau_id'=>$id_color]);
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (Exception $e){
             echo "lỗi" . $e->getMessage();
         }
     }
@@ -88,21 +180,7 @@ class AdminSanPham {
         }
     }
 
-    public function getListAnhSanPham($id){
-        try {
-            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
-
-            $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':id'=>$id]);
-
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
-        }
-    }
-
-    public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh){
+    public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh){
         try {
             
             $sql = 'UPDATE san_phams
@@ -111,7 +189,6 @@ class AdminSanPham {
                         gia_san_pham = :gia_san_pham,
                         gia_khuyen_mai = :gia_khuyen_mai,
                         so_luong = :so_luong,
-                        ngay_nhap = :ngay_nhap,
                         danh_muc_id = :danh_muc_id,
                         trang_thai = :trang_thai,
                         mo_ta = :mo_ta,
@@ -125,7 +202,6 @@ class AdminSanPham {
                 ':gia_san_pham' => $gia_san_pham,
                 ':gia_khuyen_mai' => $gia_khuyen_mai,
                 ':so_luong' => $so_luong,
-                ':ngay_nhap' => $ngay_nhap,
                 ':danh_muc_id' => $danh_muc_id,
                 ':trang_thai' => $trang_thai,
                 ':mo_ta' => $mo_ta,
@@ -136,6 +212,26 @@ class AdminSanPham {
             // Lấy id sản phẩm vừa thêm
             return true;
         } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function editBienThe($id, $ton_kho, $don_gia, $trang_thai){
+        try{
+            $this->conn->beginTransaction();
+            $sql = "UPDATE bien_the_sp 
+                SET ton_kho = :ton_kho, don_gia = :don_gia, trang_thai = :trang_thai 
+                WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':ton_kho' => $ton_kho,
+                ':don_gia' => $don_gia,
+                ':trang_thai' => $trang_thai,
+                ':id' => $id
+            ]);
+            $this->conn->commit();
+            return true;
+        }catch (Exception $e){
+            $this->conn->rollBack();
             echo "lỗi" . $e->getMessage();
         }
     }
