@@ -122,13 +122,40 @@ public function resetPassword($id, $mat_khau){
             ':so_dien_thoai' => $so_dien_thoai,
             ':trang_thai' => $trang_thai,
             ':id' =>  $khach_hang_id,
-            
-
         ]);
+             return true;
+         } catch (Exception $e) {
+             echo "lỗi" . $e->getMessage();
+         }
+       }  
 
-        return true;
-    } catch (Exception $e) {
-        echo "lỗi" . $e->getMessage();
+       public function checkLogin($email, $mat_khau){
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['email'=>$email]);
+            $user = $stmt->fetch();
+            // password verify sử lý check mật khẩu 
+            if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+            // if ($user && $mat_khau) {
+                if ($user['chuc_vu_id'] == 1) {
+                    if ($user['trang_thai'] == 1) {
+                        return $user['email'];
+                         // Trường hợp đăng nhập thành công
+                    }else{
+                        return "Tài khoản bị cấm";
+                    }
+                }else{
+                    return "Tài khoản không có quyền đăng nhập";
+                }
+            }else{
+                return "Bạn nhập sai thông tin mật khẩu hoặc tài khoản";
+            }
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+            return false;
+        }
     }
-}   
+    
+
 }

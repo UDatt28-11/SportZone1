@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Require file common
 require_once '../commons/env.php'; // Khai báo biến môi trường  
 require_once '../commons/function.php'; // Hàm hỗ trợ   
@@ -17,6 +18,7 @@ require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
+require_once './models/AdminTaiKhoan.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
@@ -28,9 +30,11 @@ require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài kho
 //Router
 $act = $_GET['act'] ?? 'san-pham';
 
+if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
+  checkLoginAdmin();
+}
+
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
-
 match($act){
     // route trang chủ
     '/' => (new AdminBaoCaoThongKeController())->home(),
@@ -68,8 +72,20 @@ match($act){
     'sua-kich-co' => (new KichCoController())->postEditKichCo(),
     'xoa-kich-co' => (new KichCoController())->deleteKichCo(),
 
+    // route biển thể
+    'list-bien-the' => (new AdminSanPhamController())->formAllBienThe(),
+    'sua-bien-the' => (new AdminSanPhamController())->postEditBienThe(),
+    'list-mau-bien-the' => (new AdminSanPhamController())->listMauCuaBienThe(),
+    'form-them-mau-bien-the' => (new AdminSanPhamController())->formAddMauBienThe(),
+    'them-mau-san-pham' => (new AdminSanPhamController())->addMauBienThe(),
+    'xoa-mau-bien-the' => (new AdminSanPhamController())->deleteMauCuaBienThe(),
+    'them-goi-hinh-bien-the' =>(new AdminSanPhamController())->postHinhAnh(),
+    'list-goi-hinh-anh' =>(new AdminSanPhamController())->listAnhMauSanPham(),
+    'edit-anh-mau-san-pham' =>(new AdminSanPhamController())->postEditAnhMauSanPham(),
+    'xoa-hinh-anh-mau-san-pham' =>(new AdminSanPhamController())->deleteAnhMauSanPham(),
 
-
+      // route bình luận
+      'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
     // route đon hàng
 
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
@@ -77,7 +93,6 @@ match($act){
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
     // 'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),
-
 
     // route tài khoản
     'list-tai-khoan-quan-tri' => (new AdminTaiKhoanController())->danhSachQuanTri(),
@@ -91,11 +106,13 @@ match($act){
     
     // route khách hàng
     'list-tai-khoan-khach-hang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
-    'form-them-khach-hang' => (new AdminTaiKhoanController())->formAddKhachHang(),
-    'them-khach-hang' => (new AdminTaiKhoanController())->postAddTaiKhoan(),
     'form-sua-khach-hang' => (new AdminTaiKhoanController())->formEditKhachHang(),
     'sua-khach-hang' => (new AdminTaiKhoanController())->postEditKhachHang(),
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
-
+    
+    // Route Auth
+    'login-admin' => (new AdminTaiKhoanController())->formLogin(),
+    'check-login-admin' => (new AdminTaiKhoanController())->login(),
+    'logout-admin' => (new AdminTaiKhoanController())->logout(),
     default => $act,
 };

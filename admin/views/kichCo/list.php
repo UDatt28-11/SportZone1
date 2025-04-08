@@ -37,7 +37,7 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên Màu</th>
+                                        <th>Kích cỡ</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -66,7 +66,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên kích cỡ</th>
+                                        <th>Kích cỡ</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </tfoot>
