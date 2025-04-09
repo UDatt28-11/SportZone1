@@ -55,6 +55,7 @@ match($act){
     'sua-album-anh-san-pham' => (new AdminSanPhamController())->postEditAnhSanPham(),
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
+    'lay-anh-theo-mau' => (new AdminSanPhamController())->getListAnhTheoMau(),
 
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),

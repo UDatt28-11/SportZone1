@@ -65,7 +65,7 @@
                                 <button class="btn btn-warning"><i class="fas fa-cogs"></i>Sửa</button>
                             </a>
 
-                            <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_khach_hang=' . $khachHang['id'] ?>"
+                            <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_tai_khoan=' . $khachHang['id'] ?>"
                             onclick="return confirm('Bạn có chắc chắn muốn reset mật khẩu tài khoản này không?')">
                                 <button class="btn btn-danger"><i class="fas fa-redo-alt"></i>Reset</button>
                             </a>

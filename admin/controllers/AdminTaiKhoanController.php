@@ -112,7 +112,7 @@ class AdminTaiKhoanController{
         }
     }
 public function resetPassword(){
-            $tai_khoan_id = $_GET['id_quan-tri'];
+            $tai_khoan_id = $_GET['id_tai_khoan'];
             $tai_khoan = $this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
             $password = password_hash('12345678', PASSWORD_BCRYPT);
             $status= $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);

@@ -58,7 +58,7 @@
                           <button class="btn btn-warning">Sửa</button>
                         </a>
 
-                        <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_quan-tri=' . $quanTri['id'] ?>"
+                        <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_tai_khoan=' . $quanTri['id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn muốn reset mật khẩu tài khoản này không?')">
                           <button class="btn btn-danger">Reset</button>
                         </a>

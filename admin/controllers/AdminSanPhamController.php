@@ -573,7 +573,18 @@ class AdminSanPhamController
 
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
 
+        $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
         // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+        
+        if ($_GET['act'] == 'lay-anh-theo-mau') {
+            $idSanPham = $_GET['id_san_pham'];
+            $idMauSac = $_GET['id_mau_sac'];
+            $listAnh = $this->modelSanPham->getGoiAnhMauSanPham($idSanPham, $idMauSac);
+            foreach ($listAnh as $anh) {
+                echo '<img style="width:100px; height:100px; margin:5px" src="' . BASE_URL . '../uploads/' . $anh['link_hinh_anh'] . '" />';
+            }
+            exit;
+        }
 
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         // var_dump($listAnhSanPham);die;
@@ -583,6 +594,15 @@ class AdminSanPhamController
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
+    }
+
+    public function getListAnhTheoMau() {
+        $productId = $_GET['id_san_pham'];
+        $colorId = $_GET['id_mau_sac'];
+        $images = $this->modelSanPham->getGoiAnhMauSanPham($productId, $colorId);
+    
+        // Render view nhỏ chỉ chứa danh sách ảnh
+        include './views/sanpham/_partial_image_list.php';
     }
 
     public function updateTrangThaiBinhLuan()
