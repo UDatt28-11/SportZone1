@@ -4,7 +4,7 @@ require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ   
 
 //Require toàn bộ file Controllers
-require_once './controllers/AdminDanhMucController.php'; 
+require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
 
@@ -18,7 +18,7 @@ $act = $_GET['act'] ?? '/';
 
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
-$result =  match($act){
+match ($act) {
     // route danh mục
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
@@ -46,7 +46,3 @@ $result =  match($act){
 
     default => $act,
 };
-
-echo($result);
-// var_dump($URL);
-?>
