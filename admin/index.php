@@ -75,9 +75,6 @@ match($act){
     'sua-kich-co' => (new KichCoController())->postEditKichCo(),
     'xoa-kich-co' => (new KichCoController())->deleteKichCo(),
 
-
-
-
       // route bình luận
       'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
 

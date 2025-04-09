@@ -81,7 +81,7 @@ class AdminSanPhamController
                 $errors['hinh_anh'] = 'Phải chọn ảnh sản phẩm';
             }
 
-            // $_SESSION['error'] = $errors;
+            $_SESSION['error'] = $errors;
 
             // Nếu ko có lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {

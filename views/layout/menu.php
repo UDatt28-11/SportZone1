@@ -177,6 +177,14 @@
                         </ul>
                     </div>
                 </div>
+                <!-- Đăng ký đăng nhập -->
+                <label for="">
+                    <?php
+                        if (isset($_SESSION['user_client'])) {
+                            echo htmlspecialchars($_SESSION['user_client']['email']);
+                        }
+                    ?>
+                </label>
                 <div class="right flex gap-12">
                     <div class="max-md:hidden search-icon flex items-center cursor-pointer relative">
                         <i class="ph-bold ph-magnifying-glass text-2xl"></i>
@@ -187,7 +195,8 @@
                             <i class="ph-bold ph-user text-2xl"></i>
                             <div
                                 class="login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-sm">
-                                <a href="login.html" class="button-main w-full text-center">Đăng Nhập</a>
+                                <a href="<?= BASE_URL . '?act=login' ?>" class="button-main w-full text-center">Đăng
+                                    Nhập</a>
                                 <div class="text-secondary text-center mt-3 pb-4">
                                     Bạn chưa có tài khoản?
                                     <a href="register.html" class="text-black pl-1 hover:underline">Đăng Ký
@@ -207,6 +216,470 @@
                             <i class="ph-bold ph-handbag text-2xl"></i>
                             <span
                                 class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tìm kiếm sản phẩm -->
+                <div class="modal-search-block">
+                    <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
+                        <div class="form-search relative w-full">
+                            <i
+                                class="ph ph-magnifying-glass absolute heading5 right-6 top-1/2 -translate-y-1/2 cursor-pointer"></i>
+                            <input type="text" placeholder="Nhập Tên Sản Phẩm"
+                                class="text-button-lg h-14 rounded-2xl border border-line w-full pl-6 pr-12" />
+                        </div>
+                        <div class="keyword mt-8">
+                            <div class="heading5">Từ Khóa Đặc Sắc Hôm Nay</div>
+                            <div class="list-keyword flex items-center flex-wrap gap-3 mt-4">
+                                <button
+                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                                    Nike
+                                </button>
+                                <button
+                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                                    Adidas
+                                </button>
+                                <button
+                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                                    Puma
+                                </button>
+                                <button
+                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                                    Fila
+                                </button>
+                            </div>
+                        </div>
+                        <div class="list-recent mt-8">
+                            <div class="heading6">Sản Phẩm Đã Xem Gần Đây</div>
+                            <div
+                                class="list-product four-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 md:mt-10 mt-6">
+                                <!-- List four product -->
+                                <?php foreach($listSanPham as $key => $sanPham) : ?>
+                                <div class=" pb-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 mt-4">
+                                    <div class="product-item grid-type" data-item="11">
+                                        <div class="product-main cursor-pointer block">
+                                            <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
+                                                <?php 
+                                    $ngayNhap = new DateTime($sanPham['ngay_nhap']);
+                                    $ngayHienTai = new DateTime();
+                                    $tinhNgay = $ngayHienTai->diff($ngayNhap);
+                                    if($tinhNgay->days <= 7){
+                                        ?>
+                                                <div
+                                                    class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                                    New
+                                                </div>
+
+                                                <?php } else { ?>
+                                                <div
+                                                    class="product-tag text-button-uppercase text-white bg-red px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                                    Giảm Giá</div>
+                                                <?php }  ?>
+                                                <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
+                                                    <div
+                                                        class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
+                                                        <div
+                                                            class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                                            Thêm Vào Yêu Thích
+                                                        </div>
+                                                        <i class="ph ph-heart text-lg"></i>
+                                                    </div>
+                                                    <div
+                                                        class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
+                                                        <div
+                                                            class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                                            So Sánh Sản Phẩm
+                                                        </div>
+                                                        <i
+                                                            class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
+                                                        <i class="ph ph-check-circle text-lg checked-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="product-img w-full h-full aspect-[3/4]">
+                                                    <a
+                                                        href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">
+                                                        <img class="w-full h-full object-cover duration-700"
+                                                            src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                                        <img class="w-full h-full object-cover duration-700"
+                                                            src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                                    </a>
+                                                </div>
+                                                <div
+                                                    class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
+                                                    <div
+                                                        class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                                        <a
+                                                            href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
+                                                            Chi Tiết</a>
+                                                    </div>
+                                                    <div
+                                                        class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                                        Thêm Vào Giỏ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-infor mt-4 lg:mb-7">
+                                                <div class="product-sold sm:pb-4 pb-2">
+                                                    <div
+                                                        class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
+                                                        <div class="progress-sold bg-red absolute left-0 top-0 h-full">
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
+                                                        <div class="text-button-uppercase">
+                                                            <span class="text-secondary2 max-sm:text-xs">Sold:
+                                                            </span>
+                                                            <span class="max-sm:text-xs">12</span>
+                                                        </div>
+                                                        <div class="text-button-uppercase">
+                                                            <span class="text-secondary2 max-sm:text-xs">Available:
+                                                            </span>
+                                                            <span class="max-sm:text-xs">88</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-name text-title duration-300">
+                                                    <?= $sanPham['ten_san_pham'] ?>
+                                                </div>
+                                                <div
+                                                    class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
+                                                    <div
+                                                        class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
+                                                        <div
+                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                                            Red
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
+                                                        <div
+                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                                            yellow
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
+                                                        <div
+                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                                            green
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
+                                                    <?php if($sanPham['gia_khuyen_mai']) { ?>
+                                                    <div class="product-price text-title">
+                                                        <?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
+                                                    </div>
+                                                    <div class="product-origin-price caption1 text-secondary2">
+                                                        <del>><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
+                                                    </div>
+                                                    <?php } else {?>
+                                                    <div class="product-price text-title">
+                                                        <?= formatPrice( $sanPham['gia_san_pham']) . 'VNĐ'; ?>
+                                                    </div>
+                                                    <?php } ?>
+                                                    <div
+                                                        class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                                        -20%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endforeach ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Danh sách yêu thích-->
+                <div class="modal-wishlist-block">
+                    <div class="modal-wishlist-main py-6">
+                        <div class="heading px-6 pb-3 flex items-center justify-between relative">
+                            <div class="heading5">Danh Sách Yêu Thích</div>
+                            <div
+                                class="close-btn absolute right-6 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
+                                <i class="ph ph-x text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="list-product px-6"></div>
+                        <div
+                            class="footer-modal p-6 border-t bg-white border-line absolute bottom-0 left-0 w-full text-center">
+                            <a href="wishlist.html" class="button-main w-full text-center uppercase">
+                                Tất Cả Danh Sách Yêu Thích</a>
+                            <div
+                                class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">
+                                Tiếp Tục Mua Sắm
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Giỏ hàng  -->
+                <div class="modal-cart-block">
+                    <div class="modal-cart-main flex">
+                        <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
+                            <div class="heading5 px-6 pb-3">Có Thể Bạn Cũng Thích</div>
+                            <div class="list px-6">
+                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                                    data-item="1">
+                                    <div class="infor flex items-center gap-5">
+                                        <div class="bg-img">
+                                            <img src="./assets/images/product/fashion/1-2.png" alt="img"
+                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                                        </div>
+                                        <div class="">
+                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="flex items-center gap-2 mt-2">
+                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-origin-price text-title text-secondary2">
+                                                    <del>$25.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                                        Xem Chi Tiết
+                                    </div>
+                                </div>
+                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                                    data-item="2">
+                                    <div class="infor flex items-center gap-5">
+                                        <div class="bg-img">
+                                            <img src="./assets/images/product/fashion/2-2.png" alt="img"
+                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                                        </div>
+                                        <div class="">
+                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="flex items-center gap-2 mt-2">
+                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-origin-price text-title text-secondary2">
+                                                    <del>$25.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                                        Xem Chi Tiết
+                                    </div>
+                                </div>
+                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                                    data-item="3">
+                                    <div class="infor flex items-center gap-5">
+                                        <div class="bg-img">
+                                            <img src="./assets/images/product/fashion/3-3.png" alt="img"
+                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                                        </div>
+                                        <div class="">
+                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="flex items-center gap-2 mt-2">
+                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-origin-price text-title text-secondary2">
+                                                    <del>$25.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                                        Xem Chi Tiết
+                                    </div>
+                                </div>
+                                <div class="product-item item py-5 flex items-center justify-between gap-3"
+                                    data-item="4">
+                                    <div class="infor flex items-center gap-5">
+                                        <div class="bg-img">
+                                            <img src="./assets/images/product/fashion/4-2.png" alt="img"
+                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                                        </div>
+                                        <div class="">
+                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="flex items-center gap-2 mt-2">
+                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-origin-price text-title text-secondary2">
+                                                    <del>$25.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                                        Xem Chi Tiết
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right cart-block md:w-1/2 w-full py-6 relative overflow-hidden">
+                            <div class="heading px-6 pb-3 flex items-center justify-between relative">
+                                <div class="heading5">Giỏ Hàng</div>
+                                <div
+                                    class="close-btn absolute right-6 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
+                                    <i class="ph ph-x text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="time countdown-cart px-6">
+                                <div class="flex items-center gap-3 px-5 py-3 bg-green rounded-lg">
+                                    <p class="text-3xl">🔥</p>
+                                    <div class="caption1">
+                                        Your cart will expire in
+                                        <span class="text-red caption1 font-semibold"><span
+                                                class="minute">04</span>:<span class="second">59</span></span>
+                                        minutes!<br />
+                                        Please checkout now before your items sell out!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="heading banner mt-3 px-6">
+                                <div class="text">
+                                    Buy
+                                    <span class="text-button">
+                                        $<span class="more-price">150</span>.00
+                                    </span>
+                                    <span>more to get </span>
+                                    <span class="text-button">freeship</span>
+                                </div>
+                                <div class="tow-bar-block mt-3">
+                                    <div class="progress-line"></div>
+                                </div>
+                            </div>
+                            <div class="list-product px-6"></div>
+                            <div class="footer-modal bg-white absolute bottom-0 left-0 w-full">
+                                <div
+                                    class="flex items-center justify-center lg:gap-14 gap-8 px-6 py-4 border-b border-line">
+                                    <div class="note-btn item flex items-center gap-3 cursor-pointer">
+                                        <i class="ph ph-note-pencil text-xl"></i>
+                                        <div class="caption1">Ghi Chú</div>
+                                    </div>
+                                    <div class="shipping-btn item flex items-center gap-3 cursor-pointer">
+                                        <i class="ph ph-truck text-xl"></i>
+                                        <div class="caption1">Vận Chuyển</div>
+                                    </div>
+                                    <div class="coupon-btn item flex items-center gap-3 cursor-pointer">
+                                        <i class="ph ph-tag text-xl"></i>
+                                        <div class="caption1">Mã Giảm Giá</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between pt-6 px-6">
+                                    <div class="heading5">Tổng Phí</div>
+                                    <div class="heading5 total-cart">$0.00</div>
+                                </div>
+                                <div class="block-button text-center p-6">
+                                    <div class="flex items-center gap-4">
+                                        <a href="cart.html"
+                                            class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
+                                            Xem Giỏ Hàng
+                                        </a>
+                                        <a href="checkout.html" class="button-main basis-1/2 text-center uppercase">
+                                            Kiểm Tra
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">
+                                        Tiếp Tục Mua Sắm
+                                    </div>
+                                </div>
+                                <div class="tab-item note-block">
+                                    <div class="px-6 py-4 border-b border-line">
+                                        <div class="item flex items-center gap-3 cursor-pointer">
+                                            <i class="ph ph-note-pencil text-xl"></i>
+                                            <div class="caption1">Note</div>
+                                        </div>
+                                    </div>
+                                    <div class="form pt-4 px-6">
+                                        <textarea name="form-note" id="form-note" rows="4"
+                                            placeholder="Add special instructions for your order..."
+                                            class="caption1 py-3 px-4 bg-surface border-line rounded-md w-full"></textarea>
+                                    </div>
+                                    <div class="block-button text-center pt-4 px-6 pb-6">
+                                        <div class="button-main w-full text-center">Save</div>
+                                        <div
+                                            class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                                            Cancel
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-item shipping-block">
+                                    <div class="px-6 py-4 border-b border-line">
+                                        <div class="item flex items-center gap-3 cursor-pointer">
+                                            <i class="ph ph-truck text-xl"></i>
+                                            <div class="caption1">Estimate shipping rates</div>
+                                        </div>
+                                    </div>
+                                    <div class="form pt-4 px-6">
+                                        <div class="">
+                                            <label for="select-country"
+                                                class="caption1 text-secondary">Country/region</label>
+                                            <div class="select-block relative mt-2">
+                                                <select id="select-country" name="select-country"
+                                                    class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
+                                                    <option value="Country/region">Country/region</option>
+                                                    <option value="France">France</option>
+                                                    <option value="Spain">Spain</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="USA">USA</option>
+                                                </select>
+                                                <i
+                                                    class="ph ph-caret-down text-xs absolute top-1/2 -translate-y-1/2 md:right-5 right-2"></i>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="select-state" class="caption1 text-secondary">State</label>
+                                            <div class="select-block relative mt-2">
+                                                <select id="select-state" name="select-state"
+                                                    class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
+                                                    <option value="State">State</option>
+                                                    <option value="Paris">Paris</option>
+                                                    <option value="Madrid">Madrid</option>
+                                                    <option value="London">London</option>
+                                                    <option value="New York">New York</option>
+                                                </select>
+                                                <i
+                                                    class="ph ph-caret-down text-xs absolute top-1/2 -translate-y-1/2 md:right-5 right-2"></i>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="select-code" class="caption1 text-secondary">Postal/Zip
+                                                Code</label>
+                                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-code"
+                                                type="text" placeholder="Postal/Zip Code" />
+                                        </div>
+                                    </div>
+                                    <div class="block-button text-center pt-4 px-6 pb-6">
+                                        <div class="button-main w-full text-center">Calculator</div>
+                                        <div
+                                            class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                                            Cancel
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-item coupon-block">
+                                    <div class="px-6 py-4 border-b border-line">
+                                        <div class="item flex items-center gap-3 cursor-pointer">
+                                            <i class="ph ph-tag text-xl"></i>
+                                            <div class="caption1">Add A Coupon Code</div>
+                                        </div>
+                                    </div>
+                                    <div class="form pt-4 px-6">
+                                        <div class="">
+                                            <label for="select-discount" class="caption1 text-secondary">Enter
+                                                Code</label>
+                                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3"
+                                                id="select-discount" type="text" placeholder="Discount code" />
+                                        </div>
+                                    </div>
+                                    <div class="block-button text-center pt-4 px-6 pb-6">
+                                        <div class="button-main w-full text-center">Apply</div>
+                                        <div
+                                            class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                                            Cancel
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
