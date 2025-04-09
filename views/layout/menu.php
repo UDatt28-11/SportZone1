@@ -178,13 +178,6 @@
                     </div>
                 </div>
                 <!-- Đăng ký đăng nhập -->
-                <label for="">
-                    <?php
-                        if (isset($_SESSION['user_client'])) {
-                            echo htmlspecialchars($_SESSION['user_client']['email']);
-                        }
-                    ?>
-                </label>
                 <div class="right flex gap-12">
                     <div class="max-md:hidden search-icon flex items-center cursor-pointer relative">
                         <i class="ph-bold ph-magnifying-glass text-2xl"></i>
@@ -192,9 +185,17 @@
                     </div>
                     <div class="list-action flex items-center gap-4">
                         <div class="user-icon flex items-center justify-center cursor-pointer">
+                            <label for="">
+                                <?php
+                        if (isset($_SESSION['user_client'])) {
+                            echo htmlspecialchars($_SESSION['user_client']['email']);
+                        }
+                                 ?>
+                            </label>
                             <i class="ph-bold ph-user text-2xl"></i>
                             <div
                                 class="login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-sm">
+                                <?php if (!isset($_SESSION['user_client'])) { ?>
                                 <a href="<?= BASE_URL . '?act=login' ?>" class="button-main w-full text-center">Đăng
                                     Nhập</a>
                                 <div class="text-secondary text-center mt-3 pb-4">
@@ -205,6 +206,10 @@
                                 <a href="my-account.html"
                                     class="button-main bg-white text-black border border-black w-full text-center">Hỗ
                                     Trợ</a>
+                                <?php } else { ?>
+                                <a href="my-account.html">Tài khoản</a>
+                                <?php } ?>
+
                             </div>
                         </div>
                         <div class="max-md:hidden wishlist-icon flex items-center relative cursor-pointer">

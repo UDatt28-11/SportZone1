@@ -32,7 +32,8 @@
                             value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="Địa chỉ Email*">
                     </div>
                     <?php if (isset($_SESSION['errors']['email'])) { ?>
-                    <p class="login-box-msg text-danger" style="color: red;"><?= $_SESSION['errors']['email'] ?></p>
+                    <p class="login-box-msg text-danger mt-2" style="color: red;"><?= $_SESSION['errors']['email'] ?>
+                    </p>
                     <?php } ?>
 
                     <div class="pass mt-5">
@@ -40,7 +41,8 @@
                             placeholder="Mật Khẩu*">
                     </div>
                     <?php if (isset($_SESSION['errors']['password'])) { ?>
-                    <p class="login-box-msg text-danger" style="color: red;"><?= $_SESSION['errors']['password'] ?></p>
+                    <p class="login-box-msg text-danger mt-2" style="color: red;"><?= $_SESSION['errors']['password'] ?>
+                    </p>
                     <?php } ?>
 
                     <div class="flex items-center justify-between mt-5">

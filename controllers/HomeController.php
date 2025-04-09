@@ -47,7 +47,7 @@ class HomeController{
             $errors = [];
     
             if (empty($email)) {
-                $errors['email'] = "Vui lòng nhập email.";
+                $errors['email'] = "Vui lòng nhập thông tin email.";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = "Email không hợp lệ.";
             }
@@ -61,7 +61,6 @@ class HomeController{
                 header("Location: " . BASE_URL . "?act=login");
                 exit();
             }
-    
             $user = $this->modelTaiKhoan->checkLogin($email, $password);
             unset($_SESSION['user_client']);
     
@@ -78,8 +77,6 @@ class HomeController{
             }
         }
     }
-    
-    
     //Resgister
     public function formRegister(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
