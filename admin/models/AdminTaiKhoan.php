@@ -137,6 +137,7 @@ public function resetPassword($id, $mat_khau){
             $user = $stmt->fetch();
             // password verify sử lý check mật khẩu 
             if ($user && password_verify($mat_khau, $user['mat_khau'])) {
+            // if ($user && $mat_khau) {
                 if ($user['chuc_vu_id'] == 1) {
                     if ($user['trang_thai'] == 1) {
                         return $user['email'];

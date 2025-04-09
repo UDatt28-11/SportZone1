@@ -28,9 +28,13 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Thêm sản phẩm</h3>
+                            
                         </div>
                         <!-- sửa -->
-                        <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+                        <?php
+                        // var_dump($errors);die;
+                        // var_dump($_SESSION['error']);
+                        if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
                         <div class="alert alert-danger">
                             <ul>
                                 <?php foreach ($_SESSION['error'] as $error): ?>
@@ -41,6 +45,7 @@
                         <?php unset($_SESSION['error']); // Xóa lỗi sau khi hiển thị ?>
                         <?php endif; ?>
                         <!-- sửa -->
+                        
                         <form action="<?= BASE_URL_ADMIN . '?act=them-san-pham' ?>" method="POST"
                             enctype="multipart/form-data">
                             <div class="row card-body ">
@@ -79,10 +84,10 @@
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-6">
+                                <!-- <div class="form-group col-6">
                                     <label>Album ảnh</label>
                                     <input type="file" class="form-control" name="img_array[]" multiple>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group col-6">
                                     <label>Số lượng</label>
@@ -93,14 +98,7 @@
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-6">
-                                    <label>Ngày nhập</label>
-                                    <input type="date" class="form-control" name="ngay_nhap"
-                                        placeholder="Nhập Ngày nhập">
-                                    <?php if (isset($_SESSION['error']['ngay_nhap'])) { ?>
-                                    <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
-                                    <?php } ?>
-                                </div>
+                                
 
                                 <div class="form-group col-6">
                                     <label>Danh mục</label>
@@ -130,12 +128,22 @@
                                     <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-9">
                                     <label>Mô tả</label>
                                     <textarea name="mo_ta" id="" class="form-control"
                                         placeholder="Nhập mô tả"></textarea>
                                 </div>
-
+                                <div class="form-group col-3">
+                                    <label for="">Màu sắc:</label><br>
+                                    <?php foreach ($listMau as $mauSac){ ?>
+                                        <input type="checkbox" name="colors[]" value="<?= $mauSac['id']?>" id=""><?= $mauSac['mau_sac']?><br>
+                                    <?php } 
+                                          if (isset($_SESSION['error']['mau_sac'])) { ?>
+                                    <p class="text-danger"><?= $_SESSION['error']['mau_sac'] ?></p>
+                                    <?php } ?>
+                                    
+                                </div>
+                                
 
 
 
@@ -143,6 +151,11 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" >
+                                <button type="button" class="btn btn-secondary">
+                                    Quay về danh sách
+                                </button>
+                                </a>
                             </div>
                         </form>
                     </div>
