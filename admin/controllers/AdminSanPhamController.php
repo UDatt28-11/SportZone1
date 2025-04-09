@@ -83,12 +83,14 @@ class AdminSanPhamController
             if (empty($hinh_anh)) {
                 $errors['hinh_anh'] = 'Phải chọn ảnh sản phẩm';
             }
+
             if (empty($colors)) {
                 $errors['mau_sac'] = 'Phải chọn màu sắc';
             }
             
             $_SESSION['error'] = $errors;
             
+
             // Nếu ko có lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {
                 // Nếu ko có lỗi thì tiến hành thêm sản phẩm
