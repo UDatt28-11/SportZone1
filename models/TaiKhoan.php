@@ -9,7 +9,7 @@ class TaiKhoan{
             $sql = "SELECT * FROM tai_khoans WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['email' => $email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC); // 👈 Quan trọng: Mảng kết hợp
+            $user = $stmt->fetch(PDO::FETCH_ASSOC); //  Quan trọng: Mảng kết hợp
     
             if (!$user || !password_verify($mat_khau, $user['mat_khau'])) {
                 return "Sai email hoặc mật khẩu.";
@@ -28,7 +28,22 @@ class TaiKhoan{
             return "Lỗi hệ thống: " . $e->getMessage();
         }
     }
-    
+    public function getTaiKhoanFromEmail($email){
+        try {
+            $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':email' => $email
+            ]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC); // Thêm FETCH_ASSOC cho chắc
+            return $result ?: null;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+            return null; 
+        }
+    }
     
 }
 ?>
