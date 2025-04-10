@@ -37,11 +37,10 @@ class TaiKhoan{
             $stmt->execute([
                 ':email' => $email
             ]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC); // Thêm FETCH_ASSOC cho chắc
-            return $result ?: null;
+
+            return $stmt->fetch();
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
-            return null; 
         }
     }
     
