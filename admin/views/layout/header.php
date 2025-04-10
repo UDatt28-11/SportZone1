@@ -28,6 +28,9 @@
         .bi-arrows-fullscreen{
             padding: 6px;
         }
+        .addColor{
+            padding: 20px;
+        }
     </style>
 </head>
 

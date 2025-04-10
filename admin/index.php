@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 //Require file common
 require_once '../commons/env.php'; // Khai báo biến môi trường  
 require_once '../commons/function.php'; // Hàm hỗ trợ   
@@ -18,16 +18,14 @@ require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
+require_once './models/AdminTaiKhoan.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
 //Require toàn bộ file Models
-
-require_once './models/AdminDanhMuc.php';
-require_once './models/AdminSanPham.php';
-require_once './models/AdminTaiKhoan.php';
-require_once './models/AdminDonHang.php';
-
+// require_once './models/AdminDanhMuc.php';
+// require_once './models/AdminSanPham.php';
+// require_once './models/AdminTaiKhoan.php';
 
 //Router
 $act = $_GET['act'] ?? 'san-pham';
@@ -58,7 +56,6 @@ match($act){
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
 
-
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),
     'form-them-mau-sac' => (new MauSacController())->formAddMauSac(),
@@ -75,12 +72,20 @@ match($act){
     'sua-kich-co' => (new KichCoController())->postEditKichCo(),
     'xoa-kich-co' => (new KichCoController())->deleteKichCo(),
 
-
-
+    // route biển thể
+    'list-bien-the' => (new AdminSanPhamController())->formAllBienThe(),
+    'sua-bien-the' => (new AdminSanPhamController())->postEditBienThe(),
+    'list-mau-bien-the' => (new AdminSanPhamController())->listMauCuaBienThe(),
+    'form-them-mau-bien-the' => (new AdminSanPhamController())->formAddMauBienThe(),
+    'them-mau-san-pham' => (new AdminSanPhamController())->addMauBienThe(),
+    'xoa-mau-bien-the' => (new AdminSanPhamController())->deleteMauCuaBienThe(),
+    'them-goi-hinh-bien-the' =>(new AdminSanPhamController())->postHinhAnh(),
+    'list-goi-hinh-anh' =>(new AdminSanPhamController())->listAnhMauSanPham(),
+    'edit-anh-mau-san-pham' =>(new AdminSanPhamController())->postEditAnhMauSanPham(),
+    'xoa-hinh-anh-mau-san-pham' =>(new AdminSanPhamController())->deleteAnhMauSanPham(),
 
       // route bình luận
       'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
-
     // route đon hàng
 
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
