@@ -66,6 +66,14 @@
                                                     <button class="btn btn-primary"><i class="far fa-eye"></i></button>
                                                 </a>
                                                 <a
+                                                    href="<?= BASE_URL_ADMIN . '?act=list-mau-bien-the&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <button class="btn btn-secondary"><i class="bi bi-palette-fill"></i></button>
+                                                </a>
+                                                <a
+                                                    href="<?= BASE_URL_ADMIN . '?act=list-bien-the&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <button class="btn btn-info"><i class="bi bi-files"></i></button>
+                                                </a>
+                                                <a
                                                     href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                     <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
                                                 </a>
