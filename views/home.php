@@ -143,10 +143,10 @@
                                     <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
                                         Chi Tiết</a>
                                 </div>
-                                <div
+                                <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
                                     class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
                                     Thêm Vào Giỏ
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -1134,7 +1134,7 @@
                 </div>
                 <div class="block-button text-center p-6">
                     <div class="flex items-center gap-4">
-                        <a href="cart.html"
+                        <a href="#"
                             class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
                             Xem Giỏ Hàng
                         </a>
@@ -1539,10 +1539,10 @@
                                 <div class="quantity body1 font-semibold">1</div>
                                 <i class="ph-bold ph-plus cursor-pointer body1"></i>
                             </div>
-                            <div
+                            <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
                                 class="add-cart-btn button-main w-full text-center bg-white text-black border border-black">
                                 Thêm Vào Giỏ
-                            </div>
+                            </a>
                         </div>
                         <div class="button-block mt-5">
                             <a href="checkout.html" class="button-main w-full text-center">Buy It Now</a>

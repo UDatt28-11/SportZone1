@@ -115,19 +115,26 @@
                                 <!-- size-item -->
                             </div>
                         </div>
+
                         <div class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
-                        <div class="choose-quantity flex items-center max-xl:flex-wrap lg:justify-between gap-5 mt-3">
+
+                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
                             <div
-                                class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">
-                                <i class="ph-bold ph-minus cursor-pointer body1"></i>
-                                <div class="quantity body1 font-semibold">1</div>
-                                <i class="ph-bold ph-plus cursor-pointer body1"></i>
+                                class="choose-quantity flex items-center max-xl:flex-wrap lg:justify-between gap-5 mt-3">
+                                <div
+                                    class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">
+                                    <div class="quantity body1 font-semibold">
+                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id']; ?>">
+                                        <input type="text" style="width: 100%; text-align: center;" value="1" min="1"
+                                            name="so_luong">
+                                    </div>
+                                </div>
+                                <button
+                                    class="add-cart-btn button-main whitespace-nowrap w-full text-center bg-white text-black border border-black">
+                                    Thêm vào giỏ hàng
+                                </button>
                             </div>
-                            <div
-                                class="add-cart-btn button-main whitespace-nowrap w-full text-center bg-white text-black border border-black">
-                                Thêm vào giỏ hàng
-                            </div>
-                        </div>
+                        </form>
                         <div class="button-block mt-5">
                             <a href="checkout.html" class="button-main w-full text-center">Mua ngay</a>
                         </div>
@@ -158,7 +165,7 @@
                             </div>
                             <div class="flex items-center gap-1 mt-3">
                                 <div class="text-title">Danh mục:</div>
-                                <div class="list-category text-secondary">Giày thể thao</div>
+                                <div class="list-category text-secondary"> <?= $sanPham['ten_danh_muc'] ?></div>
                             </div>
                             <div class="flex items-center gap-1 mt-3">
                                 <div class="text-title">Thẻ:</div>
