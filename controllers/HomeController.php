@@ -92,7 +92,74 @@ class HomeController{
         deleteSessionError();
         exit();
     }
-
+    public function postResgister() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy dữ liệu từ form
+            $email = trim($_POST['email'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+            $confirmPassword = trim($_POST['confirmPassword'] ?? '');
+            $agreeTerms = isset($_POST['remember']) ? true : false;
+    
+            $errors = [];
+    
+            // Validate email
+            if (empty($email)) {
+                $errors['email'] = "Vui lòng nhập địa chỉ email.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = "Email không hợp lệ.";
+            }
+    
+            // Validate password
+            if (empty($password)) {
+                $errors['password'] = "Vui lòng nhập mật khẩu.";
+            } elseif (strlen($password) < 6) {
+                $errors['password'] = "Mật khẩu phải có ít nhất 6 ký tự.";
+            }
+    
+            // Validate confirm password
+            if (empty($confirmPassword)) {
+                $errors['confirmPassword'] = "Vui lòng xác nhận mật khẩu.";
+            } elseif ($password !== $confirmPassword) {
+                $errors['confirmPassword'] = "Mật khẩu xác nhận không khớp.";
+            }
+    
+            // Kiểm tra đồng ý điều khoản
+            if (!$agreeTerms) {
+                $errors['agree'] = "Bạn phải đồng ý với điều khoản.";
+            }
+    
+            // Nếu có lỗi
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+    
+                //  KHÔNG redirect nữa - Gọi trực tiếp view luôn
+                header("Location: " . BASE_URL . "?act=register");
+                exit();
+            }
+    
+            // Gọi hàm register từ model
+            $user = $this->modelTaiKhoan->registerUser($email, $password);
+            unset($_SESSION['user_client']);
+    
+            if (is_array($user)) {
+                // Đăng ký thành công, đăng nhập
+                $_SESSION['user_client'] = $user;
+                echo "<script>window.location.href = '" . BASE_URL . "';</script>";
+                exit();
+            } else {
+                // Đăng ký thất bại (VD: Email đã tồn tại)
+                $_SESSION['error'] = $user;
+                $_SESSION['old'] = $_POST;
+    
+                // Trở lại form mà không redirect
+                header("Location: " . BASE_URL . "?act=register");
+                exit();
+            }
+        }
+    }
+    
+    
     public function addGioHang()
     {
         // Đảm bảo phương thức POST đúng chữ in hoa
@@ -103,7 +170,7 @@ class HomeController{
                 // Lấy thông tin tài khoản từ email
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
     
-               var_dump("hi"); 
+               var_dump($mail['id']); 
                 die;
                 //Lấy dữ liệu người dùng 
                 $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
@@ -115,63 +182,9 @@ class HomeController{
             $so_luong = $_POST['so_luong'];
         }
     }
-    // Thêm vào giỏ hàng 
-    // public function addGioHang(){
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         if (isset($_SESSION['user_client'])) {
-    //             $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-    //             // Lấy dữ liệu giỏ hàng của người dùng
-    //             $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
-    //             if (!$gioHang) {
-    //                 $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
-    //                 $gioHang = ['id'=>$gioHangId];
-    //                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-    //             }else{
-    //                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-    //             }
 
-    //             $san_pham_id = $_POST['san_pham_id'];
-    //             $so_luong = $_POST['so_luong'];
-
-    //             $checkSanPham = false;
-    //             foreach($chiTietGioHang as $detail){
-    //                 if ($detail['san_pham_id'] == $san_pham_id) {
-    //                     $newSoLuong = $detail['so_luong'] + $so_luong;
-    //                     $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $newSoLuong);
-    //                     $checkSanPham = true;
-    //                     break;
-    //                 }
-    //             }
-    //             if(!$checkSanPham){
-    //                 $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong);
-    //             }
-    //             // var_dump("Thêm Thành công"); die;
-    //             header("Location:" . BASE_URL . '?act=gio-hang');
-    //         }else{
-    //             var_dump('Chưa đăng nhập');die;
-    //         }
-    //     }
-    // }
     public function gioHang(){
-        // if (isset($_SESSION['user_client'])) {
-        //     $email = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-        //     // Lấy dữ liệu giỏ hàng của người dùng
-            
-        //     $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
-        //     if (!$gioHang) {
-        //         $gioHangId = $this->modelGioHang->addGioHang($email['id']);
-        //         $gioHang = ['id'=>$gioHangId];
-        //         $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-        //     }else{
-        //         $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-        //     }
-            // var_dump($chiTietGioHang);die;
-
             require_once './views/gioHang.php';
-
-    //     }else{
-    //         header("Location: ". BASE_URL . '?act=login');
-    //     }
     }
    
 }

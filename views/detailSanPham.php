@@ -118,14 +118,14 @@
 
                         <div class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
 
-                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
+                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST">
                             <div
                                 class="choose-quantity flex items-center max-xl:flex-wrap lg:justify-between gap-5 mt-3">
                                 <div
                                     class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">
                                     <div class="quantity body1 font-semibold">
                                         <input type="hidden" name="san_pham_id" value="<?= $sanPham['id']; ?>">
-                                        <input type="text" style="width: 100%; text-align: center;" value="1" min="1"
+                                        <input type="number" style="width: 100%; text-align: center;" value="1" min="1"
                                             name="so_luong">
                                     </div>
                                 </div>
