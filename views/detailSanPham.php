@@ -29,24 +29,19 @@
     <div class="featured-product countdown-timer underwear md:py-20 py-14">
         <div class="container flex justify-between gap-y-6 flex-wrap">
             <div class="list-img md:w-1/2 md:pr-[45px] w-full flex-shrink-0">
-                <?php foreach($listAnhSanPham as $key => $anhSanPham): ?>
+                
                 <div class="sticky">
-                    <?php endforeach; ?>
-                    <!-- Ảnh lớn ở trên cùng -->
-                    <div class="large-image mb-4 ">
-                        <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="Ảnh lớn" class="w-full">
+                
+                    
+                    <div class="mb-3">
+                        <img id="main-image" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 400px; height: 400px;" alt="Ảnh chính">
                     </div>
-                    <!-- Các ảnh bé ở dưới -->
-                    <div class="list grid grid-cols-4 gap-3 mt-5">
-                        <?php foreach($listAnhSanPham as $key => $anhSanPham): ?>
-                        <div class="small-image">
-                            <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="Ảnh bé">
+                        <div id="image-list" class="col-12">
+                            <!-- Danh sách ảnh sẽ được render ở đây -->
                         </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <?php foreach($listAnhSanPham as $key => $anhSanPham): ?>
+
+                    
                 </div>
-                <?php endforeach; ?>
                 <!-- Popup Swiper -->
                 <div class="swiper popup-img">
                     <span class="close-popup-btn absolute top-4 right-4 z-[2]">
@@ -83,7 +78,8 @@
                     </div>
                     <div class="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
                         <?php if($sanPham['gia_khuyen_mai']) { ?>
-                        <div class="product-price text-title"><?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
+                        <div id="product-price" class="product-price text-title">
+                            <?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
                         </div>
                         <div class="product-origin-price caption1 text-secondary2">
                             <del>><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
@@ -101,21 +97,122 @@
                     </div>
                     <div class="list-action mt-6">
                         <div class="choose-color mt-5">
-                            <div class="text-title">Màu sắc: <span class="text-title color"></span></div>
+                            <div class="text-title">Màu sắc: <span class="text-title color">
+                            <div class="mt-3 btn-group">
+                            <?php foreach($listMauSac as $index => $mauSac){
+                                    ?>
+                                    <button type="button" class="btn btn-outline-dark <?= $index === 0 ? 'active' : '' ?>"
+                                    data-color-id="<?= $mauSac['id'] ?>" 
+                                    data-product-id="<?= $sanPham['id'] ?>"
+                                    onclick="setActive(this)"><?=$mauSac['mau_sac']?></button>
+                                <?php
+                                } ?>
+                            </div>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('.product-image-thumb').on('click', function() {
+                                            var $image_element = $(this).find('img')
+                                            $('.product-image').prop('src', $image_element.attr('src'))
+                                            $('.product-image-thumb.active').removeClass('active')
+                                            $(this).addClass('active')
+                                        })
+                                    })
+                                        window.onload = function () {
+                                        const firstBtn = document.querySelector('.btn-group .btn');
+                                        if (firstBtn) {
+                                            setActive(firstBtn); // Kích hoạt nút đầu tiên
+                                        }
+                                    };
+                                    function setActive(button) {
+                                    const buttons = document.querySelectorAll('.btn-group .btn');
+                                    buttons.forEach(btn => btn.classList.remove('active'));
+                                    button.classList.add('active');
+
+                                    const colorId = button.getAttribute('data-color-id');
+                                    const productId = button.getAttribute('data-product-id');
+
+                                    // Load ảnh theo màu
+                                    fetch(`<?= BASE_URL_ADMIN ?>?act=lay-anh-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('image-list').innerHTML = data;
+                                        });
+
+                                    // Load size theo màu
+                                    fetch(`<?= BASE_URL_ADMIN ?>?act=lay-size-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('size-list').innerHTML = data;
+                                        });
+                                }
+
+                                    function changeMainImage(imgElement) {
+                                        const mainImage = document.getElementById('main-image');
+                                        if (mainImage) {
+                                            mainImage.src = imgElement.src;
+                                        }
+                                    }
+                                </script>
+                                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+                            </span></div>
                             <div class="list-color flex items-center gap-2 flex-wrap mt-3">
                                 <!-- color-item -->
                             </div>
                         </div>
                         <div class="choose-size mt-5">
                             <div class="heading flex items-center justify-between">
-                                <div class="text-title">Kích thước: <span class="text-title size"></span></div>
+                                <div class="choose-size mt-5">
+                                    <div class="text-title">Kích thước:</div>
+                                    <div id="size-list" class="size-list mt-2">
+                                        <!-- Các nút size sẽ được render vào đây -->
+                                    </div>
+                                </div>
+
+                                    <script>
+                                        function setActiveSize(button) {
+                                            const buttons = document.querySelectorAll('.btn-size-group .btn');
+                                            buttons.forEach(btn => {
+                                                btn.classList.remove('active');
+                                            });
+                                            button.classList.add('active');
+                                            const bienTheId = button.getAttribute('data-bienthe-id');
+                                            fetch(`<?= BASE_URL_ADMIN ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
+                                                .then(res => res.text())
+                                                .then(text => {
+                                                    console.log("Raw response:", text);
+                                                    const data = JSON.parse(text); // nếu lỗi sẽ hiện rõ
+                                                    // console.log(data);
+                                                    // Xử lý như cũ
+                                                    const priceElement = document.getElementById('product-price');
+                                                    if (priceElement && data.don_gia) {
+                                                    priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
+                                                    } else {
+                                                    priceElement.innerText = "Không xác định";
+                                                    }
+                                                    const stockElement = document.getElementById('stock-info');
+                                                    if (stockElement && data.ton_kho) {
+                                                        stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                                    } else {
+                                                        stockElement.innerText = "Không xác định";
+                                                    }
+                                                })
+                                                .catch(err => {
+                                                    console.error("Lỗi khi load giá biến thể:", err);
+                                                });
+
+                                        }
+
+                                    </script>
                                 <div class="caption1 size-guide text-red underline">Hướng dẫn kích thước</div>
                             </div>
                             <div class="list-size flex items-center gap-2 flex-wrap mt-3">
                                 <!-- size-item -->
                             </div>
                         </div>
-                        <div class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
+                        <div id="stock-info" class="text-title  mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
                         <div class="choose-quantity flex items-center max-xl:flex-wrap lg:justify-between gap-5 mt-3">
                             <div
                                 class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">

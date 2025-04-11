@@ -28,17 +28,15 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm-6">
-                        <div class="col-12">
-                            <img style="width:400px; height: 400px" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>"
-                                class="product-image" alt="Product Image">
-                        </div>
-                        <div class="col-12 product-image-thumbs">
-                            <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
-                            <div class="product-image-thumb <?= $anhSP[$key] == 0 ? 'active' : '' ?>"><img
-                                    src="<?= BASE_URL . $anhSP['link_hinh_anh']; ?>" alt="Product Image"></div>
-                            <?php endforeach ?>
+                    
+                    <div class="mb-3">
+                        <img id="main-image" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 400px; height: 400px;" alt="Ảnh chính">
+                    </div>
+                        <div id="image-list" class="col-12">
+                            <!-- Danh sách ảnh sẽ được render ở đây -->
                         </div>
                     </div>
+                    
                     <div class="col-12 col-sm-6">
                         <h3 class="my-3">Tên sản phẩm: <?= $sanPham['ten_san_pham'] ?></h3>
                         <hr>
@@ -51,10 +49,23 @@
                         <h4 class="mt-3">Trạng thái:
                             <small><?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?></small>
                         </h4>
-                        <h4 class="mt-3">Mô tả: <small><?= $sanPham['mo_ta'] ?></small></h4>
+                        <span> Màu sắc: <br></span>
+                        <div class="mt-3 btn-group">
+                            <?php foreach($listMauSac as $index => $mauSac){
+                                ?>
+                                <button type="button" class="btn btn-outline-dark <?= $index === 0 ? 'active' : '' ?>"
+                                data-color-id="<?= $mauSac['id'] ?>" 
+                                data-product-id="<?= $sanPham['id'] ?>"
+                                onclick="setActive(this)"><?=$mauSac['mau_sac']?></button>
+                            <?php
+                            } ?>
+                        </div>
+                        
 
 
                     </div>
+                    
+                    <h4 class="col-12">Mô tả: <br> <small><?= $sanPham['mo_ta'] ?></small></h4>
                 </div>
 
                 <div class="col-12">
@@ -150,6 +161,36 @@ $(document).ready(function() {
         $(this).addClass('active')
     })
 })
+        window.onload = function () {
+        const firstBtn = document.querySelector('.btn-group .btn');
+        if (firstBtn) {
+            setActive(firstBtn); // Kích hoạt nút đầu tiên
+        }
+    };
+    function setActive(button) {
+        const buttons = document.querySelectorAll('.btn-group .btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+        const colorId = button.getAttribute('data-color-id');
+        const productId = button.getAttribute('data-product-id');
+
+        fetch(`<?= BASE_URL_ADMIN ?>?act=lay-anh-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('image-list').innerHTML = data;
+            });
+    }
+    function changeMainImage(imgElement) {
+        const mainImage = document.getElementById('main-image');
+        if (mainImage) {
+            mainImage.src = imgElement.src;
+        }
+    }
 </script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>
