@@ -56,6 +56,8 @@ match($act){
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
     'lay-anh-theo-mau' => (new AdminSanPhamController())->getListAnhTheoMau(),
+    'lay-size-theo-mau' => (new AdminSanPhamController())->getListSizeTheoMau(),
+    'lay-thong-tin-bien-the' =>(new AdminSanPhamController())->layThongTinBienThe(),
 
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),

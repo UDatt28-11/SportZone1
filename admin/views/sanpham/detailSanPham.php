@@ -161,8 +161,6 @@ $(document).ready(function() {
         $(this).addClass('active')
     })
 })
-</script>
-<script>
         window.onload = function () {
         const firstBtn = document.querySelector('.btn-group .btn');
         if (firstBtn) {

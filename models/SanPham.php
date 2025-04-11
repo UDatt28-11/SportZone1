@@ -37,7 +37,7 @@ class SanPham{
 
     public function getListAnhSanPham($id){
         try {
-            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
+            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE id_san_pham = :id';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -81,5 +81,35 @@ class SanPham{
         }
     }
 
+
+    public function getAllMauCuaBienThe($id){
+        try {
+            $sql = "SELECT pc.id, pc.mau_sac 
+                    FROM bien_the_sp pv  
+                    JOIN mau_sp pc ON pv.mau_id = pc.id  
+                    WHERE pv.sp_id = :san_pham_id
+                    GROUP BY pc.id;
+                    ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':san_pham_id'=>$id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+
+        }
+    }
+    public function getGoiSizeMauSanPham($id,$colorId){
+        try{
+            $sql = "SELECT ks.id, ks.kich_co , bt.ton_kho , bt.mau_id
+            FROM bien_the_sp bt
+            JOIN kich_co_sp ks ON bt.size_id = ks.id
+            WHERE bt.sp_id = :sp_id AND mau_id= :id_mau_sac AND bt.trang_thai = 1;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':sp_id'=>$id, ':id_mau_sac'=>$colorId]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }
 ?>
