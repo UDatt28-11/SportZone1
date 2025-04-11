@@ -69,12 +69,7 @@
                                 <p>Kích cỡ sản phẩm</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?= BASE_URL_ADMIN . '?act=hinh-anh-bien-the' ?>" class="nav-link">
-                                <i class="fas fa-images nav-icon"></i>
-                                <p>Ảnh biến thể</p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
 
@@ -112,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="<?= BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
                                 <i class="nav-icon far fa-user"></i>
                                 <p>Quản lý tài khoản cá nhân</p>
                             </a>

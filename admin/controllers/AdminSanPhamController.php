@@ -631,7 +631,8 @@ class AdminSanPhamController
         if ($bienThe) {
             header('Content-Type: application/json');
             echo json_encode([
-                'don_gia' => $bienThe['don_gia'] ?? 0
+                'don_gia' => $bienThe['don_gia'] ?? 0,
+                'ton_kho' => $bienThe['ton_kho'] ?? 0
             ]);
         } else {
             header('Content-Type: application/json');

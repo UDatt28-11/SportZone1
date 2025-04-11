@@ -179,17 +179,24 @@
                                             });
                                             button.classList.add('active');
                                             const bienTheId = button.getAttribute('data-bienthe-id');
-                                            fetch(`<?= BASE_URL_ADMIN ?>?act=lay-gia-bien-the&id_bien_the=${bienTheId}`)
+                                            fetch(`<?= BASE_URL_ADMIN ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
                                                 .then(res => res.text())
                                                 .then(text => {
                                                     console.log("Raw response:", text);
                                                     const data = JSON.parse(text); // nếu lỗi sẽ hiện rõ
+                                                    // console.log(data);
                                                     // Xử lý như cũ
                                                     const priceElement = document.getElementById('product-price');
-                                                    if (priceElement && data.gia_ban) {
-                                                    priceElement.innerText = parseInt(data.gia_ban).toLocaleString('vi-VN') + ' đ';
+                                                    if (priceElement && data.don_gia) {
+                                                    priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
                                                     } else {
                                                     priceElement.innerText = "Không xác định";
+                                                    }
+                                                    const stockElement = document.getElementById('stock-info');
+                                                    if (stockElement && data.ton_kho) {
+                                                        stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                                    } else {
+                                                        stockElement.innerText = "Không xác định";
                                                     }
                                                 })
                                                 .catch(err => {
