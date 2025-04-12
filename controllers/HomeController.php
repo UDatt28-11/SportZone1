@@ -193,10 +193,9 @@ class HomeController{
                 // Lấy thông tin tài khoản từ email
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
     
-               var_dump($mail['id']); 
-                die;
+              
                 //Lấy dữ liệu người dùng 
-                $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+                // $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
 
             }else{
                 var_dump("chưa đăng nhập"); die;

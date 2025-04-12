@@ -35,7 +35,7 @@
                     <!-- Mật khẩu -->
                     <div class="pass mt-5">
                         <input class="border-line px-4 pt-3 pb-3 w-full rounded-lg" name="password" type="password"
-                            placeholder="Mật khẩu*">
+                            placeholder="Mật khẩu*">        
                     </div>
                     <?php if (isset($_SESSION['errors']['password'])): ?>
                     <p class="text-red-500 mt-2" style="color: red;"><?= $_SESSION['errors']['password'] ?></p>

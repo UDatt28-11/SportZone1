@@ -18,6 +18,7 @@ match($act){
     '/' => (new HomeController())->home(), // route trang chủ
     
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
+    'gio-hang' => (new HomeController())->chiTietSanPham(),
     
     // Auth client login
     'login' => (new HomeController())->formLogin(),
