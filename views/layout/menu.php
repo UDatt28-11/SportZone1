@@ -192,7 +192,8 @@
                         }
                                  ?>
                             </label>
-                            <i class="ph-bold ph-user text-2xl"></i>
+                            <i class="ph-bold ph-user text-2xl">
+                            </i>
                             <div
                                 class="login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-sm">
                                 <?php if (!isset($_SESSION['user_client'])) { ?>
@@ -200,14 +201,19 @@
                                     Nhập</a>
                                 <div class="text-secondary text-center mt-3 pb-4">
                                     Bạn chưa có tài khoản?
-                                    <a href="register.html" class="text-black pl-1 hover:underline">Đăng Ký
+                                    <a href="<?= BASE_URL . '?act=register' ?>"
+                                        class="text-black pl-1 hover:underline">Đăng Ký
                                     </a>
                                 </div>
-                                <a href="my-account.html"
+                                <a href="#"
                                     class="button-main bg-white text-black border border-black w-full text-center">Hỗ
                                     Trợ</a>
                                 <?php } else { ?>
-                                <a href="my-account.html">Tài khoản</a>
+                                <a href="#"
+                                    style="justify-content: space-between; margin-right: 30px; margin-left: 30px;">Tài
+                                    khoản</a>
+                                <a href="<?= BASE_URL . '?act=logout-client' ?>"
+                                    onclick="return confirm('Bạn muốn đăng xuất tài khoản?')">Đăng Xuất</a>
                                 <?php } ?>
 
                             </div>
@@ -574,7 +580,7 @@
                                 </div>
                                 <div class="block-button text-center p-6">
                                     <div class="flex items-center gap-4">
-                                        <a href="cart.html"
+                                        <a href="index.php?act=gio-hang"
                                             class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
                                             Xem Giỏ Hàng
                                         </a>
