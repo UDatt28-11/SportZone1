@@ -26,6 +26,6 @@ match($act){
     'logout-client' => (new HomeController())->logout(),
     // Auth client register
     'register' => (new HomeController())->formRegister(),
-    'resgister' => (new HomeController())->postResgister()
+    'resgister' => (new HomeController())->postRegister()
     
 };
