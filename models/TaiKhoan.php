@@ -43,34 +43,38 @@ class TaiKhoan{
             echo "lỗi" . $e->getMessage();
         }
     }
-    public function registerUser($email, $mat_khau) {
+    public function registerUser($data) {
         try {
             // Kiểm tra email đã tồn tại chưa
             $sql = "SELECT * FROM tai_khoans WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['email' => $email]);
+            $stmt->execute(['email' => $data['email']]);
     
-            if ($stmt->fetch()) {
+            if($stmt->fetch()) {
                 return "Email đã tồn tại.";
             }
-    
-            // Mã hóa mật khẩu
-            $hashedPassword = password_hash($mat_khau, PASSWORD_BCRYPT);
-    
             // Tạo tài khoản mới
-            $sql = "INSERT INTO tai_khoans (email, mat_khau, chuc_vu_id, trang_thai) 
-                    VALUES (:email, :mat_khau, 2, 1)"; // 2: Khách hàng, 1: Đang hoạt động
+            $sql = "INSERT INTO tai_khoans 
+                    (ho_ten, ngay_sinh, email, so_dien_thoai, gioi_tinh, dia_chi, mat_khau, chuc_vu_id, trang_thai) 
+                    VALUES 
+                    (:ho_ten, :ngay_sinh, :email, :so_dien_thoai, :gioi_tinh, :dia_chi, :mat_khau, 2, 1)";
     
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':email' => $email,
-                ':mat_khau' => $hashedPassword
+                ':ho_ten' => $data['ho_ten'],
+                ':ngay_sinh' => $data['ngay_sinh'],
+                ':email' => $data['email'],
+                ':so_dien_thoai' => $data['so_dien_thoai'],
+                ':gioi_tinh' => $data['gioi_tinh'],
+                ':dia_chi' => $data['dia_chi'],
+                ':mat_khau' => $data['mat_khau']
             ]);
     
             // Trả về user mới tạo
             return [
                 'id' => $this->conn->lastInsertId(),
-                'email' => $email,
+                'ho_ten' => $data['ho_ten'],
+                'email' => $data['email'],
                 'chuc_vu_id' => 2,
                 'trang_thai' => 1
             ];
@@ -78,6 +82,7 @@ class TaiKhoan{
             return "Lỗi hệ thống: " . $e->getMessage();
         }
     }
+    
     
     
 }

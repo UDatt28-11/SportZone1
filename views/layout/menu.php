@@ -80,33 +80,28 @@
                                             <div class="nav-link basis-2/3 flex justify-between pr-12">
                                                 <div class="nav-item">
                                                     <div class="text-button-uppercase pb-2">
-                                                        Shop Features
+                                                        Nike
                                                     </div>
                                                     <ul>
                                                         <li>
                                                             <a href="shop-breadcrumb2.html"
                                                                 class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
+                                                                FiLa
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="shop-breadcrumb2.html"
                                                                 class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
+                                                                BuMa
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="shop-breadcrumb2.html"
                                                                 class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
+                                                                Adidas
                                                             </a>
                                                         </li>
-                                                        <li>
-                                                            <a href="shop-collection.html"
-                                                                class="link text-secondary duration-300">
-                                                                Shop Collection
-                                                            </a>
-                                                        </li>
+
                                                     </ul>
                                                 </div>
 
