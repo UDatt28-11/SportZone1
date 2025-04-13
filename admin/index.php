@@ -28,7 +28,7 @@ require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài kho
 // require_once './models/AdminTaiKhoan.php';
 
 //Router
-$act = $_GET['act'] ?? 'san-pham';
+$act = $_GET['act'] ?? '/';
 
 if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
   checkLoginAdmin();

@@ -433,7 +433,8 @@
                     <div class="modal-cart-main flex">
                         <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
                             <div class="heading5 px-6 pb-3">Có Thể Bạn Cũng Thích</div>
-                            <div class="list px-6">
+                            <div class="list px-6 max-h-[500px] overflow-y-auto scroll-smooth">
+                                <?php foreach ($listSanPhamCungDanhMuc as $sanPham) { ?>
                                 <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
                                     data-item="1">
                                     <div class="infor flex items-center gap-5">
@@ -442,11 +443,11 @@
                                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
                                         </div>
                                         <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="name text-button"><?=$sanPham['ten_san_pham']?></div>
                                             <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-price text-title"><?=$sanPham['gia_khuyen_mai']?></div>
                                                 <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
+                                                    <del><?=$sanPham['gia_san_pham']?></del>
                                                 </div>
                                             </div>
                                         </div>
@@ -456,50 +457,8 @@
                                         Xem Chi Tiết
                                     </div>
                                 </div>
-                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                                    data-item="2">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/2-2.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
-                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                                    data-item="3">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/3-3.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
+                                <?php } ?>
+                            
                                 <div class="product-item item py-5 flex items-center justify-between gap-3"
                                     data-item="4">
                                     <div class="infor flex items-center gap-5">
@@ -580,7 +539,7 @@
                                 </div>
                                 <div class="block-button text-center p-6">
                                     <div class="flex items-center gap-4">
-                                        <a href="index.php?act=gio-hang"
+                                        <a href="?act=gio-hang"
                                             class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
                                             Xem Giỏ Hàng
                                         </a>

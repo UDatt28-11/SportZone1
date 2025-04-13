@@ -18,7 +18,11 @@ match($act){
     '/' => (new HomeController())->home(), // route trang chủ
     
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
-    'gio-hang' => (new HomeController())->chiTietSanPham(),
+    'gio-hang' => (new HomeController())->formGioHang(),
+    'lay-anh-theo-mau' => (new HomeController())->getListAnhTheoMau(),
+    'lay-size-theo-mau' => (new HomeController())->getListSizeTheoMau(),
+    'lay-thong-tin-bien-the' =>(new HomeController())->layThongTinBienThe(),
+
     
     // Auth client login
     'login' => (new HomeController())->formLogin(),
