@@ -10,12 +10,14 @@ class HomeController{
     }
     public function home(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
+        // var_dump($listSanPham);
         require_once './views/home.php';
     }
     public function chiTietSanPham(){
         $id = $_GET['id_san_pham'];
 
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        // var_dump($sanPham);
 
         $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
 
@@ -42,9 +44,37 @@ class HomeController{
         if($sanPham) {
             require_once './views/detailSanPham.php';
         } else {
-            header("Location: " . BASE_URL . '?act=san-pham');
+            header("Location: " . BASE_URL . '?act=/');
             exit();
         }
+    }
+    public function getListAnhTheoMau() {
+        $productId = $_GET['id_san_pham'];
+        $colorId = $_GET['id_mau_sac'];
+        $images = $this->modelSanPham->getGoiAnhMauSanPham($productId, $colorId);
+    
+        // Render view nhỏ chỉ chứa danh sách ảnh
+        include './views/_partial_image_list.php';
+    }
+    public function layThongTinBienThe() {
+        $idBienThe = $_GET['id_bien_the'];
+        // var_dump($idBienThe);
+        $bienThe = $this->modelSanPham->getBienTheById($idBienThe);
+        // var_dump($bienThe);die;
+
+        if ($bienThe) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'don_gia' => $bienThe['don_gia'] ?? 0,
+                'ton_kho' => $bienThe['ton_kho'] ?? 0
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'error' => 'Không tìm thấy biến thể'
+            ]);
+        }
+        exit;
     }
     public function getListSizeTheoMau() {
         $productId = $_GET['id_san_pham'];
@@ -53,6 +83,11 @@ class HomeController{
     
         // Render view nhỏ chỉ chứa danh sách ảnh
         include './views/_partial_size_list.php';
+    }
+    public function formGioHang(){
+
+
+        require_once './views/gioHang.php';
     }
     
     //Login

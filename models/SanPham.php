@@ -98,9 +98,30 @@ class SanPham{
 
         }
     }
+    public function getGoiAnhMauSanPham($id,$id_color){
+        try {
+            $sql = "SELECT * FROM hinh_anh_san_phams WHERE id_san_pham = :id_san_pham and mau_id = :mau_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id_san_pham'=>$id, ':mau_id'=>$id_color]);
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (Exception $e){
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function getBienTheById($id){
+        try{
+            $sql = "SELECT * FROM bien_the_sp WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function getGoiSizeMauSanPham($id,$colorId){
         try{
-            $sql = "SELECT ks.id, ks.kich_co , bt.ton_kho , bt.mau_id
+            $sql = "SELECT bt.id, ks.kich_co , bt.ton_kho , bt.mau_id
             FROM bien_the_sp bt
             JOIN kich_co_sp ks ON bt.size_id = ks.id
             WHERE bt.sp_id = :sp_id AND mau_id= :id_mau_sac AND bt.trang_thai = 1;";
