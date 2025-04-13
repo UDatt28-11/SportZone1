@@ -218,11 +218,13 @@
                             <span
                                 class="quantity wishlist-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
                         </div>
-                        <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
-                            <i class="ph-bold ph-handbag text-2xl"></i>
-                            <span
-                                class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
-                        </div>
+                        <a href="<?= BASE_URL . '?act=gio-hang'?>">
+                            <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
+                                <i class="ph-bold ph-handbag text-2xl"></i>
+                                <div
+                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full"><?=$soLuongHangTrongGio?></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <!-- Tìm kiếm sản phẩm -->
@@ -434,7 +436,7 @@
                                     data-item="1">
                                     <div class="infor flex items-center gap-5">
                                         <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/1-2.png" alt="img"
+                                            <img src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img"
                                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
                                         </div>
                                         <div class="">
@@ -454,28 +456,6 @@
                                 </div>
                                 <?php } ?>
                             
-                                <div class="product-item item py-5 flex items-center justify-between gap-3"
-                                    data-item="4">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/4-2.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="right cart-block md:w-1/2 w-full py-6 relative overflow-hidden">

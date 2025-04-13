@@ -11,9 +11,10 @@ require_once './models/GioHang.php';
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
+require_once './controllers/cartController.php';
 // Route
 $act = $_GET['act'] ?? '/';
-
+// var_dump($_SESSION['user_id']);
 match($act){
     '/' => (new HomeController())->home(), // route trang chủ
     
@@ -23,6 +24,7 @@ match($act){
     'lay-size-theo-mau' => (new HomeController())->getListSizeTheoMau(),
     'lay-thong-tin-bien-the' =>(new HomeController())->layThongTinBienThe(),
 
+    'add-vao-gio-hang' =>(new CartController())->add(),
     
     // Auth client login
     'login' => (new HomeController())->formLogin(),

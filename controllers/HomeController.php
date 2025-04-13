@@ -2,11 +2,13 @@
 class HomeController{
     public $modelSanPham;
     public $modelTaiKhoan;
+    public $modelGioHang;
 
     
     public function __construct(){
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
+        $this->modelGioHang = new GioHang($_SESSION['user_id']);
     }
     public function home(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
@@ -19,6 +21,11 @@ class HomeController{
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
         // var_dump($sanPham);
 
+        $listGioHang = $this->modelGioHang->getGioHang();
+        // var_dump($listGioHang);
+        $soLuongHangTrongGio = count($listGioHang);
+        // var_dump($soLuongHangTrongGio);
+
         $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
 
         // $listKichCo = $this->modelSanPham->getKichCoHienThi($id);
@@ -30,15 +37,7 @@ class HomeController{
 
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
 
-        if ($_GET['act'] == 'lay-anh-theo-mau') {
-            $idSanPham = $_GET['id_san_pham'];
-            $idMauSac = $_GET['id_mau_sac'];
-            $listSize = $this->modelSanPham->getGoiSizeMauSanPham($idSanPham, $idMauSac);
-            foreach ($listSize as $Size) {
-                echo '<button type="button" onclick="setActiveSize(this)" class="btn btn-outline-dark">' . $Size['kich_co'] . '</button>';
-            }
-            exit;
-        }
+        // var_dump($listSanPhamCungDanhMuc);die();
         
         // var_dump($listSanPhamCungDanhMuc);die;
         if($sanPham) {
@@ -49,7 +48,7 @@ class HomeController{
         }
     }
     public function getListAnhTheoMau() {
-        $productId = $_GET['id_san_pham'];
+        $productId = $_GET['id_san_pham_tt'];
         $colorId = $_GET['id_mau_sac'];
         $images = $this->modelSanPham->getGoiAnhMauSanPham($productId, $colorId);
     
@@ -65,6 +64,7 @@ class HomeController{
         if ($bienThe) {
             header('Content-Type: application/json');
             echo json_encode([
+                'id' => $bienThe['id'],
                 'don_gia' => $bienThe['don_gia'] ?? 0,
                 'ton_kho' => $bienThe['ton_kho'] ?? 0
             ]);
@@ -77,7 +77,7 @@ class HomeController{
         exit;
     }
     public function getListSizeTheoMau() {
-        $productId = $_GET['id_san_pham'];
+        $productId = $_GET['id_san_pham_tt'];
         $colorId = $_GET['id_mau_sac'];
         $listKichCo = $this->modelSanPham->getGoiSizeMauSanPham($productId, $colorId);
     
@@ -126,6 +126,7 @@ class HomeController{
             if (is_array($user)) {
                 // Đăng nhập thành công
                 $_SESSION['user_client'] = $user;
+                $_SESSION['user_id'] = $user['id'];
                 echo "<script>window.location.href = '" . BASE_URL . "';</script>";
                 exit();
             } else {
