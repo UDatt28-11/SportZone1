@@ -222,7 +222,7 @@
                             <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
                                 <i class="ph-bold ph-handbag text-2xl"></i>
                                 <div
-                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full"><?=$soLuongHangTrongGio?></div>
+                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full"><?=$soLuongHangTrongGio ?? 0 ; ?></div>
                             </div>
                         </a>
                     </div>
