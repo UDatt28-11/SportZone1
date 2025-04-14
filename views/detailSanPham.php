@@ -1,5 +1,11 @@
-<?php require_once 'layout/header.php'; ?>
-<?php require_once 'layout/menu.php'; ?>
+<?php
+// var_dump($sanPham);
+$productDetail = $sanPham; // Store original data
+require_once 'layout/header.php';
+require_once 'layout/menu.php';
+$sanPham = $productDetail; // Restore original data
+//  var_dump($sanPham);
+ ?>
 <div class="breadcrumb-product">
     <div class="main bg-surface md:pt-[88px] pt-[70px] pb-[14px]">
         <div class="container flex items-center justify-between flex-wrap gap-3">
@@ -34,7 +40,7 @@
                         <img id="main-image" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" 
                             class="w-[400px] h-[400px] object-cover" alt="Ảnh chính">
                     </div>
-                    <div id="image-list" class="grid grid-cols-12 gap-4">
+                    <div id="image-list" class="mb-3">
                         <!-- Danh sách ảnh sẽ được render ở đây -->
                     </div>
                 </div>
@@ -86,9 +92,7 @@
                             -19%
                         </div>
                     </div>
-                    <div class="product-description text-secondary">
-                        <?= $sanPham['mo_ta']; ?>
-                    </div>
+                    
                 </div>
                 <div class="list-action mt-6">
                     <div class="more-infor mt-6">
@@ -118,8 +122,9 @@
                         </div>
                         <div class="flex items-center gap-1 mt-3">
                             <div class="text-title">Danh mục:</div>
-                            <div class="list-category text-secondary"> <?= $sanPham['ten_danh_muc'] ?></div>
-                        </div>
+                            <div class="list-category text-secondary"> 
+                                <?=$sanPham['ten_danh_muc'] ?></div>
+                            </div>
                         <div class="flex items-center gap-1 mt-3">
                             <div class="text-title">Thẻ:</div>
                             <div class="list-tag text-secondary">Giày</div>
@@ -162,17 +167,18 @@
                                     const productId = button.getAttribute('data-product-id');
 
                                 // Load ảnh theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
+                                fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
                                     .then(response => response.text())
                                     .then(data => {
                                         document.getElementById('image-list').innerHTML = data;
                                     });
 
                                 // Load size theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
+                                fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
                                     .then(response => response.text())
                                     .then(data => {
                                         document.getElementById('size-list').innerHTML = data;
+                                        // console.log(data);
                                     });
                             }
 
@@ -227,11 +233,23 @@
                                                 priceElement.innerText = "Không xác định";
                                                 }
                                                 const stockElement = document.getElementById('stock-info');
+                                                // console.log(stockElement);
                                                 if (stockElement && data.ton_kho) {
                                                     stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                                    const maxQty = document.getElementById('soLuong');
+                                                    maxQty.max = parseInt(data.ton_kho);
                                                 } else {
                                                     stockElement.innerText = "Không xác định";
                                                 }
+                                                const addToCartForm = document.getElementById('addToCart');
+                                                
+                                                if (addToCartForm) {
+                                                    const variant = data.id;
+                                                    const inputElement = document.getElementById('bienTheId');
+                                                    inputElement.value = variant;
+
+                                                }
+                                                // console.log(addToCartForm);
                                             })
                                             .catch(err => {
                                                 console.error("Lỗi khi load giá biến thể:", err);
@@ -246,27 +264,44 @@
                         </div>
                     </div>
                     <div id="stock-info" class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
-                    <div class="choose-quantity flex flex-wrap gap-4 mt-3">
-                        <!-- Block tăng giảm số lượng -->
-                        <div
-                            class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">
-                            <i class="ph-bold ph-minus cursor-pointer body1"></i>
-                            <div class="quantity body1 font-semibold">1</div>
-                            <i class="ph-bold ph-plus cursor-pointer body1"></i>
-                        </div>
+                    <div class="choose-quantity flex flex-col sm:flex-row flex-wrap gap-4 mt-3">
+                        <!-- Nhóm số lượng + Thêm vào giỏ -->
+                         <div id="addToCart">
+                             <form action="<?= BASE_URL . "?act=add-vao-gio-hang&id_san_pham=" . $sanPham['id']?>" method="post">
+                             <!-- HTML -->
+                                <div class="quantity-block flex items-center justify-between rounded-lg border border-line w-[140px] px-3 py-2">
+                                    <i class="ph-bold ph-minus cursor-pointer text-gray-700 hover:text-black text-lg"></i>
+                                    <input type="hidden" id="bienTheId" value="" name="bien_the_id" id="">
+                                    
+                                    <input 
+                                        type="number" 
+                                        name="so_luong"
+                                        min="1"
+                                        id="soLuong"
+                                        class="quantity text-center w-12 font-semibold border-none outline-none bg-transparent text-base hide-arrows"
+                                        value="1"
+                                    >
+                                    <i class="ph-bold ph-plus cursor-pointer text-gray-700 hover:text-black text-lg"></i>
+                                </div>
+                                     <!-- Nút Thêm vào giỏ -->
+                                     <button
+                                         type="submit"
+                                         class="add-cart-btn button-main px-5 py-3 text-center bg-white text-black border border-black rounded-lg w-full sm:flex-1 min-w-[160px]">
+                                         Thêm vào giỏ hàng
+                                     </button>
+                                 </div>
+                             </form>
 
-                        <!-- Nút Thêm vào giỏ -->
-                        <button
-                            class="add-cart-btn button-main px-5 py-3 text-center bg-white text-black border border-black rounded-lg flex-1 min-w-[160px]">
-                            Thêm vào giỏ hàng
-                        </button>
+                        <br>
+                         </div>
 
                         <!-- Nút Mua ngay -->
                         <a href="checkout.html"
-                            class="button-main px-5 py-3 text-center rounded-lg bg-black text-white flex-1 min-w-[160px]">
+                            class="button-main px-5 py-3 text-center rounded-lg bg-black text-white w-full sm:flex-1 min-w-[160px]">
                             Mua ngay
                         </a>
                     </div>
+
 
                 </div>
             </div>
@@ -292,48 +327,15 @@
                 </div>
                 <div class="desc-block mt-8">
                     <div class="desc-item description" data-item="Description">
-                        <div class="grid md:grid-cols-2 gap-8 gap-y-5">
-                            <div class="left">
+                        
+                           
                                 <div class="heading6">Sự miêu tả</div>
-                                <div class="text-secondary mt-2">
-                                    Giữ cho không gian thể thao của bạn gọn gàng nhưng vẫn đầy phong cách với thiết bị
-                                    và
-                                    phụ kiện từ Sport Zone. Giúp bạn sắp xếp gọn gàng đồ dùng thể thao, những sản
-                                    phẩm này còn tạo điểm nhấn năng động cho không gian sống của bạn. Được thiết kế theo
-                                    phong cách hiện đại cho người yêu thể thao, sản phẩm của Sport Zone hoàn hảo
-                                    để sử dụng bất kỳ nơi nào bạn muốn. Với chất liệu cao cấp, bền bỉ theo thời gian,
-                                    Sport
-                                    Zone mang đến giải pháp tiện ích giúp bạn luôn sẵn sàng cho những buổi tập luyện đầy
-                                    hứng
-                                    khởi.
+                                <div class="product-description text-secondary">
+                                    <?= $sanPham['mo_ta']; ?>
                                 </div>
-                            </div>
-                            <div class="right">
-                                <div class="heading6">Về sản phẩm này</div>
-                                <div class="list-feature">
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Sản phẩm chất lượng cao, bền bỉ theo thời gian.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Thiết kế hiện đại, phù hợp với nhiều không gian thể thao.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Đa dạng mẫu mã, đáp ứng mọi nhu cầu tập luyện.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Dễ dàng sử dụng, thuận tiện cho mọi đối tượng.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Hỗ trợ khách hàng tận tình, chính sách bảo hành rõ ràng.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            
+                            
+        
                         <div class="grid lg:grid-cols-4 grid-cols-2 gap-[30px] md:mt-10 mt-6">
                             <div class="item">
                                 <div class="icon-delivery-truck text-4xl"></div>

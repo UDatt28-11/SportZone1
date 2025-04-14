@@ -2,16 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 @import 'icomoon/style.css';
-
-#image-list{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-header-main{
-    background-color: #ffffff !important;
-}
-nav {
-    background-color: white; /* Hoặc màu khác tùy bạn */
-    z-index: 1000; /* Đảm bảo nằm trên ảnh */
-    position: relative; /* Hoặc fixed nếu cần */
-  }

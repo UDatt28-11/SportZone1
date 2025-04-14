@@ -30,28 +30,38 @@
                 </div>
                 <div class="list-product w-full sm:mt-7 mt-5">
                     <div class="w-full">
-                        <div class="heading bg-surface bora-4 pt-4 pb-4">
-                            <div class="flex">
-                                <div class="w-1/2">
-                                    <div class="text-button text-center" _msttexthash="2108392" _msthash="339">Sản phẩm
-                                    </div>
-                                </div>
-                                <div class="w-1/12">
-                                    <div class="text-button text-center" _msttexthash="43706" _msthash="340">Giá</div>
-                                </div>
-                                <div class="w-1/6">
-                                    <div class="text-button text-center" _msttexthash="2062073" _msthash="341">Số lượng
-                                    </div>
-                                </div>
-                                <div class="w-1/6">
-                                    <div class="text-button text-center" _msttexthash="923910" _msthash="342">Tổng giá
-                                    </div>
-                                </div>
+                        <!-- Header -->
+                        <div class="heading bg-surface bora-4 pt-4 pb-4 border-b border-gray-300">
+                            <div class="flex text-sm font-semibold text-center">
+                                <div class="w-1/2">Sản phẩm</div>
+                                <div class="w-1/6">Giá</div>
+                                <div class="w-1/6">Số lượng</div>
+                                <div class="w-1/6">Tổng giá</div>
                             </div>
                         </div>
-                        <div class="list-product-main w-full mt-3"></div>
+
+                        <!-- Danh sách sản phẩm -->
+                        <div class="list-product-main w-full mt-3 divide-y divide-gray-200">
+                            <?php foreach($listGioHang as $gioHang){ ?>
+                                <div class="flex items-center text-center text-sm py-4">
+                                    <div class="w-1/2 px-2">
+                                        <div class="font-medium text-gray-800"><?= $gioHang['ten_san_pham'] ?></div>
+                                    </div>
+                                    <div class="w-1/6 px-2 text-gray-600">
+                                        <?= number_format($gioHang['don_gia'], 0, ',', '.') ?> đ
+                                    </div>
+                                    <div class="w-1/6 px-2 text-gray-600">
+                                        <?= $gioHang['so_luong'] ?>
+                                    </div>
+                                    <div class="w-1/6 px-2 font-semibold text-black">
+                                        <?= number_format($gioHang['don_gia'] * $gioHang['so_luong'], 0, ',', '.') ?> đ
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
+
                 <div class="input-block discount-code w-full h-12 sm:mt-7 mt-5">
                     <form class="w-full h-full relative">
                         <input type="text" placeholder="Thêm giảm giá voucher"
