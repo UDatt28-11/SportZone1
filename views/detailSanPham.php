@@ -1,5 +1,11 @@
-<?php require_once 'layout/header.php'; ?>
-<?php require_once 'layout/menu.php'; ?>
+<?php
+// var_dump($sanPham);
+$productDetail = $sanPham; // Store original data
+require_once 'layout/header.php';
+require_once 'layout/menu.php';
+$sanPham = $productDetail; // Restore original data
+//  var_dump($sanPham);
+ ?>
 <div class="breadcrumb-product">
     <div class="main bg-surface md:pt-[88px] pt-[70px] pb-[14px]">
         <div class="container flex items-center justify-between flex-wrap gap-3">
@@ -29,22 +35,17 @@
     <div class="featured-product countdown-timer underwear md:py-20 py-14">
         <div class="container flex justify-between gap-y-6 flex-wrap">
             <div class="list-img md:w-1/2 md:pr-[45px] w-full flex-shrink-0">
-
                 <div class="sticky">
-
-
                     <div class="mb-3">
-                        <img id="main-image" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>"
-                            style="width: 400px; height: 400px;" alt="Ảnh chính">
+                        <img id="main-image" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" 
+                            class="w-[400px] h-[400px] object-cover" alt="Ảnh chính">
                     </div>
-                    <div id="image-list" class="col-12">
+                    <div id="image-list" class="mb-3">
                         <!-- Danh sách ảnh sẽ được render ở đây -->
                     </div>
-
-
                 </div>
                 <!-- Popup Swiper -->
-                <div class="swiper popup-img">
+                <div class="swiper popup-img relative">
                     <span class="close-popup-btn absolute top-4 right-4 z-[2]">
                         <i class="ph ph-x text-3xl text-white"></i>
                     </span>
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <div class="product-infor md:w-1/2 w-full lg:pl-[15px] md:pl-2">
-                <div class="">
+                <div class="space-y-6">
                     <div class="flex justify-between">
                         <div>
                             <div class="product-category caption2 text-secondary font-semibold uppercase">
@@ -61,12 +62,11 @@
                             </div>
                             <div class="product-name heading4 mt-1"><?= $sanPham['ten_san_pham'] ?></div>
                         </div>
-                        <div
-                            class="add-wishlist-btn w-10 h-10 flex-shrink-0 flex items-center justify-center border border-line cursor-pointer rounded-lg duration-300 hover:bg-black hover:text-white">
+                        <div class="add-wishlist-btn w-10 h-10 flex-shrink-0 flex items-center justify-center border border-line cursor-pointer rounded-lg duration-300 hover:bg-black hover:text-white">
                             <i class="ph ph-heart text-xl"></i>
                         </div>
                     </div>
-                    <div class="flex items-center gap-1 mt-3">
+                    <div class="flex items-center gap-1">
                         <div class="rate flex">
                             <i class="ph-fill ph-star text-sm text-yellow"></i>
                             <i class="ph-fill ph-star text-sm text-yellow"></i>
@@ -77,205 +77,259 @@
                         <?php $countComment = count($listBinhLuan); ?>
                         <span class="caption1 text-secondary"><?= $countComment . ' Đánh Giá ' ?></span>
                     </div>
-                    <div class="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
+                    <div class="flex items-center gap-3 flex-wrap pb-6 border-b border-line">
                         <?php if($sanPham['gia_khuyen_mai']) { ?>
                         <div id="product-price" class="product-price text-title">
-                            <?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
+                            <?= formatPrice($sanPham['gia_khuyen_mai']) . 'VNĐ'; ?>
                         </div>
                         <div class="product-origin-price caption1 text-secondary2">
-                            <del>><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
+                            <del><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
                         </div>
                         <?php } else {?>
-                        <div class="product-price text-title"><?= formatPrice( $sanPham['gia_san_pham']) . 'VNĐ'; ?>
-                        </div>
+                        <div class="product-price text-title"><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></div>
                         <?php } ?>
-
                         <div class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
-                            -19%</div>
-                        <div class="product-description text-secondary mt-3">
-                            <?= $sanPham['mo_ta']; ?>
+                            <?= round(100 - ($sanPham['gia_khuyen_mai'] * 100 / $sanPham['gia_san_pham'])) ?>%
                         </div>
                     </div>
-                    <div class="list-action mt-6">
-                        <div class="choose-color mt-5">
-                            <div class="text-title">Màu sắc: <span class="text-title color">
-                                    <div class="mt-3 btn-group">
-                                        <?php foreach($listMauSac as $index => $mauSac){
-                                    ?>
-                                        <button type="button"
-                                            class="btn btn-outline-dark <?= $index === 0 ? 'active' : '' ?>"
-                                            data-color-id="<?= $mauSac['id'] ?>" data-product-id="<?= $sanPham['id'] ?>"
-                                            onclick="setActive(this)"><?=$mauSac['mau_sac']?></button>
-                                        <?php
-                                } ?>
-                                    </div>
-                                    <script>
-                                    $(document).ready(function() {
-                                        $('.product-image-thumb').on('click', function() {
-                                            var $image_element = $(this).find('img')
-                                            $('.product-image').prop('src', $image_element.attr('src'))
-                                            $('.product-image-thumb.active').removeClass('active')
-                                            $(this).addClass('active')
-                                        })
-                                    })
-                                    window.onload = function() {
-                                        const firstBtn = document.querySelector('.btn-group .btn');
-                                        if (firstBtn) {
-                                            setActive(firstBtn); // Kích hoạt nút đầu tiên
-                                        }
-                                    };
-
-                                    function setActive(button) {
-                                        const buttons = document.querySelectorAll('.btn-group .btn');
-                                        buttons.forEach(btn => btn.classList.remove('active'));
-                                        button.classList.add('active');
-
-                                        const colorId = button.getAttribute('data-color-id');
-                                        const productId = button.getAttribute('data-product-id');
-
-                                        // Load ảnh theo màu
-                                        fetch(
-                                                `<?= BASE_URL_ADMIN ?>?act=lay-anh-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
-                                            .then(response => response.text())
-                                            .then(data => {
-                                                document.getElementById('image-list').innerHTML = data;
-                                            });
-
-                                        // Load size theo màu
-                                        fetch(
-                                                `<?= BASE_URL_ADMIN ?>?act=lay-size-theo-mau&id_san_pham=${productId}&id_mau_sac=${colorId}`)
-                                            .then(response => response.text())
-                                            .then(data => {
-                                                document.getElementById('size-list').innerHTML = data;
-                                            });
-                                    }
-
-                                    function changeMainImage(imgElement) {
-                                        const mainImage = document.getElementById('main-image');
-                                        if (mainImage) {
-                                            mainImage.src = imgElement.src;
-                                        }
-                                    }
-                                    </script>
-                                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                                    <script
-                                        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
-                                    </script>
-                                    <script
-                                        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-                                    </script>
-
-                                </span></div>
-                            <div class="list-color flex items-center gap-2 flex-wrap mt-3">
-                                <!-- color-item -->
+                    
+                </div>
+                <div class="list-action mt-6">
+                    <div class="more-infor mt-6">
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-arrow-clockwise body1"></i>
+                                <div class="text-title">Giao hàng & Trả hàng</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-question body1"></i>
+                                <div class="text-title">Hỏi đáp</div>
                             </div>
                         </div>
-                        <div class="choose-size mt-5">
-                            <div class="heading flex items-center justify-between">
-                                <div class="choose-size mt-5">
-                                    <div class="text-title">Kích thước:</div>
-                                    <div id="size-list" class="size-list mt-2">
-                                        <!-- Các nút size sẽ được render vào đây -->
-                                    </div>
+                        <div class="flex items-center gap-1 mt-3">
+                            <i class="ph ph-timer body1"></i>
+                            <div class="text-title">Thời gian giao hàng dự kiến:</div>
+                            <div class="text-secondary">Trong Nước 3 ngày Quốc Tế 1 tuần</div>
+                        </div>
+                        <div class="flex items-center gap-1 mt-3">
+                            <i class="ph ph-eye body1"></i>
+                            <div class="text-title">38</div>
+                            <div class="text-secondary">người đang xem sản phẩm này ngay bây giờ!</div>
+                        </div>
+                        <div class="flex items-center gap-1 mt-3">
+                            <div class="text-title">Mã sản phẩm:</div>
+                            <div class="text-secondary">53453412</div>
+                        </div>
+                        <div class="flex items-center gap-1 mt-3">
+                            <div class="text-title">Danh mục:</div>
+                            <div class="list-category text-secondary"> 
+                                <?=$sanPham['ten_danh_muc'] ?></div>
+                            </div>
+                        <div class="flex items-center gap-1 mt-3">
+                            <div class="text-title">Thẻ:</div>
+                            <div class="list-tag text-secondary">Giày</div>
+                        </div>
+                    </div>
+                    <div class="choose-color mt-5">
+                        <div class="text-title">Màu sắc: <span class="text-title color">
+                                <div class="mt-3 btn-group">
+                                    <?php foreach($listMauSac as $index => $mauSac){
+                                ?>
+                                    <button type="button"
+                                        class="btn btn-outline-dark <?= $index === 0 ? 'active' : '' ?>"
+                                        data-color-id="<?= $mauSac['id'] ?>" data-product-id="<?= $sanPham['id'] ?>"
+                                        onclick="setActive(this)"><?=$mauSac['mau_sac']?></button>
+                                    <?php
+                            } ?>
                                 </div>
-
                                 <script>
-                                function setActiveSize(button) {
-                                    const buttons = document.querySelectorAll('.btn-size-group .btn');
-                                    buttons.forEach(btn => {
-                                        btn.classList.remove('active');
-                                    });
-                                    button.classList.add('active');
-                                    const bienTheId = button.getAttribute('data-bienthe-id');
-                                    fetch(`<?= BASE_URL_ADMIN ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
-                                        .then(res => res.text())
-                                        .then(text => {
-                                            console.log("Raw response:", text);
-                                            const data = JSON.parse(text); // nếu lỗi sẽ hiện rõ
-                                            // console.log(data);
-                                            // Xử lý như cũ
-                                            const priceElement = document.getElementById('product-price');
-                                            if (priceElement && data.don_gia) {
-                                                priceElement.innerText = parseInt(data.don_gia).toLocaleString(
-                                                    'vi-VN') + ' đ';
-                                            } else {
-                                                priceElement.innerText = "Không xác định";
-                                            }
-                                            const stockElement = document.getElementById('stock-info');
-                                            if (stockElement && data.ton_kho) {
-                                                stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
-                                            } else {
-                                                stockElement.innerText = "Không xác định";
-                                            }
-                                        })
-                                        .catch(err => {
-                                            console.error("Lỗi khi load giá biến thể:", err);
-                                        });
+                                $(document).ready(function() {
+                                    $('.product-image-thumb').on('click', function() {
+                                        var $image_element = $(this).find('img')
+                                        $('.product-image').prop('src', $image_element.attr('src'))
+                                        $('.product-image-thumb.active').removeClass('active')
+                                        $(this).addClass('active')
+                                    })
+                                })
+                                window.onload = function() {
+                                    const firstBtn = document.querySelector('.btn-group .btn');
+                                    if (firstBtn) {
+                                        setActive(firstBtn); // Kích hoạt nút đầu tiên
+                                    }
+                                };
 
+                                function setActive(button) {
+                                    const buttons = document.querySelectorAll('.btn-group .btn');
+                                    buttons.forEach(btn => btn.classList.remove('active'));
+                                    button.classList.add('active');
+
+                                    const colorId = button.getAttribute('data-color-id');
+                                    const productId = button.getAttribute('data-product-id');
+
+                                // Load ảnh theo màu
+                                fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('image-list').innerHTML = data;
+                                    });
+
+                                // Load size theo màu
+                                fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('size-list').innerHTML = data;
+                                        // console.log(data);
+                                    });
+                            }
+
+                                function changeMainImage(imgElement) {
+                                    const mainImage = document.getElementById('main-image');
+                                    if (mainImage) {
+                                        mainImage.src = imgElement.src;
+                                    }
                                 }
                                 </script>
-                                <div class="caption1 size-guide text-red underline">Hướng dẫn kích thước</div>
-                            </div>
-                            <div class="list-size flex items-center gap-2 flex-wrap mt-3">
-                                <!-- size-item -->
-                            </div>
-                        </div>
-                        <div class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
-                        <div class="choose-quantity flex items-center max-xl:flex-wrap lg:justify-between gap-5 mt-3">
-                            <div
-                                class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[140px] w-[120px] flex-shrink-0">
-                                <i class="ph-bold ph-minus cursor-pointer body1"></i>
-                                <div class="quantity body1 font-semibold">1</div>
-                                <i class="ph-bold ph-plus cursor-pointer body1"></i>
-                            </div>
-                            <div
-                                class="add-cart-btn button-main whitespace-nowrap w-full text-center bg-white text-black border border-black">
-                                Thêm vào giỏ hàng
-                            </div>
-                            </form>
-                            <div class="button-block mt-5">
-                                <a href="checkout.html" class="button-main w-full text-center">Mua ngay</a>
-                            </div>
-                            <div class="more-infor mt-6">
-                                <div class="flex items-center gap-4 flex-wrap">
-                                    <div class="flex items-center gap-1">
-                                        <i class="ph ph-arrow-clockwise body1"></i>
-                                        <div class="text-title">Giao hàng & Trả hàng</div>
-                                    </div>
-                                    <div class="flex items-center gap-1">
-                                        <i class="ph ph-question body1"></i>
-                                        <div class="text-title">Hỏi đáp</div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-1 mt-3">
-                                    <i class="ph ph-timer body1"></i>
-                                    <div class="text-title">Thời gian giao hàng dự kiến:</div>
-                                    <div class="text-secondary">Trong Nước 3 ngày Quốc Tế 1 tuần</div>
-                                </div>
-                                <div class="flex items-center gap-1 mt-3">
-                                    <i class="ph ph-eye body1"></i>
-                                    <div class="text-title">38</div>
-                                    <div class="text-secondary">người đang xem sản phẩm này ngay bây giờ!</div>
-                                </div>
-                                <div class="flex items-center gap-1 mt-3">
-                                    <div class="text-title">Mã sản phẩm:</div>
-                                    <div class="text-secondary">53453412</div>
-                                </div>
-                                <div class="flex items-center gap-1 mt-3">
-                                    <div class="text-title">Danh mục:</div>
-                                    <div class="list-category text-secondary"> <?= $sanPham['ten_danh_muc'] ?></div>
-                                </div>
-                                <div class="flex items-center gap-1 mt-3">
-                                    <div class="text-title">Thẻ:</div>
-                                    <div class="list-tag text-secondary">Giày</div>
-                                </div>
-                            </div>
+                                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                                <script
+                                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
+                                </script>
+                                <script
+                                    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+                                </script>
+
+                            </span></div>
+                        <div class="list-color flex items-center gap-2 flex-wrap mt-3">
+                            <!-- color-item -->
                         </div>
                     </div>
-                </div>
+                    <div class="choose-size mt-5">
+                        <div class="heading flex items-center justify-between">
+                            <div class="choose-size mt-5">
+                                <div class="text-title">Kích thước:</div>
+                                <div id="size-list" class="size-list mt-2">
+                                    <!-- Các nút size sẽ được render vào đây -->
+                                </div>
+                            </div>
 
+                                <script>
+                                    function setActiveSize(button) {
+                                        const buttons = document.querySelectorAll('.btn-size-group .btn');
+                                        buttons.forEach(btn => {
+                                            btn.classList.remove('active');
+                                        });
+                                        button.classList.add('active');
+                                        const bienTheId = button.getAttribute('data-bienthe-id');
+                                        fetch(`<?= BASE_URL ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
+                                            .then(res => res.text())
+                                            .then(text => {
+                                                // console.log("Raw response:", text);
+                                                const data = JSON.parse(text); // nếu lỗi sẽ hiện rõ
+                                                // console.log(data);
+                                                // Xử lý như cũ
+                                                const priceElement = document.getElementById('product-price');
+                                                if (priceElement && data.don_gia) {
+                                                priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
+                                                } else {
+                                                priceElement.innerText = "Không xác định";
+                                                }
+                                                const stockElement = document.getElementById('stock-info');
+                                                // console.log(stockElement);
+                                                if (stockElement && data.ton_kho) {
+                                                    stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                                    const maxQty = document.getElementById('soLuong');
+                                                    maxQty.max = parseInt(data.ton_kho);
+                                                } else {
+                                                    stockElement.innerText = "Không xác định";
+                                                }
+                                                const addToCartForm = document.getElementById('addToCart');
+                                                
+                                                if (addToCartForm) {
+                                                    const variant = data.id;
+                                                    const inputElement = document.getElementById('bienTheId');
+                                                    inputElement.value = variant;
+
+                                                }
+                                                // console.log(addToCartForm);
+                                            })
+                                            .catch(err => {
+                                                console.error("Lỗi khi load giá biến thể:", err);
+                                            });
+
+                            }
+                            </script>
+                            <div class="caption1 size-guide text-red underline">Hướng dẫn kích thước</div>
+                        </div>
+                        <div class="list-size flex items-center gap-2 flex-wrap mt-3">
+                            <!-- size-item -->
+                        </div>
+                    </div>
+                    <div id="stock-info" class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
+                    <div class="choose-quantity flex flex-col sm:flex-row flex-wrap gap-4 mt-3">
+                        <!-- Nhóm số lượng + Thêm vào giỏ -->
+                         <div id="addToCart">
+                             <form action="<?= BASE_URL . "?act=add-vao-gio-hang&id_san_pham=" . $sanPham['id']?>" method="post">
+                             <!-- HTML -->
+                                <div class="quantity-block flex items-center justify-between rounded-lg border border-line w-[140px] px-3 py-2">
+                                    <i class="ph-bold ph-minus cursor-pointer text-gray-700 hover:text-black text-lg"></i>
+                                    <input type="hidden" id="bienTheId" value="" name="bien_the_id" id="">
+                                    
+                                    <input 
+                                        type="number" 
+                                        name="so_luong"
+                                        min="1"
+                                        id="soLuong"
+                                        class="quantity text-center w-12 font-semibold border-none outline-none bg-transparent text-base hide-arrows"
+                                        value="1"
+                                    >
+                                    <i class="ph-bold ph-plus cursor-pointer text-gray-700 hover:text-black text-lg"></i>
+                                </div>
+                                <script>
+                                        document.querySelectorAll('.quantity-block').forEach(block => {
+                                            const input = block.querySelector('.quantity');
+                                            const minusBtn = block.querySelector('.ph-minus');
+                                            const plusBtn = block.querySelector('.ph-plus');
+                                        
+                                            minusBtn.addEventListener('click', () => {
+                                                let value = parseInt(input.value) || 1;
+                                                if (value > 1) {
+                                                    input.value = value - 1;
+                                                }
+                                            });
+                                        
+                                            plusBtn.addEventListener('click', () => {
+                                                let value = parseInt(input.value) || 1;
+                                                input.value = value + 1;
+                                            });
+                                        });
+                                </script>
+                                     <!-- Nút Thêm vào giỏ -->
+                                     <button
+                                         type="submit"
+                                         class="add-cart-btn button-main px-5 py-3 text-center bg-white text-black border border-black rounded-lg w-full sm:flex-1 min-w-[160px]">
+                                         Thêm vào giỏ hàng
+                                     </button>
+                                 </div>
+                             </form>
+
+                        <br>
+                         </div>
+
+                        <!-- Nút Mua ngay -->
+                        <a href="checkout.html"
+                            class="button-main px-5 py-3 text-center rounded-lg bg-black text-white w-full sm:flex-1 min-w-[160px]">
+                            Mua ngay
+                        </a>
+                    </div>
+
+
+                </div>
             </div>
+            
         </div>
+        <br>
+        <br>
+        <hr>
+        <br>
         <div class="desc-tab">
             <div class="container">
                 <div class="flex items-center justify-center w-full">
@@ -292,48 +346,15 @@
                 </div>
                 <div class="desc-block mt-8">
                     <div class="desc-item description" data-item="Description">
-                        <div class="grid md:grid-cols-2 gap-8 gap-y-5">
-                            <div class="left">
+                        
+                           
                                 <div class="heading6">Sự miêu tả</div>
-                                <div class="text-secondary mt-2">
-                                    Giữ cho không gian thể thao của bạn gọn gàng nhưng vẫn đầy phong cách với thiết bị
-                                    và
-                                    phụ kiện từ Sport Zone. Giúp bạn sắp xếp gọn gàng đồ dùng thể thao, những sản
-                                    phẩm này còn tạo điểm nhấn năng động cho không gian sống của bạn. Được thiết kế theo
-                                    phong cách hiện đại cho người yêu thể thao, sản phẩm của Sport Zone hoàn hảo
-                                    để sử dụng bất kỳ nơi nào bạn muốn. Với chất liệu cao cấp, bền bỉ theo thời gian,
-                                    Sport
-                                    Zone mang đến giải pháp tiện ích giúp bạn luôn sẵn sàng cho những buổi tập luyện đầy
-                                    hứng
-                                    khởi.
+                                <div class="product-description text-secondary">
+                                    <?= $sanPham['mo_ta']; ?>
                                 </div>
-                            </div>
-                            <div class="right">
-                                <div class="heading6">Về sản phẩm này</div>
-                                <div class="list-feature">
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Sản phẩm chất lượng cao, bền bỉ theo thời gian.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Thiết kế hiện đại, phù hợp với nhiều không gian thể thao.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Đa dạng mẫu mã, đáp ứng mọi nhu cầu tập luyện.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Dễ dàng sử dụng, thuận tiện cho mọi đối tượng.</p>
-                                    </div>
-                                    <div class="item flex gap-1 text-secondary mt-1">
-                                        <i class="ph ph-dot text-2xl"></i>
-                                        <p>Hỗ trợ khách hàng tận tình, chính sách bảo hành rõ ràng.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            
+                            
+        
                         <div class="grid lg:grid-cols-4 grid-cols-2 gap-[30px] md:mt-10 mt-6">
                             <div class="item">
                                 <div class="icon-delivery-truck text-4xl"></div>
@@ -1165,122 +1186,79 @@
         </div>
     </div>
 
-    <div class="modal-wishlist-block">
-        <div class="modal-wishlist-main py-6">
-            <div class="heading px-6 pb-3 flex items-center justify-between relative">
-                <div class="heading5">Danh sách yêu thích</div>
-                <div
-                    class="close-btn absolute right-6 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
-                    <i class="ph ph-x text-sm"></i>
-                </div>
+<div class="modal-wishlist-block">
+    <div class="modal-wishlist-main py-6">
+        <div class="heading px-6 pb-3 flex items-center justify-between relative">
+            <div class="heading5">Danh sách yêu thích</div>
+            <div
+                class="close-btn absolute right-6 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
+                <i class="ph ph-x text-sm"></i>
             </div>
-            <div class="list-product px-6"></div>
-            <div class="footer-modal p-6 border-t bg-white border-line absolute bottom-0 left-0 w-full text-center">
-                <a href="wishlist.html" class="button-main w-full text-center uppercase"> Xem tất cả danh sách mong
-                    muốn</a>
-                <div
-                    class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">
-                    Or
-                    tiếp tục mua sắm</div>
+        </div>
+        <div class="list-product px-6"></div>
+        <div class="footer-modal p-6 border-t bg-white border-line absolute bottom-0 left-0 w-full text-center">
+            <a href="wishlist.html" class="button-main w-full text-center uppercase"> Xem tất cả danh sách mong
+                muốn</a>
+            <div class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">Or
+                tiếp tục mua sắm</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal-compare-block">
+    <div class="modal-compare-main py-6">
+        <div
+            class="close-btn absolute 2xl:right-6 right-4 2xl:top-6 md:-top-4 top-3 lg:w-10 w-6 lg:h-10 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
+            <i class="ph ph-x body1"></i>
+        </div>
+        <div class="container h-full flex items-center w-full">
+            <div class="content-main flex items-center justify-between xl:gap-10 gap-6 w-full max-md:flex-wrap">
+                <div class="heading5 flex-shrink-0 max-md:w-full">Compare <br class="max-md:hidden" />Products</div>
+                <div class="list-product flex items-center w-full gap-4"></div>
+                <div class="block-button flex flex-col gap-4 flex-shrink-0">
+                    <a href="compare.html" class="button-main whitespace-nowrap"> Compare Products</a>
+                    <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">Clear All
+                        Products</div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal-cart-block">
-        <div class="modal-cart-main flex">
-            <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
-                <div class="heading5 px-6 pb-3">Bạn có thể thích</div>
-                <div class="list px-6">
-                    <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                        data-item="1">
-                        <div class="infor flex items-center gap-5">
-                            <div class="bg-img">
-                                <img src="assets/images/product/fashion/1-2.png" alt="img"
-                                    class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                            </div>
-                            <div class="">
-                                <div class="name text-button">Quần giả da</div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <div class="product-price text-title">$15.00</div>
-                                    <div class="product-origin-price text-title text-secondary2">
-                                        <del>$25.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                            XEM NHANH</div>
+<div class="modal-quickview-block">
+    <div class="modal-quickview-main py-6">
+        <div class="flex h-full max-md:flex-col-reverse gap-y-6">
+            <div class="left lg:w-[388px] md:w-[300px] flex-shrink-0 px-6">
+                <div class="list-img max-md:flex items-center gap-4">
+                    <div
+                        class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
+                        <img src="assets/images/product/fashion/3-1.png" alt="item"
+                            class="w-full h-full object-cover" />
                     </div>
-                    <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                        data-item="2">
-                        <div class="infor flex items-center gap-5">
-                            <div class="bg-img">
-                                <img src="assets/images/product/fashion/2-2.png" alt="img"
-                                    class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                            </div>
-                            <div class="">
-                                <div class="name text-button">Quần giả da</div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <div class="product-price text-title">$15.00</div>
-                                    <div class="product-origin-price text-title text-secondary2">
-                                        <del>$25.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                            XEM NHANH</div>
+                    <div
+                        class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
+                        <img src="assets/images/product/fashion/3-2.png" alt="item"
+                            class="w-full h-full object-cover" />
                     </div>
-                    <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                        data-item="3">
-                        <div class="infor flex items-center gap-5">
-                            <div class="bg-img">
-                                <img src="assets/images/product/fashion/3-3.png" alt="img"
-                                    class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                            </div>
-                            <div class="">
-                                <div class="name text-button">Quần giả da</div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <div class="product-price text-title">$15.00</div>
-                                    <div class="product-origin-price text-title text-secondary2">
-                                        <del>$25.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                            XEM NHANH</div>
+                    <div
+                        class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
+                        <img src="assets/images/product/fashion/3-3.png" alt="item"
+                            class="w-full h-full object-cover" />
                     </div>
-                    <div class="product-item item py-5 flex items-center justify-between gap-3" data-item="4">
-                        <div class="infor flex items-center gap-5">
-                            <div class="bg-img">
-                                <img src="assets/images/product/fashion/4-2.png" alt="img"
-                                    class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                            </div>
-                            <div class="">
-                                <div class="name text-button">Quần giả da</div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <div class="product-price text-title">$15.00</div>
-                                    <div class="product-origin-price text-title text-secondary2">
-                                        <del>$25.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                            XEM NHANH</div>
+                    <div
+                        class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
+                        <img src="assets/images/product/fashion/3-4.png" alt="item"
+                            class="w-full h-full object-cover" />
                     </div>
                 </div>
             </div>
-            <div class="right cart-block md:w-1/2 w-full py-6 relative overflow-hidden">
-                <div class="heading px-6 pb-3 flex items-center justify-between relative">
-                    <div class="heading5">Giỏ hàng</div>
+            <div class="right w-full px-6">
+                <div class="heading pb-6 flex items-center justify-between relative">
+                    <div class="heading5">Xem Nhanh</div>
                     <div
-                        class="close-btn absolute right-6 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
+                        class="close-btn absolute right-0 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
                         <i class="ph ph-x text-sm"></i>
                     </div>
                 </div>

@@ -3,15 +3,17 @@
 @tailwind utilities;
 @import 'icomoon/style.css';
 
-#image-list{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+/* Mega Menu */
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    background-color: white;
+    z-index: 50;
+    width: 100%;
 }
-header-main{
-    background-color: #ffffff !important;
+
+.group:hover .mega-menu {
+    display: block;
 }
-nav {
-    background-color: white; /* Hoặc màu khác tùy bạn */
-    z-index: 1000; /* Đảm bảo nằm trên ảnh */
-    position: relative; /* Hoặc fixed nếu cần */
-  }

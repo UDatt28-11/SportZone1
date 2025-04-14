@@ -29,10 +29,15 @@ require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài kho
 // require_once './models/AdminTaiKhoan.php';
 
 //Router
-$act = $_GET['act'] ?? 'san-pham';
+$act = $_GET['act'] ?? '/';
 
 if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
   checkLoginAdmin();
+}
+
+if (isset($_GET['act']) && $_GET['act'] === 'update-avatar') {
+    $controller = new AdminTaiKhoanController();
+    $controller->updateAvatar();
 }
 
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
@@ -109,6 +114,7 @@ match($act){
     'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
     'form-sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
     'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+    
 
     // route reset password
     'reset-password' => (new AdminTaiKhoanController())->resetPassword(),

@@ -72,35 +72,28 @@
                             <li class="h-full">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Sản Phẩm
+                                    Danh mục
                                 </a>
                                 <div class="mega-menu absolute top-[74px] left-0px bg-white ">
                                     <div class="container">
                                         <div class="flex justify-between py-8">
                                             <div class="nav-link basis-2/3 flex justify-between pr-12">
                                                 <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">
-                                                        Nike
-                                                    </div>
+                                                    
                                                     <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                FiLa
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                BuMa
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                Adidas
-                                                            </a>
-                                                        </li>
+                                                        <?php
+                                                        foreach ($listDanhMuc as $danhMuc){
+                                                            ?><li>
+                                                                <a href="shop-breadcrumb2.html"
+                                                                    class="link text-secondary duration-300">
+                                                                    <?=$danhMuc['ten_danh_muc']?>
+                                                                </a>
+                                                                
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                        
 
                                                     </ul>
                                                 </div>
@@ -111,13 +104,9 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="h-full">
-                                <a href="<?= BASE_URL ?>"
-                                    class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Danh Mục
-                                </a>
+                            
 
-                            </li>
+
                             <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
@@ -218,11 +207,13 @@
                             <span
                                 class="quantity wishlist-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
                         </div>
-                        <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
-                            <i class="ph-bold ph-handbag text-2xl"></i>
-                            <span
-                                class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
-                        </div>
+                        <a href="<?= BASE_URL . '?act=gio-hang'?>">
+                            <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
+                                <i class="ph-bold ph-handbag text-2xl"></i>
+                                <div
+                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full"><?=$soLuongHangTrongGio ?? 0 ; ?></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <!-- Tìm kiếm sản phẩm -->
@@ -428,20 +419,21 @@
                     <div class="modal-cart-main flex">
                         <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
                             <div class="heading5 px-6 pb-3">Có Thể Bạn Cũng Thích</div>
-                            <div class="list px-6">
+                            <div class="list px-6 max-h-[500px] overflow-y-auto scroll-smooth">
+                                <?php foreach ($listSanPhamCungDanhMuc as $sanPham) { ?>
                                 <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
                                     data-item="1">
                                     <div class="infor flex items-center gap-5">
                                         <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/1-2.png" alt="img"
+                                            <img src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img"
                                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
                                         </div>
                                         <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
+                                            <div class="name text-button"><?=$sanPham['ten_san_pham']?></div>
                                             <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
+                                                <div class="product-price text-title"><?=$sanPham['gia_khuyen_mai']?></div>
                                                 <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
+                                                    <del><?=$sanPham['gia_san_pham']?></del>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,72 +443,8 @@
                                         Xem Chi Tiết
                                     </div>
                                 </div>
-                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                                    data-item="2">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/2-2.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
-                                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                                    data-item="3">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/3-3.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
-                                <div class="product-item item py-5 flex items-center justify-between gap-3"
-                                    data-item="4">
-                                    <div class="infor flex items-center gap-5">
-                                        <div class="bg-img">
-                                            <img src="./assets/images/product/fashion/4-2.png" alt="img"
-                                                class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                        </div>
-                                        <div class="">
-                                            <div class="name text-button">Faux-leather trousers</div>
-                                            <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title">$15.00</div>
-                                                <div class="product-origin-price text-title text-secondary2">
-                                                    <del>$25.00</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                        Xem Chi Tiết
-                                    </div>
-                                </div>
+                                <?php } ?>
+                            
                             </div>
                         </div>
                         <div class="right cart-block md:w-1/2 w-full py-6 relative overflow-hidden">
@@ -575,7 +503,7 @@
                                 </div>
                                 <div class="block-button text-center p-6">
                                     <div class="flex items-center gap-4">
-                                        <a href="index.php?act=gio-hang"
+                                        <a href="?act=gio-hang"
                                             class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
                                             Xem Giỏ Hàng
                                         </a>
@@ -1572,25 +1500,26 @@
     <!-- Menu bar -->
     <div class="menu_bar fixed bg-white bottom-0 left-0 w-full h-[70px] sm:hidden z-[101]">
         <div class="menu_bar-inner grid grid-cols-4 items-center h-full">
-            <a href="index-2.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>" class="menu_bar-link flex flex-col items-center gap-1">
                 <span class="ph-bold ph-house text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Home</span>
+                <span class="menu_bar-title caption2 font-semibold">Trang Chủ</span>
             </a>
-            <a href="shop-filter-canvas.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>?act=product-category" class="menu_bar-link flex flex-col items-center gap-1">
                 <span class="ph-bold ph-list text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Category</span>
+                <span class="menu_bar-title caption2 font-semibold">Danh Mục</span>
             </a>
-            <a href="search-result.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <span class="ph-bold ph-magnifying-glass text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Search</span>
-            </a>
-            <a href="cart.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>?act=gio-hang" class="menu_bar-link flex flex-col items-center gap-1">
                 <div class="cart-icon relative">
                     <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span
-                        class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                        <?= $soLuongHangTrongGio ?? 0 ?>
+                    </span>
                 </div>
-                <span class="menu_bar-title caption2 font-semibold">Cart</span>
+                <span class="menu_bar-title caption2 font-semibold">Giỏ Hàng</span>
+            </a>
+            <a href="<?= BASE_URL ?>?act=login" class="menu_bar-link flex flex-col items-center gap-1">
+                <span class="ph-bold ph-user text-2xl block"></span>
+                <span class="menu_bar-title caption2 font-semibold">Tài Khoản</span>
             </a>
         </div>
     </div>
