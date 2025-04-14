@@ -72,35 +72,28 @@
                             <li class="h-full">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Sản Phẩm
+                                    Danh mục
                                 </a>
                                 <div class="mega-menu absolute top-[74px] left-0px bg-white ">
                                     <div class="container">
                                         <div class="flex justify-between py-8">
                                             <div class="nav-link basis-2/3 flex justify-between pr-12">
                                                 <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">
-                                                        Nike
-                                                    </div>
+                                                    
                                                     <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                FiLa
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                BuMa
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                Adidas
-                                                            </a>
-                                                        </li>
+                                                        <?php
+                                                        foreach ($listDanhMuc as $danhMuc){
+                                                            ?><li>
+                                                                <a href="shop-breadcrumb2.html"
+                                                                    class="link text-secondary duration-300">
+                                                                    <?=$danhMuc['ten_danh_muc']?>
+                                                                </a>
+                                                                
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                        
 
                                                     </ul>
                                                 </div>
@@ -111,13 +104,9 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="h-full">
-                                <a href="<?= BASE_URL ?>"
-                                    class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Danh Mục
-                                </a>
+                            
 
-                            </li>
+
                             <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
@@ -1511,25 +1500,26 @@
     <!-- Menu bar -->
     <div class="menu_bar fixed bg-white bottom-0 left-0 w-full h-[70px] sm:hidden z-[101]">
         <div class="menu_bar-inner grid grid-cols-4 items-center h-full">
-            <a href="index-2.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>" class="menu_bar-link flex flex-col items-center gap-1">
                 <span class="ph-bold ph-house text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Home</span>
+                <span class="menu_bar-title caption2 font-semibold">Trang Chủ</span>
             </a>
-            <a href="shop-filter-canvas.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>?act=product-category" class="menu_bar-link flex flex-col items-center gap-1">
                 <span class="ph-bold ph-list text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Category</span>
+                <span class="menu_bar-title caption2 font-semibold">Danh Mục</span>
             </a>
-            <a href="search-result.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <span class="ph-bold ph-magnifying-glass text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Search</span>
-            </a>
-            <a href="cart.html" class="menu_bar-link flex flex-col items-center gap-1">
+            <a href="<?= BASE_URL ?>?act=gio-hang" class="menu_bar-link flex flex-col items-center gap-1">
                 <div class="cart-icon relative">
                     <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span
-                        class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                        <?= $soLuongHangTrongGio ?? 0 ?>
+                    </span>
                 </div>
-                <span class="menu_bar-title caption2 font-semibold">Cart</span>
+                <span class="menu_bar-title caption2 font-semibold">Giỏ Hàng</span>
+            </a>
+            <a href="<?= BASE_URL ?>?act=login" class="menu_bar-link flex flex-col items-center gap-1">
+                <span class="ph-bold ph-user text-2xl block"></span>
+                <span class="menu_bar-title caption2 font-semibold">Tài Khoản</span>
             </a>
         </div>
     </div>

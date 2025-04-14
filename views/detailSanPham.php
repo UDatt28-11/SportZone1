@@ -89,7 +89,7 @@ $sanPham = $productDetail; // Restore original data
                         <div class="product-price text-title"><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></div>
                         <?php } ?>
                         <div class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
-                            -19%
+                            <?= round(100 - ($sanPham['gia_khuyen_mai'] * 100 / $sanPham['gia_san_pham'])) ?>%
                         </div>
                     </div>
                     
@@ -283,6 +283,25 @@ $sanPham = $productDetail; // Restore original data
                                     >
                                     <i class="ph-bold ph-plus cursor-pointer text-gray-700 hover:text-black text-lg"></i>
                                 </div>
+                                <script>
+                                        document.querySelectorAll('.quantity-block').forEach(block => {
+                                            const input = block.querySelector('.quantity');
+                                            const minusBtn = block.querySelector('.ph-minus');
+                                            const plusBtn = block.querySelector('.ph-plus');
+                                        
+                                            minusBtn.addEventListener('click', () => {
+                                                let value = parseInt(input.value) || 1;
+                                                if (value > 1) {
+                                                    input.value = value - 1;
+                                                }
+                                            });
+                                        
+                                            plusBtn.addEventListener('click', () => {
+                                                let value = parseInt(input.value) || 1;
+                                                input.value = value + 1;
+                                            });
+                                        });
+                                </script>
                                      <!-- Nút Thêm vào giỏ -->
                                      <button
                                          type="submit"

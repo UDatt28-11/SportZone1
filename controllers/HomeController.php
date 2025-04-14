@@ -2,13 +2,14 @@
 class HomeController{
     public $modelSanPham;
     public $modelTaiKhoan;
+    public $modelDanhMuc;
     public $modelGioHang;
 
     
     public function __construct(){
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
-        
+        $this->modelDanhMuc = new DanhMuc();
         // Chỉ khởi tạo GioHang nếu user đã đăng nhập
         if (isset($_SESSION['user_id'])) {
             $this->modelGioHang = new GioHang($_SESSION['user_id']);
@@ -16,6 +17,7 @@ class HomeController{
     }
     public function home(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         // var_dump($listSanPham);
         require_once './views/home.php';
     }
@@ -40,7 +42,7 @@ class HomeController{
             $listGioHang = $this->modelGioHang->getGioHang();
             $soLuongHangTrongGio = count($listGioHang);
         }
-
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);

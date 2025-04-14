@@ -3692,4 +3692,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    const menuItems = document.querySelectorAll('.group');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const megaMenu = this.querySelector('.mega-menu');
+            if (megaMenu) {
+                megaMenu.classList.toggle('hidden');
+            }
+        });
+    });
 });
