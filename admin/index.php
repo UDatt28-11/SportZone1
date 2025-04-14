@@ -28,7 +28,7 @@ require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài kho
 // require_once './models/AdminTaiKhoan.php';
 
 //Router
-$act = $_GET['act'] ?? 'san-pham';
+$act = $_GET['act'] ?? '/';
 
 if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
   checkLoginAdmin();
@@ -60,6 +60,9 @@ match($act){
     'sua-album-anh-san-pham' => (new AdminSanPhamController())->postEditAnhSanPham(),
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
+    'lay-anh-theo-mau' => (new AdminSanPhamController())->getListAnhTheoMau(),
+    'lay-size-theo-mau' => (new AdminSanPhamController())->getListSizeTheoMau(),
+    'lay-thong-tin-bien-the' =>(new AdminSanPhamController())->layThongTinBienThe(),
 
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),

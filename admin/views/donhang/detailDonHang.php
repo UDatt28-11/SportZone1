@@ -114,14 +114,14 @@
                                     <tbody>
                                         <?php $tongTien = 0; ?>
                                         <?php foreach ($listChiTietDonHang as $key => $sanPham) : ?>
-                                            <tr>
-                                                <td><?= $key + 1 ?></td>
-                                                <td><?= $sanPham['ten_san_pham'] ?></td>
-                                                <td><?= $sanPham['don_gia'] ?></td>
-                                                <td><?= $sanPham['so_luong'] ?></td>
-                                                <td><?= $sanPham['thanh_tien'] ?> VNĐ</td>
-                                            </tr>
-                                            <?php $tongTien += $sanPham['thanh_tien'] ?>
+                                        <tr>
+                                            <td><?= $key + 1 ?></td>
+                                            <td><?= $sanPham['ten_san_pham'] ?></td>
+                                            <td><?= $sanPham['don_gia'] ?></td>
+                                            <td><?= $sanPham['so_luong'] ?></td>
+                                            <td><?= $sanPham['thanh_tien'] ?> VNĐ</td>
+                                        </tr>
+                                        <?php $tongTien += $sanPham['thanh_tien'] ?>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
@@ -146,11 +146,11 @@
                                             </tr>
                                             <tr>
                                                 <th>Vận chuyểnchuyển:</th>
-                                                <td>15000 VNĐ</td>
+                                                <td>30000 VNĐ</td>
                                             </tr>
                                             <tr>
                                                 <th>Tổng:</th>
-                                                <td><?=$tongTien + 15000  ?> VNĐ</td>
+                                                <td><?=$tongTien + 30000  ?> VNĐ</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -178,23 +178,23 @@
 
 <!-- Page specific script -->
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
+});
 </script>
 <!-- Code injected by live-server -->
 

@@ -63,7 +63,7 @@ class AdminTaiKhoanController{
         }
     }
     public function formEditQuanTri(){
-        $quan_Tri_id = $_GET['id_quan-tri'];
+        $quan_Tri_id = $_GET['id_quan_tri'];
         $quanTri = $this->modelTaiKhoan->getDetailTaiKhoan($quan_Tri_id);
         // var_dump($quanTri);die();
         require_once './views/taikhoan/quantri/editQuanTri.php';
@@ -112,7 +112,7 @@ class AdminTaiKhoanController{
         }
     }
 public function resetPassword(){
-            $tai_khoan_id = $_GET['id_quan-tri'];
+            $tai_khoan_id = $_GET['id_quan_tri'];
             $tai_khoan = $this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
             // var_dump($tai_khoan);die();
             $password = password_hash('12345678', PASSWORD_BCRYPT);

@@ -23,7 +23,7 @@
                 <div class="heading4" _msttexthash="1457443" _msthash="336">Đăng nhập</div>
                 <br>
                 <?php if (isset($_SESSION['error'])) { ?>
-                <p class="text-danger login-box-msg"><?= $_SESSION['error'] ?></p>
+                <p class="text-danger login-box-msg" style="color:red"><?= $_SESSION['error'] ?></p>
                 <?php } ?>
 
                 <form class="md:mt-7 mt-4" action="<?= BASE_URL . '?act=check-login' ?>" method="post">
@@ -61,7 +61,6 @@
                         <button class="button-main">Đăng nhập</button>
                     </div>
                 </form>
-
                 <?php 
 // Xoá lỗi sau khi hiển thị
 unset($_SESSION['errors'], $_SESSION['error']);

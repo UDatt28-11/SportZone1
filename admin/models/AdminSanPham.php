@@ -162,7 +162,29 @@ class AdminSanPham {
             echo "lỗi" . $e->getMessage();
         }
     }
-
+    public function getGoiSizeMauSanPham($id,$colorId){
+        try{
+            $sql = "SELECT bt.id, ks.kich_co , bt.ton_kho , bt.mau_id
+            FROM bien_the_sp bt
+            JOIN kich_co_sp ks ON bt.size_id = ks.id
+            WHERE bt.sp_id = :sp_id AND mau_id= :id_mau_sac AND bt.trang_thai = 1;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':sp_id'=>$id, ':id_mau_sac'=>$colorId]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function getBienTheById($id){
+        try{
+            $sql = "SELECT * FROM bien_the_sp WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function getDetailSanPham($id){
         try {
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc

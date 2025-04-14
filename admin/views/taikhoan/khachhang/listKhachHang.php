@@ -71,16 +71,17 @@
                                                 </a>
 
 
-                            <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_quan-tri=' . $khachHang['id'] ?>"
-                            onclick="return confirm('Bạn có chắc chắn muốn reset mật khẩu tài khoản này không?')">
-                                <button class="btn btn-danger"><i class="fas fa-redo-alt"></i>Reset</button>
-                            </a>
-                        </div>         
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
-                </tbody>
-                <tfoot>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=reset-password&id_quan_tri=' . $khachHang['id'] ?>"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn reset mật khẩu tài khoản này không?')">
+                                                    <button class="btn btn-danger"><i
+                                                            class="fas fa-redo-alt"></i>Reset</button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                                <tfoot>
                                 </tfoot>
                             </table>
                         </div>
