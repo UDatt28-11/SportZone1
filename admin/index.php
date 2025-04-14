@@ -19,6 +19,7 @@ require_once './models/AdminDonHang.php';
 require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
 require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminBaoCaoThongKe.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
@@ -41,7 +42,7 @@ if (isset($_GET['act']) && $_GET['act'] === 'update-avatar') {
 
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 match($act){
-    // route trang chủ
+    // route trang chủ Thống Kê
     '/' => (new AdminBaoCaoThongKeController())->home(),
     // route danh mục
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
