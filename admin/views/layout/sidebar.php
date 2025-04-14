@@ -69,12 +69,12 @@
                                 <p>Kích cỡ sản phẩm</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="<?= BASE_URL_ADMIN . '?act=hinh-anh-bien-the' ?>" class="nav-link">
                                 <i class="fas fa-images nav-icon"></i>
                                 <p>Ảnh biến thể</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 
