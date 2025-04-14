@@ -74,54 +74,37 @@
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Sản Phẩm
                                 </a>
-                                <div class="mega-menu absolute top-[74px] left-0px bg-white ">
-                                    <div class="container">
-                                        <div class="flex justify-between py-8">
-                                            <div class="nav-link basis-2/3 flex justify-between pr-12">
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">
-                                                        Shop Features
-                                                    </div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300">
-                                                                Shop Breadcrumb 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-collection.html"
-                                                                class="link text-secondary duration-300">
-                                                                Shop Collection
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
 
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li class="h-full">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Danh Mục
                                 </a>
-
+                                <div class="mega-menu absolute top-[74px] left-0px bg-white ">
+                                    <div class="container">
+                                        <div class="flex justify-between py-8">
+                                            <div class="nav-link basis-2/3 flex justify-between pr-12">
+                                                <div class="nav-item">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="shop-breadcrumb2.html"
+                                                                class="link text-secondary duration-300 text-button-uppercase pb-2">
+                                                                Shop Breadcrumb 2
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="shop-breadcrumb2.html"
+                                                                class="link text-secondary duration-300 text-button-uppercase pb-2">
+                                                                Shop Breadcrumb 2
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
@@ -134,7 +117,7 @@
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Pages
                                 </a>
-                                <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
+                                <!-- <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
                                     <ul class="w-full">
                                         <li>
                                             <a href="about.html" class="link text-secondary duration-300">
@@ -172,7 +155,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </li>
                         </ul>
                     </div>

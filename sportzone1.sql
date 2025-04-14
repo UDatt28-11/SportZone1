@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 03, 2025 at 04:47 PM
+-- Generation Time: Apr 09, 2025 at 02:44 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,48 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bien_the_sp`
+--
+
+CREATE TABLE `bien_the_sp` (
+  `id` int NOT NULL,
+  `sp_id` int NOT NULL,
+  `mau_id` int DEFAULT NULL,
+  `size_id` int NOT NULL,
+  `ton_kho` int NOT NULL DEFAULT '0',
+  `don_gia` int NOT NULL DEFAULT '0',
+  `trang_thai` tinyint NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bien_the_sp`
+--
+
+INSERT INTO `bien_the_sp` (`id`, `sp_id`, `mau_id`, `size_id`, `ton_kho`, `don_gia`, `trang_thai`) VALUES
+(7, 43, 3, 1, 0, 11, 0),
+(8, 43, 3, 2, 0, 11, 0),
+(9, 43, 3, 3, 5, 11, 0),
+(12, 43, 3, 5, 0, 11, 0),
+(13, 42, 4, 1, 0, 111, 0),
+(14, 42, 4, 2, 0, 111, 0),
+(15, 42, 4, 3, 0, 111, 0),
+(16, 42, 4, 5, 0, 111, 0),
+(25, 42, 2, 1, 0, 111, 0),
+(26, 42, 2, 2, 0, 111, 0),
+(27, 42, 2, 3, 0, 111, 0),
+(28, 42, 2, 5, 0, 111, 0),
+(29, 42, 3, 1, 0, 111, 0),
+(30, 42, 3, 2, 0, 111, 0),
+(31, 42, 3, 3, 0, 111, 0),
+(32, 42, 3, 5, 0, 111, 0),
+(33, 44, 3, 1, 0, 111, 0),
+(34, 44, 3, 2, 0, 111, 0),
+(35, 44, 3, 3, 0, 111, 0),
+(36, 44, 3, 5, 0, 111, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `binh_luans`
 --
 
@@ -31,20 +73,10 @@ CREATE TABLE `binh_luans` (
   `id` int NOT NULL,
   `san_pham_id` int NOT NULL,
   `tai_khoan_id` int NOT NULL,
-  `noi_dung` text COLLATE utf8mb4_general_ci NOT NULL,
+  `noi_dung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ngay_dang` date NOT NULL,
   `trang_thai` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `binh_luans`
---
-
-INSERT INTO `binh_luans` (`id`, `san_pham_id`, `tai_khoan_id`, `noi_dung`, `ngay_dang`, `trang_thai`) VALUES
-(1, 42, 3, 'Sản phẩm này còn hàng không shop', '2024-07-28', 2),
-(2, 1, 3, 'Shop ơi rep tin nhắn em', '2024-07-28', 2),
-(3, 37, 3, 'Ship hỏa tốc thì bao giờ có', '2024-07-27', 2),
-(4, 37, 3, 'Shop ơi rep tin nhắn em', '2024-07-28', 2);
 
 -- --------------------------------------------------------
 
@@ -54,22 +86,12 @@ INSERT INTO `binh_luans` (`id`, `san_pham_id`, `tai_khoan_id`, `noi_dung`, `ngay
 
 CREATE TABLE `chi_tiet_don_hangs` (
   `id` int NOT NULL,
-  `don_hang_id` int NOT NULL,
-  `san_pham_id` int NOT NULL,
+  `don_hang_id` int DEFAULT NULL,
+  `bien_the_id` int DEFAULT NULL,
   `don_gia` decimal(10,2) NOT NULL,
   `so_luong` int NOT NULL,
   `thanh_tien` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `chi_tiet_don_hangs`
---
-
-INSERT INTO `chi_tiet_don_hangs` (`id`, `don_hang_id`, `san_pham_id`, `don_gia`, `so_luong`, `thanh_tien`) VALUES
-(1, 1, 36, '12345.00', 1, '12345.00'),
-(2, 1, 37, '1234.00', 2, '123456.00'),
-(3, 2, 36, '12345.00', 1, '12345.00'),
-(4, 2, 33, '1234.00', 2, '123456.00');
 
 -- --------------------------------------------------------
 
@@ -80,19 +102,9 @@ INSERT INTO `chi_tiet_don_hangs` (`id`, `don_hang_id`, `san_pham_id`, `don_gia`,
 CREATE TABLE `chi_tiet_gio_hangs` (
   `id` int NOT NULL,
   `gio_hang_id` int NOT NULL,
-  `san_pham_id` int NOT NULL,
+  `bien_the_id` int NOT NULL,
   `so_luong` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `chi_tiet_gio_hangs`
---
-
-INSERT INTO `chi_tiet_gio_hangs` (`id`, `gio_hang_id`, `san_pham_id`, `so_luong`) VALUES
-(4, 3, 1, 3),
-(5, 3, 34, 4),
-(6, 3, 2, 4),
-(7, 3, 36, 2);
 
 -- --------------------------------------------------------
 
@@ -102,7 +114,7 @@ INSERT INTO `chi_tiet_gio_hangs` (`id`, `gio_hang_id`, `san_pham_id`, `so_luong`
 
 CREATE TABLE `chuc_vus` (
   `id` int NOT NULL,
-  `ten_chuc_vu` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `ten_chuc_vu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -121,8 +133,8 @@ INSERT INTO `chuc_vus` (`id`, `ten_chuc_vu`) VALUES
 
 CREATE TABLE `danh_mucs` (
   `id` int NOT NULL,
-  `ten_danh_muc` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `mo_ta` text COLLATE utf8mb4_general_ci
+  `ten_danh_muc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mo_ta` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -130,8 +142,10 @@ CREATE TABLE `danh_mucs` (
 --
 
 INSERT INTO `danh_mucs` (`id`, `ten_danh_muc`, `mo_ta`) VALUES
-(2, 'Yoga', 'Danh mục sản phẩm giày Yoga'),
-(5, 'Giày thể thao', 'Giày Quốc Tế');
+(1, 'Chó ta', 'Danh mục chó ta'),
+(2, 'Mèo tây', 'Danh mục sản phẩm mèo tây'),
+(5, 'Mèo ai cập', 'Mèo này không lông'),
+(6, '1111', '111');
 
 -- --------------------------------------------------------
 
@@ -141,15 +155,15 @@ INSERT INTO `danh_mucs` (`id`, `ten_danh_muc`, `mo_ta`) VALUES
 
 CREATE TABLE `don_hangs` (
   `id` int NOT NULL,
-  `ma_don_hang` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `ma_don_hang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tai_khoan_id` int NOT NULL,
-  `ten_nguoi_nhan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `email_nguoi_nhan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `sdt_nguoi_nhan` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
-  `dia_chi_nguoi_nhan` text COLLATE utf8mb4_general_ci NOT NULL,
+  `ten_nguoi_nhan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email_nguoi_nhan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `sdt_nguoi_nhan` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `dia_chi_nguoi_nhan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ngay_dat` date NOT NULL,
   `tong_tien` decimal(10,2) NOT NULL,
-  `ghi_chu` text COLLATE utf8mb4_general_ci,
+  `ghi_chu` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `phuong_thuc_thanh_toan_id` int NOT NULL,
   `trang_thai_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -191,39 +205,63 @@ INSERT INTO `gio_hangs` (`id`, `tai_khoan_id`) VALUES
 
 CREATE TABLE `hinh_anh_san_phams` (
   `id` int NOT NULL,
-  `san_pham_id` int NOT NULL,
-  `link_hinh_anh` text COLLATE utf8mb4_general_ci NOT NULL
+  `id_san_pham` int NOT NULL,
+  `mau_id` int NOT NULL,
+  `link_hinh_anh` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hinh_anh_san_phams`
 --
 
-INSERT INTO `hinh_anh_san_phams` (`id`, `san_pham_id`, `link_hinh_anh`) VALUES
-(4, 35, './uploads/1720908621_z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
-(28, 39, './uploads/1721057179z5550783400537_7b8dd570891f48acf52e343a14cbce75.jpg'),
-(29, 39, './uploads/1721057179z5550783400601_4adbc42c6bb8a9cbdfbb15961721eb20.jpg'),
-(30, 39, './uploads/1721057179z5553545947549_fe27cf0f6c8e943ebc7295844477c00a.jpg'),
-(31, 40, './uploads/1721063929z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
-(32, 40, './uploads/1721063929z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
-(35, 40, './uploads/1721063917z5617645685043_498a7a632f80e43e56eb0eaf612074e9.jpg'),
-(36, 40, './uploads/1721063945z5553545947549_fe27cf0f6c8e943ebc7295844477c00a.jpg'),
-(39, 40, './uploads/1721063984z5550783400601_4adbc42c6bb8a9cbdfbb15961721eb20.jpg'),
-(52, 41, './uploads/1743389448nike đen.webp'),
-(53, 41, './uploads/1743389448nike đen2.webp'),
-(57, 41, './uploads/174338962519.webp'),
-(60, 44, './uploads/1743693290AIR+MAX+DN8 .3.png'),
-(61, 44, './uploads/1743693290AIR+MAX+DN8.2.png'),
-(62, 44, './uploads/1743693290AIR+MAX+DN8.png'),
-(63, 45, './uploads/1743693976AIR+MAX+DN8+AMD+(GS).png'),
-(64, 45, './uploads/1743693630AIR+MAX+DN8 .3.png'),
-(65, 45, './uploads/1743693553AIR+MAX+DN8.png'),
-(66, 46, './uploads/1743693648AIR+MAX+DN8 .3.png'),
-(67, 46, './uploads/1743693648AIR+MAX+DN8+AMD+(GS).png'),
-(68, 46, './uploads/1743693212AIR+MAX+DN8.png'),
-(69, 42, './uploads/1743693602AIR+MAX+DN8+AMD+(GS).png'),
-(70, 42, './uploads/1743693585AIR+MAX+DN8.png'),
-(71, 42, './uploads/1743693602AIR+MAX+DN8.2.png');
+INSERT INTO `hinh_anh_san_phams` (`id`, `id_san_pham`, `mau_id`, `link_hinh_anh`) VALUES
+(52, 42, 2, './uploads/1744085355novaflow.jpg'),
+(53, 42, 3, './uploads/1744085355novaflow.jpg'),
+(54, 42, 4, './uploads/1744085355novaflow2.png'),
+(55, 42, 3, './uploads/1744085381novaflow.jpg'),
+(57, 42, 4, './uploads/1744107112asicslogo.jpg'),
+(58, 42, 2, './uploads/1744085886novaflow2.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kich_co_sp`
+--
+
+CREATE TABLE `kich_co_sp` (
+  `id` int NOT NULL,
+  `kich_co` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kich_co_sp`
+--
+
+INSERT INTO `kich_co_sp` (`id`, `kich_co`) VALUES
+(1, '37'),
+(2, '37,5'),
+(3, '38'),
+(5, '38,5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mau_sp`
+--
+
+CREATE TABLE `mau_sp` (
+  `id` int NOT NULL,
+  `mau_sac` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mau_sp`
+--
+
+INSERT INTO `mau_sp` (`id`, `mau_sac`) VALUES
+(2, 'Blue'),
+(3, 'Red'),
+(4, 'Green');
 
 -- --------------------------------------------------------
 
@@ -233,7 +271,7 @@ INSERT INTO `hinh_anh_san_phams` (`id`, `san_pham_id`, `link_hinh_anh`) VALUES
 
 CREATE TABLE `phuong_thuc_thanh_toans` (
   `id` int NOT NULL,
-  `ten_phuong_thuc` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `ten_phuong_thuc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -252,15 +290,15 @@ INSERT INTO `phuong_thuc_thanh_toans` (`id`, `ten_phuong_thuc`) VALUES
 
 CREATE TABLE `san_phams` (
   `id` int NOT NULL,
-  `ten_san_pham` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `ten_san_pham` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `gia_san_pham` decimal(10,2) NOT NULL,
   `gia_khuyen_mai` decimal(10,2) DEFAULT NULL,
-  `hinh_anh` text COLLATE utf8mb4_general_ci,
+  `hinh_anh` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `so_luong` int NOT NULL,
   `luot_xem` int DEFAULT '0',
-  `ngay_nhap` date NOT NULL,
-  `mo_ta` text COLLATE utf8mb4_general_ci,
-  `danh_muc_id` int NOT NULL,
+  `ngay_nhap` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `mo_ta` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `danh_muc_id` int DEFAULT NULL,
   `trang_thai` tinyint NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -269,11 +307,9 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `ten_san_pham`, `gia_san_pham`, `gia_khuyen_mai`, `hinh_anh`, `so_luong`, `luot_xem`, `ngay_nhap`, `mo_ta`, `danh_muc_id`, `trang_thai`) VALUES
-(41, 'Giày thể thao Nike', '15000.00', NULL, './uploads/174338944819.webp', 1000, 0, '2025-03-04', 'Nike là một trong những thương hiệu thể thao nổi tiếng nhất trên thế giới. Từ học sinh tiểu học cho đến các vận động viên chuyên nghiệp, không ai có thể phủ nhận sức hấp dẫn của Nike. Nếu bạn khảo sát xem có bao nhiêu người đã hoặc đang sở hữu các sản phẩm của Nike, thì con số này sẽ khiến bạn bất ngờ háo hức.', 1, 1),
-(42, 'AIR+MAX+DN9', '1000000.00', '890000.00', './uploads/1743689460AIR+MAX+DN8.2.png', 100, 0, '2025-01-07', 'Nike bắt đầu hành trình khởi nghiệp từ năm 2017, khi thành lập một cửa hàng giày thể thao tại quận Tân Bình với tiêu chí mang đến cho khách hàng những đôi giày chất lượng, êm ái, thoải mái.', 5, 1),
-(44, 'AIR+MAX+DN8', '1000000.00', '890000.00', './uploads/1743569761AIR+MAX+DN8.png', 1000, 0, '2025-04-02', 'Giày AIR+MAX+DN8', 5, 1),
-(45, 'AIR+MAX+DN7', '3000000.00', '1999000.00', './uploads/1743689404AIR+MAX+DN8+AMD+(GS).png', 200, 0, '2025-04-16', 'Giày JORDAN+CMFT+ERA', 5, 1),
-(46, 'AIR+MAX+DN6', '1200000.00', '999000.00', './uploads/1743689423AIR+MAX+DN8 .3.png', 200, 0, '2025-04-07', 'Giày NIKE+VOMERO+18 Việt', 5, 1);
+(42, '11111111 sửa r đấy', '111.00', '111.00', './uploads/1743997781novaflow2.png', 11, 0, '2025-04-07 01:37:31', '1', 1, 1),
+(43, 't', '111.00', '11.00', './uploads/1743992198novaflow.jpg', 11, 0, '2025-04-07 02:16:38', '1', 1, 1),
+(44, 'test', '1111.00', '111.00', './uploads/1744083406novaflow.jpg', 111, 0, '2025-04-08 03:36:46', '11', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -283,14 +319,14 @@ INSERT INTO `san_phams` (`id`, `ten_san_pham`, `gia_san_pham`, `gia_khuyen_mai`,
 
 CREATE TABLE `tai_khoans` (
   `id` int NOT NULL,
-  `ho_ten` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `anh_dai_dien` text COLLATE utf8mb4_general_ci,
+  `ho_ten` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `anh_dai_dien` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `ngay_sinh` date NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `so_dien_thoai` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `so_dien_thoai` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `gioi_tinh` tinyint(1) NOT NULL DEFAULT '1',
-  `dia_chi` text COLLATE utf8mb4_general_ci NOT NULL,
-  `mat_khau` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `dia_chi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mat_khau` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `chuc_vu_id` int NOT NULL,
   `trang_thai` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -300,11 +336,12 @@ CREATE TABLE `tai_khoans` (
 --
 
 INSERT INTO `tai_khoans` (`id`, `ho_ten`, `anh_dai_dien`, `ngay_sinh`, `email`, `so_dien_thoai`, `gioi_tinh`, `dia_chi`, `mat_khau`, `chuc_vu_id`, `trang_thai`) VALUES
-(1, 'Nguyễn Đức Anh', './uploads/174338944819.webp', '2004-09-28', 'anhnd120@fpt.edu.vn', '0829998923', 1, 'Số 1 Hà Nội', '$2y$10$knF8cMRUOMbAfZxHSad0SOU3Hc5gTZ3y8kR8SU.9EEKBb7XCDphBG', 1, 1),
+(1, 'Nguyễn Đức Anh', NULL, '2004-09-28', 'anhnd120@fpt.edu.vn', '0829998923', 1, 'Số 1 Hà Nội', '$2y$10$n7scc2K8Upt./z6Hvvg/j.gJxIqvdJ/51gEBKnbjmof/aRBGwzIRa', 1, 1),
 (2, 'Tạ văn định', NULL, '2003-07-09', 'dinhtv7@gmail.com', '', 1, '', '$2y$10$ntoxTQE3bvDnyU1bkwdSIOA1oHiGcXZ.sx/ktZi3peyQOHtiQKpVi', 1, 1),
 (3, 'Tạ trần bình1', './uploads/1723191077product-details-img4.jpg', '2004-10-01', 'binh1102@gmail.com', '0829998929', 2, 'Số 1 Ba Đình', '$2y$10$GFkpcB0SPAMeXqMf2weDC.TfCZr8cMJIKRnjK4VNmTMsbuqtBdCHO', 2, 1),
 (4, 'Nguyễn Văn Mạnh1', NULL, '0000-00-00', 'jennifer.nienow@example.org', '', 1, '', '$2y$10$z2aKAIEMQpcgut54QvjoZ.EINVCFSlk6K/H04mCd.7lNkregVkjqK', 1, 1),
-(5, 'Nguyễn Văn Minh 123', NULL, '0000-00-00', 'minh123@gmail.com', '0829998921', 1, '', '$2y$10$/umk.Ld/u3.MQ17dGOtKJesiJzuA0EqLtEOLxc1FN9ACNaPitXCH6', 1, 2);
+(5, 'Nguyễn Văn Minh 123', NULL, '0000-00-00', 'minh123@gmail.com', '0829998921', 1, '', '$2y$10$/umk.Ld/u3.MQ17dGOtKJesiJzuA0EqLtEOLxc1FN9ACNaPitXCH6', 1, 2),
+(6, 'manhHung', NULL, '2005-04-06', 'manhHung@gmail.com', '0987654321', 1, 'HÀ NỘI', '$2y$10$0NUXZwec3nD2fC98NrTfCu/6UO.4A18bssP1HyUVMKnZi0SqK3ws.', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -314,7 +351,7 @@ INSERT INTO `tai_khoans` (`id`, `ho_ten`, `anh_dai_dien`, `ngay_sinh`, `email`, 
 
 CREATE TABLE `trang_thai_don_hangs` (
   `id` int NOT NULL,
-  `ten_trang_thai` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `ten_trang_thai` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -339,22 +376,37 @@ INSERT INTO `trang_thai_don_hangs` (`id`, `ten_trang_thai`) VALUES
 --
 
 --
+-- Indexes for table `bien_the_sp`
+--
+ALTER TABLE `bien_the_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_sp_id_bien_the` (`sp_id`),
+  ADD KEY `fk_mau_id_bien_the` (`mau_id`),
+  ADD KEY `fk_size_id_bien_the` (`size_id`);
+
+--
 -- Indexes for table `binh_luans`
 --
 ALTER TABLE `binh_luans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_sp_id_binh_luan` (`san_pham_id`),
+  ADD KEY `fk_user_id_binh_luan` (`tai_khoan_id`);
 
 --
 -- Indexes for table `chi_tiet_don_hangs`
 --
 ALTER TABLE `chi_tiet_don_hangs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_don_hang_id_chi_tiet_don_hang` (`don_hang_id`),
+  ADD KEY `fk_var_id_chi_tiet_don_hang` (`bien_the_id`);
 
 --
 -- Indexes for table `chi_tiet_gio_hangs`
 --
 ALTER TABLE `chi_tiet_gio_hangs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_gio_hang_id_chi_tiet_gio_hang` (`gio_hang_id`),
+  ADD KEY `fk_var_id_chi_tiet_gio_hang` (`bien_the_id`);
 
 --
 -- Indexes for table `chuc_vus`
@@ -372,18 +424,34 @@ ALTER TABLE `danh_mucs`
 -- Indexes for table `don_hangs`
 --
 ALTER TABLE `don_hangs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tk_id_don_hang` (`tai_khoan_id`);
 
 --
 -- Indexes for table `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tk_id_gio_hang` (`tai_khoan_id`);
 
 --
 -- Indexes for table `hinh_anh_san_phams`
 --
 ALTER TABLE `hinh_anh_san_phams`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_mau_id_hinh_anh_sp` (`mau_id`),
+  ADD KEY `fk_sp_id_hinh_anh` (`id_san_pham`);
+
+--
+-- Indexes for table `kich_co_sp`
+--
+ALTER TABLE `kich_co_sp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mau_sp`
+--
+ALTER TABLE `mau_sp`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -396,7 +464,8 @@ ALTER TABLE `phuong_thuc_thanh_toans`
 -- Indexes for table `san_phams`
 --
 ALTER TABLE `san_phams`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_dm_id_san_pham` (`danh_muc_id`);
 
 --
 -- Indexes for table `tai_khoans`
@@ -414,6 +483,12 @@ ALTER TABLE `trang_thai_don_hangs`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bien_the_sp`
+--
+ALTER TABLE `bien_the_sp`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `binh_luans`
@@ -443,7 +518,7 @@ ALTER TABLE `chuc_vus`
 -- AUTO_INCREMENT for table `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `don_hangs`
@@ -461,7 +536,19 @@ ALTER TABLE `gio_hangs`
 -- AUTO_INCREMENT for table `hinh_anh_san_phams`
 --
 ALTER TABLE `hinh_anh_san_phams`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT for table `kich_co_sp`
+--
+ALTER TABLE `kich_co_sp`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `mau_sp`
+--
+ALTER TABLE `mau_sp`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `phuong_thuc_thanh_toans`
@@ -473,19 +560,75 @@ ALTER TABLE `phuong_thuc_thanh_toans`
 -- AUTO_INCREMENT for table `san_phams`
 --
 ALTER TABLE `san_phams`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tai_khoans`
 --
 ALTER TABLE `tai_khoans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `trang_thai_don_hangs`
 --
 ALTER TABLE `trang_thai_don_hangs`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bien_the_sp`
+--
+ALTER TABLE `bien_the_sp`
+  ADD CONSTRAINT `fk_sp_id_bien_the` FOREIGN KEY (`sp_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `binh_luans`
+--
+ALTER TABLE `binh_luans`
+  ADD CONSTRAINT `fk_sp_id_binh_luan` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user_id_binh_luan` FOREIGN KEY (`tai_khoan_id`) REFERENCES `tai_khoans` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `chi_tiet_don_hangs`
+--
+ALTER TABLE `chi_tiet_don_hangs`
+  ADD CONSTRAINT `fk_don_hang_id_chi_tiet_don_hang` FOREIGN KEY (`don_hang_id`) REFERENCES `don_hangs` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_var_id_chi_tiet_don_hang` FOREIGN KEY (`bien_the_id`) REFERENCES `bien_the_sp` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `chi_tiet_gio_hangs`
+--
+ALTER TABLE `chi_tiet_gio_hangs`
+  ADD CONSTRAINT `fk_gio_hang_id_chi_tiet_gio_hang` FOREIGN KEY (`gio_hang_id`) REFERENCES `gio_hangs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_var_id_chi_tiet_gio_hang` FOREIGN KEY (`bien_the_id`) REFERENCES `bien_the_sp` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `don_hangs`
+--
+ALTER TABLE `don_hangs`
+  ADD CONSTRAINT `fk_tk_id_don_hang` FOREIGN KEY (`tai_khoan_id`) REFERENCES `tai_khoans` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `gio_hangs`
+--
+ALTER TABLE `gio_hangs`
+  ADD CONSTRAINT `fk_tk_id_gio_hang` FOREIGN KEY (`tai_khoan_id`) REFERENCES `tai_khoans` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hinh_anh_san_phams`
+--
+ALTER TABLE `hinh_anh_san_phams`
+  ADD CONSTRAINT `fk_mau_id_hinh_anh_sp` FOREIGN KEY (`mau_id`) REFERENCES `mau_sp` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_sp_id_hinh_anh` FOREIGN KEY (`id_san_pham`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `san_phams`
+--
+ALTER TABLE `san_phams`
+  ADD CONSTRAINT `fk_dm_id_san_pham` FOREIGN KEY (`danh_muc_id`) REFERENCES `danh_mucs` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
