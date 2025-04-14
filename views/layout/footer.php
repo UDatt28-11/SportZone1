@@ -8,68 +8,59 @@
                     </a>
                     <div class="flex gap-3 mt-3">
                         <div class="flex flex-col">
-                            <span class="text-button">Mail:</span>
-                            <span class="text-button mt-3">Phone:</span>
-                            <span class="text-button mt-3">Address:</span>
+                            <span class="text-button">Email:</span>
+                            <span class="text-button mt-3">Số điện thoại:</span>
+                            <span class="text-button mt-3">Địa chỉ:</span>
                         </div>
                         <div class="flex flex-col">
                             <span class="">SportZone@gmail.com</span>
                             <span class="mt-[14px]">0379198870</span>
-                            <span class="mt-3 pt-1">10 Nam Từ Liêm Hà Nội</span>
+                            <span class="mt-3 pt-1">10 Nam Từ Liêm, Hà Nội</span>
                         </div>
                     </div>
                 </div>
                 <div class="right-content flex flex-wrap gap-y-8 basis-3/4 max-lg:basis-full">
                     <div class="list-nav flex justify-between basis-2/3 max-md:basis-full gap-4">
                         <div class="item flex flex-col basis-1/3">
-                            <div class="text-button-uppercase pb-3">Infomation</div>
-                            <a class="caption1 has-line-before duration-300 w-fit" href="contact.html">Contact us
-                            </a>
+                            <div class="text-button-uppercase pb-3">Thông tin</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="contact.html">Liên hệ</a>
                             <a class="caption1 has-line-before duration-300 w-fit pt-2" href="#!">
-                                Career
+                                Tuyển dụng
                             </a>
                             <a class="caption1 has-line-before duration-300 w-fit pt-2" href="my-account.html">
-                                My Account</a>
+                                Tài khoản của tôi</a>
                             <a class="caption1 has-line-before duration-300 w-fit pt-2" href="order-tracking.html">
-                                Order & Returns</a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">FAQs
-                            </a>
+                                Đơn hàng & Đổi trả</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Câu hỏi thường
+                                gặp</a>
                         </div>
                         <div class="item flex flex-col basis-1/3">
-                            <div class="text-button-uppercase pb-3">Quick Shop</div>
-                            <a class="caption1 has-line-before duration-300 w-fit"
-                                href="shop-breadcrumb1.html">Women</a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html">Men
-                            </a>
+                            <div class="text-button-uppercase pb-3">Mua sắm nhanh</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="shop-breadcrumb1.html">Nữ</a>
                             <a class="caption1 has-line-before duration-300 w-fit pt-2"
-                                href="shop-breadcrumb1.html">Clothes
-                            </a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html">
-                                Accessories
-                            </a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="blog-default.html">Blog
-                            </a>
+                                href="shop-breadcrumb1.html">Nam</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2"
+                                href="shop-breadcrumb1.html">Quần áo</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html">Phụ
+                                kiện</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2"
+                                href="blog-default.html">Blog</a>
                         </div>
                         <div class="item flex flex-col basis-1/3">
-                            <div class="text-button-uppercase pb-3">
-                                Customer Services
-                            </div>
-                            <a class="caption1 has-line-before duration-300 w-fit" href="faqs.html">FAQs
-                            </a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Shipping
-                            </a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Privacy
-                                Policy</a>
-                            <a class="caption1 has-line-before duration-300 w-fit pt-2"
-                                href="order-tracking.html">Return & Refund</a>
+                            <div class="text-button-uppercase pb-3">Dịch vụ khách hàng</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="faqs.html">Câu hỏi thường
+                                gặp</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Giao hàng</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Chính sách bảo
+                                mật</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="order-tracking.html">Hoàn
+                                trả & Đổi hàng</a>
                         </div>
                     </div>
                     <div class="newsletter basis-1/3 pl-7 max-md:basis-full max-md:pl-0">
-                        <div class="text-button-uppercase">Newletter</div>
+                        <div class="text-button-uppercase">Bản tin</div>
                         <div class="caption1 mt-3">
-
-                            Đăng ký nhận bản tin của chúng tôi và được giảm giá 10% cho lần mua hàng đầu tiên của
-                            bạn
+                            Đăng ký nhận bản tin của chúng tôi và nhận ưu đãi giảm 10% cho lần mua hàng đầu tiên!
                         </div>
                         <div class="input-block w-full h-[52px] mt-4">
                             <form class="w-full h-full relative" action="https://anvogue-html.vercel.app/post">
@@ -105,7 +96,7 @@
                 class="footer-bottom py-3 flex items-center justify-between gap-5 max-lg:justify-center max-lg:flex-col border-t border-line">
                 <div class="left flex items-center gap-8">
                     <div class="copyright caption1 text-secondary">
-                        ©2025 Sprot Zone. All Rights Reserved.
+                        ©2025 Sport Zone. Mọi quyền được bảo lưu.
                     </div>
                     <div class="select-block flex items-center gap-5 max-md:hidden">
                         <div class="choose-language flex items-center gap-1.5">
@@ -127,7 +118,7 @@
                     </div>
                 </div>
                 <div class="right flex items-center gap-2">
-                    <div class="caption1 text-secondary">Payment:</div>
+                    <div class="caption1 text-secondary">Thanh toán:</div>
                     <div class="payment-img">
                         <img src="./assets/images/payment/Frame-0.png" alt="payment" class="w-9" />
                     </div>
@@ -151,6 +142,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="./assets/js/phosphor-icons.js"></script>

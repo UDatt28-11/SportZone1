@@ -18,5 +18,6 @@
 6. index.php // Điều hướng
 
 - Cấu hình DB trong file commons/env.php
+- Hi
 
 <!-- Từ giờ trở đi với base này, không dùng bất cứ 1 đường dẫn chính xác nào -->

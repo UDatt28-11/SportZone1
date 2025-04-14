@@ -12,11 +12,26 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="./assets/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
+     <!-- Thêm vào phần <head> -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+
     <link rel="stylesheet" href="./assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="./assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="./assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./assets/dist/css/adminlte.min.css">
+    <style>
+        .bi-arrows-fullscreen{
+            padding: 6px;
+        }
+        .addColor{
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
