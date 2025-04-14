@@ -69,7 +69,6 @@
                                 <p>Kích cỡ sản phẩm</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 

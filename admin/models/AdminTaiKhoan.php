@@ -172,4 +172,24 @@ public function resetPassword($id, $mat_khau){
             echo "lỗi" . $e->getMessage();
         }
     }
+
+    public function updateAvatar($id, $avatarPath) {
+        try {
+            $sql = 'UPDATE tai_khoans SET anh_dai_dien = :anh_dai_dien WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':anh_dai_dien', $avatarPath);
+            $stmt->bindParam(':id', $id);
+    
+            // Kiểm tra việc thực thi
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                throw new Exception('Cập nhật ảnh đại diện thất bại.');
+            }
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false;
+        }
+    }
+    
 }
