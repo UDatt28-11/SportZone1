@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 @import 'icomoon/style.css';
+
+/* Mega Menu */
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    background-color: white;
+    z-index: 50;
+    width: 100%;
+}
+
+.group:hover .mega-menu {
+    display: block;
+}

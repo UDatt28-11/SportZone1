@@ -9,6 +9,7 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './models/SanPham.php';
 require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
+require_once './models/danhMuc.php';
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
