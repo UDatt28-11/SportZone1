@@ -25,17 +25,20 @@ if (in_array($act, $protectedRoutes) && !isset($_SESSION['user_id'])) {
     exit;
 }
 
-match($act){
+match($act) {
     '/' => (new HomeController())->home(), // route trang chủ
     
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
     'gio-hang' => (new HomeController())->formGioHang(),
     'lay-anh-theo-mau' => (new HomeController())->getListAnhTheoMau(),
     'lay-size-theo-mau' => (new HomeController())->getListSizeTheoMau(),
-    'lay-thong-tin-bien-the' =>(new HomeController())->layThongTinBienThe(),
+    'lay-thong-tin-bien-the' => (new HomeController())->layThongTinBienThe(),
 
-    'add-vao-gio-hang' =>(new CartController())->add(),
-    
+    'add-vao-gio-hang' => (new CartController())->addToCart(),
+    'update-gio-hang' => (new CartController())->updateQuantity(), // Route mới để cập nhật giỏ hàng
+    'remove-gio-hang' => (new CartController())->removeItem(), // Route mới để xóa sản phẩm khỏi giỏ hàng
+    'dat-hang' => (new CartController())->datHang(), // Route mới để đặt hàng
+
     // Auth client login
     'login' => (new HomeController())->formLogin(),
     'check-login' => (new HomeController())->postLogin(),

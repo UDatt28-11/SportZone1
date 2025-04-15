@@ -13,12 +13,23 @@ class HomeController{
         // Chỉ khởi tạo GioHang nếu user đã đăng nhập
         if (isset($_SESSION['user_id'])) {
             $this->modelGioHang = new GioHang($_SESSION['user_id']);
+
         }
     }
     public function home(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
-        // var_dump($listSanPham);
+        
+        // Khởi tạo biến giỏ hàng
+        $listGioHang = [];
+        $soLuongHangTrongGio = 0;
+        
+        // Chỉ lấy giỏ hàng nếu đã đăng nhập và modelGioHang đã được khởi tạo
+        if (isset($_SESSION['user_id']) && $this->modelGioHang) {
+            $listGioHang = $this->modelGioHang->getGioHang();
+            $soLuongHangTrongGio = count($listGioHang);
+        }
+        
         require_once './views/home.php';
     }
     public function chiTietSanPham(){
@@ -89,6 +100,16 @@ class HomeController{
     }
     public function formGioHang(){
         $listGioHang = $this->modelGioHang->getGioHang();
+        $soLuongHangTrongGio = count($listGioHang);
+        // echo '<pre>';
+        // print_r($listGioHang);
+        // echo '</pre>';
+        $tongTien = 0;
+        foreach ($listGioHang as $gioHang) {
+            $donGia = floatval($gioHang['don_gia']);
+            $soLuong = intval($gioHang['so_luong']);
+            $tongTien += $donGia * $soLuong;
+        }
 
         require_once './views/gioHang.php';
     }

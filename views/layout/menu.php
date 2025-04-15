@@ -1511,9 +1511,11 @@
             <a href="<?= BASE_URL ?>?act=gio-hang" class="menu_bar-link flex flex-col items-center gap-1">
                 <div class="cart-icon relative">
                     <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
-                        <?= $soLuongHangTrongGio ?? 0 ?>
-                    </span>
+                    <?php if(isset($_SESSION['user_id'])): ?>
+                        <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                            <?= isset($soLuongHangTrongGio) ? $soLuongHangTrongGio : 0 ?>
+                        </span>
+                    <?php endif; ?>
                 </div>
                 <span class="menu_bar-title caption2 font-semibold">Giỏ Hàng</span>
             </a>
