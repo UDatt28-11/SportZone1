@@ -1,5 +1,5 @@
 <?php require_once 'layout/header.php'; ?>
-<?php require_once 'layout/menu.php'; ?>
+<?php require_once './views/layout/menu.php'; ?>
 
 <!-- Slider -->
 <div

@@ -193,11 +193,15 @@
                                     class="button-main bg-white text-black border border-black w-full text-center">Hỗ
                                     Trợ</a>
                                 <?php } else { ?>
-                                <a href="#"
-                                    style="justify-content: space-between; margin-right: 30px; margin-left: 30px;">Tài
-                                    khoản</a>
+                                    
+                                    <a href="<?= BASE_URL . '?act=don-hang' ?>"
+                                    class="w-full text-center mb-3 inline-block bg-black btn-color-white text-white font-semibold py-3 rounded-xl shadow-md hover:bg-neutral-800 transition duration-300">
+                                    Đơn Hàng
+                                    </a>
+
                                 <a href="<?= BASE_URL . '?act=logout-client' ?>"
-                                    onclick="return confirm('Bạn muốn đăng xuất tài khoản?')">Đăng Xuất</a>
+                                    onclick="return confirm('Bạn muốn đăng xuất tài khoản?')"
+                                    class="button-main bg-white text-black border border-black w-full text-center">Đăng Xuất</a>
                                 <?php } ?>
 
                             </div>
@@ -1523,6 +1527,12 @@
                 <span class="ph-bold ph-user text-2xl block"></span>
                 <span class="menu_bar-title caption2 font-semibold">Tài Khoản</span>
             </a>
+            <?php if (isset($_SESSION['user_client'])): ?>
+            <a href="<?= BASE_URL ?>?act=don-hang" class="menu_bar-link flex flex-col items-center gap-1">
+                <span class="ph-bold ph-clipboard-text text-2xl block"></span>
+                <span class="menu_bar-title caption2 font-semibold">Đơn Hàng</span>
+            </a>
+            <?php endif; ?>
         </div>
     </div>
 

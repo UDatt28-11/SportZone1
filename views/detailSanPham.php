@@ -2,7 +2,7 @@
 // var_dump($sanPham);
 $productDetail = $sanPham; // Store original data
 require_once 'layout/header.php';
-require_once 'layout/menu.php';
+require_once './views/layout/menu.php';
 $sanPham = $productDetail; // Restore original data
 //  var_dump($sanPham);
  ?>

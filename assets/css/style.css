@@ -117,4 +117,8 @@ button[name="update"]:hover {
 }
 .btn-payment-submit{
     background-color: #000 !important;
+    color: white !important;
+}
+.btn-color-white{
+    background-color: #fff !important;
 }

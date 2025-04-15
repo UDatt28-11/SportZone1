@@ -405,7 +405,7 @@ public function resetPassword(){
             }
 
             // Xử lý upload ảnh
-            $avatarPath = uploadFile($avatar, './uploads/avatars/');
+            $avatarPath = uploadFile($avatar, './uploadADMIN/avatars/');
             if (!$avatarPath) {
                 $_SESSION['error'] = ['avatar' => 'Không thể upload ảnh. Vui lòng thử lại.'];
                 header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');

@@ -21,6 +21,10 @@ class CartController {
             $totalPrice = $this->gioHangModel->getTongTien($this->userId);
             $totalQuantity = $this->gioHangModel->getSoLuongSanPham($this->userId);
 
+            // Truyền dữ liệu vào view
+            $listGioHang = $cartItems;
+            $totalPrice = $totalPrice;
+
             require_once 'views/gioHang.php';
         } catch(Exception $e) {
             $_SESSION['error'] = $e->getMessage();
@@ -154,54 +158,6 @@ class CartController {
                 exit;
             }
 
-            $_SESSION['error'] = $e->getMessage();
-            header('Location: ?act=gio-hang');
-            exit;
-        }
-    }
-
-    public function datHang() {
-        try {
-            if (!isset($_SESSION['user_id'])) {
-                throw new Exception('Vui lòng đăng nhập để đặt hàng.');
-            }
-
-            $userId = $_SESSION['user_id'];
-            $gioHang = $this->gioHangModel->getGioHang();
-
-            if (empty($gioHang)) {
-                throw new Exception('Giỏ hàng của bạn đang trống.');
-            }
-
-            // Lấy thông tin từ form đặt hàng
-            $tenNguoiNhan = $_POST['ten_nguoi_nhan'] ?? '';
-            $emailNguoiNhan = $_POST['email_nguoi_nhan'] ?? '';
-            $sdtNguoiNhan = $_POST['sdt_nguoi_nhan'] ?? '';
-            $diaChiNguoiNhan = $_POST['dia_chi_nguoi_nhan'] ?? '';
-            $ghiChu = $_POST['ghi_chu'] ?? '';
-            $phuongThucThanhToanId = intval($_POST['phuong_thuc_thanh_toan_id'] ?? 1);
-
-            // Tính tổng tiền
-            $tongTien = 0;
-            foreach ($gioHang as $item) {
-                $tongTien += $item['don_gia'] * $item['so_luong'];
-            }
-
-            // Tạo đơn hàng
-            $donHangId = $this->gioHangModel->taoDonHang($userId, $tongTien, $tenNguoiNhan, $emailNguoiNhan, $sdtNguoiNhan, $diaChiNguoiNhan, $ghiChu, $phuongThucThanhToanId);
-
-            // Lưu chi tiết đơn hàng
-            foreach ($gioHang as $item) {
-                $this->gioHangModel->luuChiTietDonHang($donHangId, $item['bien_the_id'], $item['so_luong'], $item['don_gia']);
-            }
-
-            // Xóa giỏ hàng
-            $this->gioHangModel->xoaGioHang($userId);
-
-            $_SESSION['success'] = 'Đặt hàng thành công!';
-            header('Location: ?act=gio-hang');
-            exit;
-        } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
             header('Location: ?act=gio-hang');
             exit;

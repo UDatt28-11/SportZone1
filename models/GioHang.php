@@ -220,5 +220,23 @@ class GioHang{
             ':thanh_tien' => $soLuong * $donGia
         ]);
     }
+
+    public function capNhatTrangThaiDonHang($donHangId, $trangThai) {
+        try {
+            $sql = "UPDATE don_hang SET trang_thai = :trang_thai WHERE id = :don_hang_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':trang_thai', $trangThai);
+            $stmt->bindParam(':don_hang_id', $donHangId);
+            
+            if (!$stmt->execute()) {
+                throw new Exception("Không thể cập nhật trạng thái đơn hàng");
+            }
+            
+            return true;
+        } catch (Exception $e) {
+            error_log("Lỗi cập nhật trạng thái đơn hàng: " . $e->getMessage());
+            throw $e;
+        }
+    }
 }
 ?>

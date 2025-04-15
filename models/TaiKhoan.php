@@ -82,8 +82,17 @@ class TaiKhoan{
             return "Lỗi hệ thống: " . $e->getMessage();
         }
     }
-    
-    
-    
+    public function getUserById($userId) {
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $userId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log("Lỗi lấy thông tin người dùng: " . $e->getMessage());
+            throw $e;
+        }
+    }
 }
 ?>

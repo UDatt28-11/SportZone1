@@ -284,10 +284,7 @@ class AdminSanPhamController
         $colorId = $_GET['id_mau_sac'];
         $mauSanPham = $this->modelMau->getColorById($colorId);
         if($_SERVER['REQUEST_METHOD']){
-            // var_dump($_FILES['new_image']);
-            // var_dump($images);
             foreach ($_FILES['new_image']['name'] as $id => $name) {
-                // print_r($id);die();
                 if ($_FILES['new_image']['error'][$id] === UPLOAD_ERR_OK) {
                     // Xử lý upload ảnh mới
                     $file = [
@@ -297,24 +294,36 @@ class AdminSanPhamController
                         'error' => $_FILES['new_image']['error'][$id],
                         'size' => $_FILES['new_image']['size'][$id],
                     ];
+
+                    // Lấy ảnh cũ để xóa
                     $oldImage = $this->modelSanPham->getDetailAnhSanPham($id);
                     if (!empty($oldImage['link_hinh_anh'])) {
-                        deleteFile($oldImage['link_hinh_anh']);
+                        $oldImagePath = $_SERVER['DOCUMENT_ROOT'] . '/SportZone1/' . $oldImage['link_hinh_anh'];
+                        if (file_exists($oldImagePath)) {
+                            unlink($oldImagePath);
+                        }
                     }
 
+                    // Upload ảnh mới vào thư mục uploads ở thư mục gốc
+                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/SportZone1/uploads/';
+                    if (!file_exists($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
 
-                    $uploadedPath = uploadFile($file, './uploads/');
-                    if ($uploadedPath) {
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $newFileName = time() . '_' . uniqid() . '.' . $extension;
+                    $targetPath = $uploadDir . $newFileName;
+
+                    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
                         // Cập nhật ảnh mới cho ID tương ứng
-                        $this->modelSanPham->updateAnhSanPham($id, $uploadedPath);
+                        $this->modelSanPham->updateAnhSanPham($id, './uploads/' . $newFileName);
                     }
                 }
             }
             header("Location: " . BASE_URL_ADMIN . "?act=list-goi-hinh-anh&id_san_pham=" . $product['id'] . "&id_mau_sac=" . $mauSanPham['id']);
             exit();
         }
-    }
-    public function deleteAnhMauSanPham(){
+    }    public function deleteAnhMauSanPham(){
         $id_anh = $_GET['id_anh'];
         $productId = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($productId);

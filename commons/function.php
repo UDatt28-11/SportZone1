@@ -25,14 +25,19 @@ function connectDB() {
 
 // Thêm file 
 function uploadFile($file, $folderUpload) {
+    // Đảm bảo đường dẫn thư mục kết thúc bằng dấu "/"
+    if (substr($folderUpload, -1) !== '/') {
+        $folderUpload .= '/';
+    }
+
+    // Tạo thư mục nếu chưa tồn tại
+    if (!is_dir($folderUpload)) {
+        mkdir($folderUpload, 0777, true);
+    }
+
     if ($file['error'] === UPLOAD_ERR_OK) {
         $fileName = time() . '_' . basename($file['name']);
         $targetPath = $folderUpload . $fileName;
-
-        // Tạo thư mục nếu chưa tồn tại
-        if (!is_dir($folderUpload)) {
-            mkdir($folderUpload, 0777, true);
-        }
 
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
             return $targetPath; // Trả về đường dẫn file đã upload
