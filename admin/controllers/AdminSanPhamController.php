@@ -298,25 +298,14 @@ class AdminSanPhamController
                     // Lấy ảnh cũ để xóa
                     $oldImage = $this->modelSanPham->getDetailAnhSanPham($id);
                     if (!empty($oldImage['link_hinh_anh'])) {
-                        $oldImagePath = $_SERVER['DOCUMENT_ROOT'] . '/SportZone1/' . $oldImage['link_hinh_anh'];
-                        if (file_exists($oldImagePath)) {
-                            unlink($oldImagePath);
-                        }
+                        deleteFile($oldImage['link_hinh_anh']);
                     }
 
-                    // Upload ảnh mới vào thư mục uploads ở thư mục gốc
-                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/SportZone1/uploads/';
-                    if (!file_exists($uploadDir)) {
-                        mkdir($uploadDir, 0777, true);
-                    }
-
-                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-                    $newFileName = time() . '_' . uniqid() . '.' . $extension;
-                    $targetPath = $uploadDir . $newFileName;
-
-                    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                    // Upload ảnh mới
+                    $uploadedPath = uploadFile($file, '../uploads/');
+                    if ($uploadedPath) {
                         // Cập nhật ảnh mới cho ID tương ứng
-                        $this->modelSanPham->updateAnhSanPham($id, './uploads/' . $newFileName);
+                        $this->modelSanPham->updateAnhSanPham($id, $uploadedPath);
                     }
                 }
             }

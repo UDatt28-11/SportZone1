@@ -1,67 +1,85 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once './views/layout/menu.php'; ?>
 
+<style>
+    .swiper-slide {
+        height: 75vh; /* Chiều cao bằng 75% chiều cao màn hình */
+    }
+</style>
+
 <!-- Slider -->
-<div
-    class="slider-block style-one bg-linear xl:h-[860px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
-    <div class="slider-main h-full w-full">
-        <div class="swiper swiper-slider h-full relative">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Bộ sưu tập giảm giá mùa hè
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div class="sub-img absolute sm:w-1/2 w-3/5 2xl:-right-[60px] -right-[16px] bottom-0">
-                                <img src="./assets/images/slider/bg1-1.png" alt="bg1-1" />
-                            </div>
-                        </div>
+<div class="slider-block relative">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Bộ sưu tập giảm giá mùa hè</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Xu hướng của thời đại
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div class="sub-img absolute w-1/2 2xl:-right-[60px] -right-[0] sm:-bottom-[60px] bottom-0">
-                                <img src="./assets/images/slider/bg3-1.png" alt="bg1-2" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Phong cách thể thao bốn mùa
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div
-                                class="sub-img absolute sm:w-1/2 w-2/3 2xl:-right-[60px] -right-[36px] sm:bottom-0 -bottom-[30px]">
-                                <img src="./assets/images/slider/bg1-3.png" alt="bg1-3" />
-                            </div>
-                        </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider1.png" alt="Bộ sưu tập mùa hè" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Xu hướng của thời đại</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider2.png" alt="Xu hướng thời đại" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider3.png" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slide7.png" height="760px" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slide8.png" height="760px" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 </div>
 <div class="what-new-block filter-product-block md:pt-20 pt-10">
@@ -231,11 +249,11 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/swimwear.png" alt="swimwear" />
+                            <img src="./assets/images/collection/tenisImage.png" alt="" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
-                            Nike
+                            Asics
                         </div>
                     </a>
                 </div>
@@ -243,7 +261,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/top.png" alt="top" />
+                            <img src="./assets/images/collection/adidasImage.png" alt="top" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -255,7 +273,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/sets.png" alt="sets" />
+                            <img src="./assets/images/collection/.png" alt="sets" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -267,7 +285,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/outerwear.png" alt="outerwear" />
+                            <img src="./assets/images/collection/.png" alt="outerwear" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -279,7 +297,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/underwear.png" alt="underwear" />
+                            <img src="./assets/images/collection/.png" alt="underwear" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -291,7 +309,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/t-shirt.png" alt="t-shirt" />
+                            <img src="./assets/images/collection/.png" alt="t-shirt" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -675,7 +693,7 @@
 <a class="scroll-to-top-btn" href="#top-nav"><i class="ph-bold ph-caret-up"></i></a>
 
 <!-- slide show -->
-<div class="modal-newsletter">
+<!-- <div class="modal-newsletter">
     <div class="container h-full flex items-center justify-center w-full">
         <div class="modal-newsletter-main">
             <div class="main-content flex rounded-[20px] overflow-hidden w-full">
@@ -717,7 +735,7 @@
                                     <div class="name text-button">Faux-leather trousers</div>
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
+                                        <div class="product-origin-price caption1 text-secondary2">
                                             <del>$25.00</del>
                                         </div>
                                     </div>
@@ -739,7 +757,7 @@
                                     <div class="name text-button">Faux-leather trousers</div>
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
+                                        <div class="product-origin-price caption1 text-secondary2">
                                             <del>$25.00</del>
                                         </div>
                                     </div>
@@ -761,7 +779,7 @@
                                     <div class="name text-button">Faux-leather trousers</div>
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
+                                        <div class="product-origin-price caption1 text-secondary2">
                                             <del>$25.00</del>
                                         </div>
                                     </div>
@@ -782,7 +800,7 @@
                                     <div class="name text-button">Faux-leather trousers</div>
                                     <div class="flex items-center gap-2 mt-2">
                                         <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
+                                        <div class="product-origin-price caption1 text-secondary2">
                                             <del>$25.00</del>
                                         </div>
                                     </div>
@@ -798,7 +816,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Tìm kiếm sản phẩm -->
 <div class="modal-search-block">
     <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
@@ -1634,3 +1652,48 @@
 </div>
 <!--End Modal -->
 <?php require_once 'layout/footer.php'; ?>
+
+<!-- Initialize Swiper -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Main Slider
+    new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        speed: 800,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        // Thêm các cấu hình mới
+        wrapperClass: 'swiper-wrapper',
+        slideClass: 'swiper-slide',
+        slideActiveClass: 'swiper-slide-active',
+        slideNextClass: 'swiper-slide-next',
+        slidePrevClass: 'swiper-slide-prev',
+        slideVisibleClass: 'swiper-slide-visible',
+        slideDuplicateClass: 'swiper-slide-duplicate',
+        slideDuplicateNextClass: 'swiper-slide-duplicate-next',
+        slideDuplicatePrevClass: 'swiper-slide-duplicate-prev',
+        // Cấu hình observer để tự động cập nhật khi DOM thay đổi
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true
+    });
+
+    // ... existing code ...
+});
+</script>

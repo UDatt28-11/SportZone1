@@ -54,6 +54,7 @@ class HomeController{
             $soLuongHangTrongGio = count($listGioHang);
         }
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        // var_dump($listDanhMuc);die;
         $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);

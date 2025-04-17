@@ -223,7 +223,7 @@ class GioHang{
 
     public function capNhatTrangThaiDonHang($donHangId, $trangThai) {
         try {
-            $sql = "UPDATE don_hang SET trang_thai = :trang_thai WHERE id = :don_hang_id";
+            $sql = "UPDATE don_hangs SET trang_thai_id = :trang_thai WHERE id = :don_hang_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':trang_thai', $trangThai);
             $stmt->bindParam(':don_hang_id', $donHangId);

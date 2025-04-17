@@ -69,24 +69,21 @@
                                     Giới Thiệu
                                 </a>
                             </li>
-                            <li class="h-full">
+                            <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Danh mục
+                                    Danh Mục
                                 </a>
-                                <div class="mega-menu absolute top-[74px] left-0px bg-white ">
-                                    <div class="container">
-                                        <div class="flex justify-between py-8">
-                                            <div class="nav-link basis-2/3 flex justify-between pr-12">
-                                                <div class="nav-item">
-                                                    
-                                                    <ul>
+                                <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
+                                    <ul class="w-full">
+                                
                                                         <?php
                                                         foreach ($listDanhMuc as $danhMuc){
                                                             ?><li>
                                                                 <a href="shop-breadcrumb2.html"
                                                                     class="link text-secondary duration-300">
                                                                     <?=$danhMuc['ten_danh_muc']?>
+
                                                                 </a>
                                                                 
                                                             </li>
@@ -95,13 +92,9 @@
                                                         ?>
                                                         
 
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                         
+                                        
+                                    </ul>
                                 </div>
                             </li>
                             
@@ -120,11 +113,6 @@
                                 </a>
                                 <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
                                     <ul class="w-full">
-                                        <li>
-                                            <a href="about.html" class="link text-secondary duration-300">
-                                                About Us
-                                            </a>
-                                        </li>
                                         <li>
                                             <a href="contact.html" class="link text-secondary duration-300">
                                                 Contact Us
@@ -195,9 +183,9 @@
                                 <?php } else { ?>
                                     
                                     <a href="<?= BASE_URL . '?act=don-hang' ?>"
-                                    class="w-full text-center mb-3 inline-block bg-black btn-color-white text-white font-semibold py-3 rounded-xl shadow-md hover:bg-neutral-800 transition duration-300">
+                                    class="button-main w-full text-center">
                                     Đơn Hàng
-                                    </a>
+                                    </a><br><br>
 
                                 <a href="<?= BASE_URL . '?act=logout-client' ?>"
                                     onclick="return confirm('Bạn muốn đăng xuất tài khoản?')"

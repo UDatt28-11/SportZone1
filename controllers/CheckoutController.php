@@ -103,13 +103,13 @@ class CheckoutController {
             // Xử lý thanh toán
             switch ($phuongThucThanhToanId) {
                 case 1: // Thanh toán khi nhận hàng
-                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, 'pending');
+                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '1');
                     $_SESSION['success'] = 'Đặt hàng thành công! Bạn sẽ thanh toán khi nhận hàng.';
                     header('Location: ' . BASE_URL . '?act=order-confirmation&id=' . $donHangId);
                     break;
 
                 case 2: // Chuyển khoản ngân hàng
-                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, 'pending_payment');
+                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '3');
                     $_SESSION['payment_info'] = [
                         'bank_name' => 'Vietcombank',
                         'account_number' => '1234567890',
@@ -121,7 +121,7 @@ class CheckoutController {
                     break;
 
                 case 3: // Ví điện tử
-                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, 'pending_payment');
+                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '3');
                     $_SESSION['success'] = 'Đặt hàng thành công! Vui lòng thanh toán qua ví điện tử.';
                     header('Location: ' . BASE_URL . '?act=order-confirmation&id=' . $donHangId);
                     break;

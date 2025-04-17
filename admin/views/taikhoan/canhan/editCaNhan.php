@@ -45,7 +45,7 @@
             </div>
             <form action="<?= BASE_URL_ADMIN . '?act=update-avatar' ?>" method="post" enctype="multipart/form-data">
                 <div class="d-flex align-items-start py-3 border-bottom">
-                    <img src="<?= $thongTin['anh_dai_dien'] ? BASE_URL_ADMIN . $thongTin['anh_dai_dien'] : 'https://www.w3schools.com/w3images/avatar2.png' ?>" 
+                    <img src="<?= $thongTin['anh_dai_dien'] ? BASE_URL . $thongTin['anh_dai_dien'] : 'https://www.w3schools.com/w3images/avatar2.png' ?>" 
                          width="90" height="90" id="img" class="img" alt="">
                     <div class="pl-sm-4 pl-2" id="img-section">
                         <b>Chỉnh sửa hình ảnh đại diện</b>

@@ -236,10 +236,14 @@ public function resetPassword(){
     
                 // Xử lý kiểm tra thông tin đăng nhập
                 $user = $this->modelTaiKhoan->checkLogin($email, $password);
-    
+                $user_info = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
+                // var_dump($user_info);die;
                 if ($user == $email) { // Trường hợp đăng nhập thành công
                     // Lưu thông tin vào session 
                     $_SESSION['user_admin'] = $user;
+                    
+                    $_SESSION['user_id'] = $user_info['id'];
+                    
                     echo "<script type='text/javascript'>
                     alert('Đăng nhập Admin thành công');
                     window.location.href = '" . BASE_URL_ADMIN . "';
@@ -261,6 +265,9 @@ public function resetPassword(){
     public function logout(){
         if (isset($_SESSION['user_admin'])) {
             unset($_SESSION['user_admin']);
+            unset($_SESSION['user_id']);
+            unset($_SESSION['flash']);
+            unset($_SESSION['error']);
             header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
         }
     }
@@ -379,6 +386,7 @@ public function resetPassword(){
     public function updateAvatar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_SESSION['user_id']; // Lấy ID người dùng từ session
+            // print_r($id);die();
             $avatar = $_FILES['avatar'] ?? null;
 
             $errors = [];
@@ -405,7 +413,7 @@ public function resetPassword(){
             }
 
             // Xử lý upload ảnh
-            $avatarPath = uploadFile($avatar, './uploadADMIN/avatars/');
+            $avatarPath = uploadFile($avatar, './uploads/avatars/');
             if (!$avatarPath) {
                 $_SESSION['error'] = ['avatar' => 'Không thể upload ảnh. Vui lòng thử lại.'];
                 header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');

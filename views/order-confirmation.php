@@ -1,17 +1,37 @@
+<?php require_once 'layout/header.php'; ?>
+<?php require_once './views/layout/menu.php'; ?>
+<br><br><br><br>
 <?php
+
+require_once __DIR__ . '/../models/HinhAnhSanPham.php';
+
 if (!isset($_GET['id'])) {
     header('Location: ' . BASE_URL);
     exit;
 }
 
-$donHangId = $_GET['id'];
-$donHangModel = new DonHang();
-$donHang = $donHangModel->getDonHangById($donHangId);
-
-if (!$donHang) {
+$donHangId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+if (!$donHangId) {
+    $_SESSION['error'] = "ID đơn hàng không hợp lệ.";
     header('Location: ' . BASE_URL);
     exit;
 }
+
+$donHangModel = new DonHang();
+$donHang = $donHangModel->getDonHangById($donHangId);
+
+if (!$donHang || !is_array($donHang)) {
+    $_SESSION['error'] = "Không tìm thấy đơn hàng.";
+    header('Location: ' . BASE_URL);
+    exit;
+}
+
+// Lấy chi tiết đơn hàng
+$chiTiet = $donHangModel->getChiTietDonHang($donHang['id']);
+if ($chiTiet === false) {
+    throw new Exception("Không thể lấy chi tiết đơn hàng #" . $donHang['id']);
+}
+$donHang['chi_tiet'] = $chiTiet;
 ?>
 
 <div class="container mt-5">
@@ -53,7 +73,7 @@ if (!$donHang) {
                                 </tr>
                                 <tr>
                                     <th class="bg-light">Phương thức thanh toán</th>
-                                    <td><?php echo $donHang['ten_phuong_thuc_thanh_toan']; ?></td>
+                                    <td><?php echo $donHang['ten_phuong_thuc']; ?></td>
                                 </tr>
                                 <tr>
                                     <th class="bg-light">Tổng tiền</th>
@@ -63,12 +83,12 @@ if (!$donHang) {
                                     <th class="bg-light">Trạng thái</th>
                                     <td>
                                         <span class="badge bg-<?php 
-                                            echo $donHang['trang_thai'] == 'pending' ? 'warning' : 
-                                                ($donHang['trang_thai'] == 'completed' ? 'success' : 'info'); 
+                                            echo $donHang['trang_thai_id'] == '3' ? 'warning' : 
+                                                ($donHang['trang_thai_id'] == '4' ? 'success' : 'info'); 
                                         ?>">
                                             <?php 
-                                            echo $donHang['trang_thai'] == 'pending' ? 'Chờ xử lý' : 
-                                                ($donHang['trang_thai'] == 'completed' ? 'Hoàn thành' : 'Đang xử lý'); 
+                                            echo $donHang['trang_thai_id'] == '3' ? 'Chờ xử lý' : 
+                                                ($donHang['trang_thai_id'] == '4' ? 'Hoàn thành' : 'Đang xử lý'); 
                                             ?>
                                         </span>
                                     </td>
@@ -80,26 +100,30 @@ if (!$donHang) {
                     <div class="mt-4">
                         <h5 class="mb-3">Chi tiết đơn hàng</h5>
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Thành tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($donHang['chi_tiet'] as $item): ?>
-                                    <tr>
-                                        <td><?php echo $item['ten_san_pham']; ?></td>
-                                        <td><?php echo $item['so_luong']; ?></td>
-                                        <td><?php echo number_format($item['don_gia'], 0, ',', '.'); ?> VNĐ</td>
-                                        <td><?php echo number_format($item['thanh_tien'], 0, ',', '.'); ?> VNĐ</td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                            
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <?php foreach ($donHang['chi_tiet'] as $chiTiet): ?>
+                                <?php
+                                    $hinhAnh = (new HinhAnhSanPham())->getHinhAnhBySanPhamAndMau($chiTiet['sp_id'], $chiTiet['mau_id']);
+                                ?>
+                                <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
+                                    <img src="<?= BASE_URL . ($hinhAnh ? $hinhAnh['link_hinh_anh'] : 'uploads/default.jpg')  ?>" 
+                                        alt="<?= $chiTiet['ten_san_pham'] ?>" class="w-full h-40 object-cover rounded mb-3">
+                                    <h4 class="font-medium text-gray-800"><?= $chiTiet['ten_san_pham'] ?></h4>
+                                    <div class="text-sm text-gray-600">
+                                        <p>Số lượng: <?= $chiTiet['so_luong'] ?></p>
+                                        <?php if ($chiTiet['mau_sac']): ?><p>Màu: <?= $chiTiet['mau_sac'] ?></p><?php endif; ?>
+                                        <?php if ($chiTiet['kich_co']): ?><p>Size: <?= $chiTiet['kich_co'] ?></p><?php endif; ?>
+                                    </div>
+                                    <div class="text-right mt-2 text-sm text-gray-800">
+                                        <p class="font-semibold"><?= number_format($chiTiet['don_gia'], 0, ',', '.') ?>đ</p>
+                                        <p class="text-xs text-gray-500">Thành tiền: <?= number_format($chiTiet['don_gia'] * $chiTiet['so_luong'], 0, ',', '.') ?>đ</p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                                
                         </div>
                     </div>
 
@@ -114,14 +138,17 @@ if (!$donHang) {
                         </div>
                     </div>
 
-                    <div class="mt-4 text-center">
-                        <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">
-                            <i class="fas fa-home"></i> Về trang chủ
+                    <div class="mt-6 text-center space-x-3">
+                        <a href="<?= BASE_URL ?>" 
+                        class="inline-flex items-center px-4 py-2 border border-blue-600 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-50 transition">
+                            <i class="fas fa-home mr-2"></i> Về trang chủ
                         </a>
-                        <a href="<?php echo BASE_URL; ?>?act=order-history" class="btn btn-outline-primary ms-2">
-                            <i class="fas fa-history"></i> Xem lịch sử đơn hàng
+                        <a href="<?= BASE_URL ?>?act=don-hang" 
+                        class="inline-flex items-center px-4 py-2 border border-blue-600 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-50 transition">
+                            <i class="fas fa-history mr-2"></i> Xem lịch sử đơn hàng
                         </a>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
@@ -138,4 +165,5 @@ if (!$donHang) {
 .table th {
     width: 30%;
 }
-</style> 
+</style>
+<?php require_once 'layout/footer.php'; ?> 

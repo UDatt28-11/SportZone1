@@ -122,3 +122,47 @@ button[name="update"]:hover {
 .btn-color-white{
     background-color: #fff !important;
 }
+.text-content{
+    padding-left: 60px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    /* background-color: #d1d5db; Màu xám nhạt */
+    width: 30px; /* Chiều rộng nhỏ hơn */
+    height: 30px; /* Chiều cao nhỏ hơn */
+    /* border-radius: 50%; Bo tròn thành hình tròn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563; /* Màu xám đậm cho icon */
+    font-size: 16px; /* Kích thước icon nhỏ hơn */
+    /* transition: background-color 0.3s ease, color 0.3s ease; */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    /* background-color: #9ca3af; Màu xám đậm hơn khi hover */
+    color:rgb(0, 0, 0); /* Màu trắng cho icon khi hover */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 14px; /* Kích thước icon nhỏ hơn */
+}
+.swiper-slide{
+    height: 500px;
+}
+.btn.btn-outline-dark {
+    /* Style cụ thể cho nút */
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 7px;
+    font-size: medium ;
+    font-weight: 500;
+}
+
+.btn.btn-outline-dark.active {
+    background-color: #000000;
+    color: #ffffff;
+}
