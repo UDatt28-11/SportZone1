@@ -18,8 +18,8 @@ class CartController {
     public function index() {
         try {
             $cartItems = $this->gioHangModel->getGioHang();
-            $totalPrice = $this->gioHangModel->getTongTien($this->userId);
-            $totalQuantity = $this->gioHangModel->getSoLuongSanPham($this->userId);
+            $totalPrice = $this->gioHangModel->getTongTien();
+            $totalQuantity = $this->gioHangModel->getSoLuongSanPham();
 
             // Truyền dữ liệu vào view
             $listGioHang = $cartItems;

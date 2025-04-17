@@ -31,7 +31,7 @@ require_once './views/layout/menu.php';
     <?php else: ?>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <?php foreach ($donHangList as $donHang): ?>
-        <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden flex flex-col">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden flex flex-col h-full">
             <!-- Header -->
             <div class="bg-gray-100 px-5 py-4 border-b">
                 <div class="flex justify-between items-start">
@@ -106,16 +106,36 @@ require_once './views/layout/menu.php';
             </div>
 
             <!-- Hành động -->
-            <?php if ($donHang['trang_thai_id'] == 1 || $donHang['trang_thai_id'] == 3): ?>
-                <div class="px-5 py-4 border-t bg-white">
-                    <div class="flex justify-end">
+            <div class="mt-auto px-5 py-4 border-t">
+                <div class="d-flex justify-content-end gap-2">
+                    <?php if ($donHang['trang_thai_id'] == 1): ?>
                         <button onclick="huyDonHang(<?= $donHang['id'] ?>)" 
-                            class="text-sm bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
+                            class="btn btn-danger">
+                            <i class="bi bi-x-circle me-1"></i>
                             Hủy đơn hàng
                         </button>
-                    </div>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 2): ?>
+                        <button onclick="yeuCauHuyDon(<?= $donHang['id'] ?>)" 
+                            class="btn btn-warning">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            Yêu cầu hủy
+                        </button>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 12): ?>
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-clock-history me-1"></i>
+                            Đang chờ xác nhận hủy
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 11): ?>
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-clock-history me-1"></i>
+                            Đã hủy
+                        </span>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>
@@ -159,7 +179,34 @@ function toggleProducts(orderId) {
 
 function huyDonHang(donHangId) {
     if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')) {
-        window.location.href = '<?= BASE_URL ?>?act=huy-don-hang&id=' + donHangId;
+        // Thêm debug để kiểm tra
+        console.log('Hủy đơn hàng ID:', donHangId);
+        
+        // Tạo URL với tham số
+        const url = new URL('<?= BASE_URL ?>');
+        url.searchParams.append('act', 'huy-don-hang');
+        url.searchParams.append('id', donHangId);
+        console.log(url.toString());
+        
+        // Chuyển hướng
+        window.location.href = url.toString();
+    }
+}
+
+function yeuCauHuyDon(donHangId) {
+    if (confirm('Bạn có chắc chắn muốn yêu cầu hủy đơn hàng này?')) {
+        // Thêm debug để kiểm tra
+        console.log('Yêu cầu hủy đơn hàng ID:', donHangId);
+        
+        // Tạo URL với tham số
+        const url = new URL('<?= BASE_URL ?>');
+        url.searchParams.append('act', 'yeu-cau-huy-don');
+        url.searchParams.append('id', donHangId);
+        console.log(url.toString());
+
+        
+        // Chuyển hướng
+        window.location.href = url.toString();
     }
 }
 </script>

@@ -35,13 +35,15 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
+                                        <th>Trạng thái</th>
+                                        <th>Cập nhật</th>
                                         <th>Mã đơn hàng</th>
                                         <th>Tên người nhận</th>
                                         <th>Số điện thoại</th>
                                         <th>Ngày đặt</th>
                                         <th>Tổng tiền</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
+                                        
+                                        <th>Chi tiết</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,29 +51,60 @@
 
                                     <tr>
                                         <td><?= $key + 1 ?></td>
+                                        <td>
+                                            <?= $donHang['ten_trang_thai'] ?>
+                                        </td>
+                                        <td>
+                                            <?php if($donHang['trang_thai_id'] == 1):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Xác nhận</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 2):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Yêu cầu thanh toán</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 3):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Xác nhận thanh toán</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 4):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Chuẩn bị hàng</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 5):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Giao hàng</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 6):  ?>
+                                                <button type="button" class="btn btn-sm btn-success">Đã giao</button>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 7):  ?>
+                                                <div>Chờ xác nhận của khác hàng</div>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 8):  ?>
+                                                <div>Giao hàng thành công</div>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 9):  ?>
+                                                <div>Giao hàng thành công</div>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 10):  ?>
+                                                <a class="btn btn-sm btn-warning">Xác nhận hoàn hàng</a>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 11):  ?>
+                                                <div>Đã hủy</div>
+                                            <?php endif; ?>
+                                            <?php if($donHang['trang_thai_id'] == 12):  ?>
+                                                <a class="btn btn-sm btn-waring">Xác nhận hủy</a>
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?= $donHang['ma_don_hang'] ?></td>
                                         <td><?= $donHang['ten_nguoi_nhan'] ?></td>
                                         <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
                                         <td><?= $donHang['ngay_dat'] ?></td>
                                         <td><?= $donHang['tong_tien'] ?></td>
-                                        <td><?= $donHang['ten_trang_thai'] ?></td>
+                                        
                                         <td>
                                             <div class="btn-group">
                                                 <a
                                                     href="<?= BASE_URL_ADMIN .'?act=chi-tiet-don-hang&id_don_hang='. $donHang['id'] ?>">
                                                     <button class="btn btn-primary"><i class="far fa-eye"></i></button>
                                                 </a>
-                                                <a id="check" <?php
-
-                                                        if($donHang['trang_thai_id'] == 9 || $donHang['trang_thai_id'] == 10 || $donHang['trang_thai_id'] == 11) {
-                                                            echo 'onclick="return checkTrangThai('.$donHang['trang_thai_id'].')"';
-                                                        } else {
-                                                            echo 'href="' . BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] . '"';
-                                                        }?>>
-                                                    <input type="number" name="" id="trang_thai_id" hidden
-                                                        value="<?= $donHang['trang_thai_id'] ?>">
-                                                    <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
-                                                </a>
+                                                
                                             </div>
 
                                         </td>

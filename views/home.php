@@ -92,15 +92,15 @@
                     </div>
                     <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="top">
-                        Bán Chạy
+                        Bền bỉ
                     </div>
-                    <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black active"
+                    <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="t-shirt">
-                        Sale 50%
+                        Ưu đãi
                     </div>
                     <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="dress">
-                        Mới Nhất
+                        Chất lượng
                     </div>
 
                 </div>
@@ -155,16 +155,12 @@
                                         src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
                                 </a>
                             </div>
-                            <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
+                            <div class="list-action px-5 absolute w-full bottom-5 max-lg:hidden">
                                 <div
                                     class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
                                     <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
                                         Chi Tiết</a>
                                 </div>
-                                <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
-                                    class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
-                                    Thêm Vào Giỏ
-                                </a>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -188,26 +184,7 @@
                             <div class="product-name text-title duration-300">
                                 <?= $sanPham['ten_san_pham'] ?>
                             </div>
-                            <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Red
-                                    </div>
-                                </div>
-                                <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        yellow
-                                    </div>
-                                </div>
-                                <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        green
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <div
                                 class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
@@ -225,7 +202,7 @@
                                 <?php } ?>
                                 <div
                                     class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
-                                    -20%
+                                    <?= round(100 - ($sanPham['gia_khuyen_mai'] * 100 / $sanPham['gia_san_pham'])) ?>%
                                 </div>
                             </div>
                         </div>

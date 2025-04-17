@@ -17,6 +17,8 @@ require_once './controllers/HomeController.php';
 require_once './controllers/cartController.php';
 require_once './controllers/CheckoutController.php';
 require_once './controllers/DonHangController.php';
+require_once './controllers/DanhMucController.php';
+require_once './controllers/SearchController.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -34,10 +36,15 @@ $protectedRoutes = [
     'huy-don-hang'
 ];
 
+// var_dump($listDanhMuc);
+// var_dump($soLuongHangTrongGio);
+
 if (in_array($act, $protectedRoutes) && !isset($_SESSION['user_id'])) {
-    header('Location: ' . BASE_URL . '?act=login');
+    header('Location:' . BASE_URL . '?act=login');
     exit;
 }
+
+
 
 match($act) {
     '/' => (new HomeController())->home(), // route trang chủ
@@ -57,7 +64,7 @@ match($act) {
     'process-payment' => (new CheckoutController())->processPayment(),
     'order-confirmation' => require_once 'views/order-confirmation.php',
     'thanh-toan-chuyen-khoan' => require_once 'views/thanhToanChuyenKhoan.php',
-    'order-history' => (new CheckoutController())->orderHistory(),
+    // 'order-history' => (new CheckoutController())->orderHistory(),
 
     // Auth client login
     'login' => (new HomeController())->formLogin(),
@@ -70,6 +77,12 @@ match($act) {
     // Các route mới cho quản lý đơn hàng
     'don-hang' => (new DonHangController())->index(),
     'huy-don-hang' => (new DonHangController())->huyDonHang(),
+    'yeu-cau-huy-don' => (new DonHangController())->yeuCauHuyDon(),
+
+    'danh-muc' => (new DanhMucController())->index(),
+    
+    // Route tìm kiếm
+    'search' => (new SearchController())->search(),
 
     default => (new HomeController())->home()
 };

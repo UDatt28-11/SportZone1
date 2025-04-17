@@ -240,7 +240,7 @@ public function resetPassword(){
                 // var_dump($user_info);die;
                 if ($user == $email) { // Trường hợp đăng nhập thành công
                     // Lưu thông tin vào session 
-                    $_SESSION['user_admin'] = $user;
+                    $_SESSION['user'] = $user;
                     
                     $_SESSION['user_id'] = $user_info['id'];
                     
@@ -263,8 +263,8 @@ public function resetPassword(){
             }
         }
     public function logout(){
-        if (isset($_SESSION['user_admin'])) {
-            unset($_SESSION['user_admin']);
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
             unset($_SESSION['user_id']);
             unset($_SESSION['flash']);
             unset($_SESSION['error']);
@@ -273,7 +273,7 @@ public function resetPassword(){
     }
 
     public function formEditCaNhanQuanTri(){
-        $email = $_SESSION['user_admin'];
+        $email = $_SESSION['user'];
         $thongTin = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
         // var_dump($thongTin);die();
         require_once './views/taikhoan/canhan/editCaNhan.php';
@@ -287,7 +287,7 @@ public function resetPassword(){
             $confirm_pass = $_POST['confirm_pass'] ?? '';
 
             // Lấy thông tin người dùng từ session
-            $user = $this->modelTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_admin']);
+            $user = $this->modelTaiKhoan->getTaiKhoanFormEmail($_SESSION['user']);
             $errors = [];
 
             // Kiểm tra mật khẩu cũ

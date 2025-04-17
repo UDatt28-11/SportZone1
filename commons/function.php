@@ -1,5 +1,6 @@
 <?php
 
+
 // Kết nối CSDL qua PDO
 function connectDB() {
     // Kết nối CSDL
@@ -78,8 +79,8 @@ function formatDate($date){
 }
 
 function checkLoginAdmin(){
-    if (!isset($_SESSION['user_admin'])) {
-        header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
+    if (!isset($_SESSION['user'])) {
+        header("Location: " . BASE_URL . '?act=login');
         exit();
     }
 }
@@ -88,3 +89,38 @@ function formatPrice($price){
     return number_format($price, 0, ',', '.');
 }
 // Debug
+require_once __DIR__ . '/../models/danhMuc.php';
+require_once __DIR__ . '/../models/GioHang.php';
+require_once __DIR__ . '/../models/SanPham.php';
+
+// Khai báo biến toàn cục
+$listDanhMuc = [];
+$listSanPham = [];
+$soLuongHangTrongGio = 0;
+
+function initSanPham() {
+    global $listSanPham;
+    $sanPhamModel = new SanPham();
+    $listSanPham = $sanPhamModel->getAllSanPham();
+    return $listSanPham;
+}
+
+function initDanhMuc() {
+    global $listDanhMuc;
+    $danhMucModel = new DanhMuc();
+    $listDanhMuc = $danhMucModel->getAll();
+    return $listDanhMuc;
+}
+
+function initSoLuongHangTrongGio() {
+    global $soLuongHangTrongGio;
+    if (isset($_SESSION['user_id'])) {
+        $gioHangModel = new GioHang($_SESSION['user_id']);
+        $listGioHang = $gioHangModel->getGioHang();
+        $soLuongHangTrongGio = count($listGioHang);
+        return $soLuongHangTrongGio;
+    }
+    return 0;
+}
+
+// Gọi các hàm khởi tạo

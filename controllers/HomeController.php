@@ -15,6 +15,7 @@ class HomeController{
             $this->modelGioHang = new GioHang($_SESSION['user_id']);
 
         }
+        
     }
     public function home(){
         $listSanPham = $this->modelSanPham->getAllSanPham();
@@ -22,13 +23,13 @@ class HomeController{
         
         // Khởi tạo biến giỏ hàng
         $listGioHang = [];
-        $soLuongHangTrongGio = 0;
+        // $soLuongHangTrongGio = 0;
         
-        // Chỉ lấy giỏ hàng nếu đã đăng nhập và modelGioHang đã được khởi tạo
-        if (isset($_SESSION['user_id']) && $this->modelGioHang) {
-            $listGioHang = $this->modelGioHang->getGioHang();
-            $soLuongHangTrongGio = count($listGioHang);
-        }
+        // // Chỉ lấy giỏ hàng nếu đã đăng nhập và modelGioHang đã được khởi tạo
+        // if (isset($_SESSION['user_id']) && $this->modelGioHang) {
+        //     $listGioHang = $this->modelGioHang->getGioHang();
+        //     $soLuongHangTrongGio = count($listGioHang);
+        // }
         
         require_once './views/home.php';
     }
@@ -48,10 +49,10 @@ class HomeController{
 
         // Xử lý giỏ hàng
         $listGioHang = [];
-        $soLuongHangTrongGio = 0;
+        // $soLuongHangTrongGio = 0;
         if ($this->modelGioHang) {
             $listGioHang = $this->modelGioHang->getGioHang();
-            $soLuongHangTrongGio = count($listGioHang);
+            $_SESSION['SLTGH'] = count($listGioHang);
         }
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         // var_dump($listDanhMuc);die;
@@ -117,6 +118,10 @@ class HomeController{
     
     //Login
     public function formLogin(){
+        if(!empty($_SESSION['user']) ){
+            header('Location:' . BASE_URL . '?act=/');
+            exit;
+        }
         $listSanPham = $this->modelSanPham->getAllSanPham();
         require_once './views/auth/formLogin.php';
         deleteSessionError();
@@ -146,11 +151,13 @@ class HomeController{
             }
 
             $user = $this->modelTaiKhoan->checkLogin($email, $password);
+            // print_r($user);die;
 
             if (is_array($user)) {
                 // Đăng nhập thành công
-                $_SESSION['user_client'] = $user;
+                $_SESSION['user'] = $user;
                 $_SESSION['user_id'] = $user['id'];
+                $_SESSION['chuc_vu_id'] = $user['chuc_vu_id'];
                 
                 // Xóa các session lỗi nếu có
                 unset($_SESSION['errors']);
@@ -175,6 +182,10 @@ class HomeController{
     }
     //Resgister
     public function formRegister(){
+        if(!empty($_SESSION['user']) ){
+            header('Location:' . BASE_URL . '?act=/');
+            exit;
+        }
         $listSanPham = $this->modelSanPham->getAllSanPham();
         require_once './views/auth/formRegister.php';
         deleteSessionError();
@@ -268,11 +279,11 @@ class HomeController{
             ]);
     
             // Gỡ user cũ (nếu có)
-            unset($_SESSION['user_client']);
+            unset($_SESSION['user']);
     
             if (is_array($user)) {
                 // Lưu user nếu cần
-                $_SESSION['user_client'] = $user;
+                $_SESSION['user'] = $user;
             
                 // Hiển thị thông báo và chuyển hướng sau khi đăng ký thành công
                 echo "<script>

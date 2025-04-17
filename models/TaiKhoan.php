@@ -15,9 +15,9 @@ class TaiKhoan{
                 return "Sai email hoặc mật khẩu.";
             }
     
-            if ($user['chuc_vu_id'] != 2) {
-                return "Tài khoản không có quyền đăng nhập.";
-            }
+            // if ($user['chuc_vu_id'] != 2) {
+            //     return "Tài khoản không có quyền đăng nhập.";
+            // }
     
             if ($user['trang_thai'] != 1) {
                 return "Tài khoản của bạn đã bị cấm.";

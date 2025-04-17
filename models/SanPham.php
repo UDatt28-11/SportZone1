@@ -133,5 +133,25 @@ class SanPham{
             echo "lỗi" . $e->getMessage();
         }
     }
+
+    public function searchSanPham($keyword) {
+        try {
+            $sql = "SELECT * FROM san_phams 
+                    WHERE (ten_san_pham LIKE :keyword 
+                    OR mo_ta LIKE :keyword)
+                    AND trang_thai = 1
+                    ORDER BY ngay_nhap DESC";
+            
+            $stmt = $this->conn->prepare($sql);
+            $searchKeyword = "%$keyword%";
+            $stmt->bindParam(':keyword', $searchKeyword, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error in SanPham::searchSanPham(): " . $e->getMessage());
+            return [];
+        }
+    }
 }
 ?>
