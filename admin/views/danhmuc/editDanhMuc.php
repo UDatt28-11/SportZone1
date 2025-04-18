@@ -30,10 +30,10 @@
                             <h3 class="card-title">Sửa danh mục sản phẩm</h3>
                         </div>
 
-                        <form action="<?= BASE_URL_ADMIN . '?act=sua-danh-muc' ?>" method="POST">
+                        <form action="<?= BASE_URL_ADMIN . '?act=sua-danh-muc' ?>" method="POST" enctype="multipart/form-data">
 
                             <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
-                            
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
@@ -42,12 +42,22 @@
                                         <p class="text-danger"><?= $errors['ten_danh_muc'] ?></p>
                                     <?php } ?>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Hình ảnh</label>
+                                    <?php if (!empty($danhMuc['hinh_anh'])) { ?>
+                                        <div class="mb-2">
+                                            <img src="<?= BASE_URL . $danhMuc['hinh_anh'] ?>" alt="" width="100">
+                                        </div>
+                                    <?php } ?>
+                                    <input type="file" class="form-control" name="hinh_anh" accept="image/*">
+                                    <?php if (isset($errors['hinh_anh'])) { ?>
+                                        <p class="text-danger"><?= $errors['hinh_anh'] ?></p>
+                                    <?php } ?>
+                                </div>
                                 <div class="form-group">
                                     <label>Mô tả</label>
                                     <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả"><?= $danhMuc['mo_ta'] ?></textarea>
                                 </div>
-                                
                             </div>
 
                             <div class="card-footer">

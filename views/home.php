@@ -219,11 +219,48 @@
     </div>
 </div>
 
+<div class="collection-block md:pt-20 pt-10">
+    <div class="container">
+        <div class="heading3 text-center">Danh Mục Của Chúng Tôi</div>
+        <div class="list-collection relative section-swiper-navigation md:mt-10 mt-6">
+            <div class="swiper-button-prev lg:left-10 left-6"></div>
+            <div class="swiper-button-next lg:right-10 right-6"></div>
 
+            <div class="swiper swiper-collection">
+                <div class="swiper-wrapper">
+                    <?php if (!empty($listDanhMuc)) : ?>
+                        <?php foreach ($listDanhMuc as $danhMuc) : ?>
+                            <div class="swiper-slide">
+                                <div class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
+                                    <!-- Khối ảnh -->
+                                    <a href="<?= BASE_URL . '?act=danh-muc&id=' . $danhMuc['id'] ?>">
+                                        <div class="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-100">
+                                            <img src="<?= BASE_URL . $danhMuc['hinh_anh'] ?>"
+                                                alt="<?= $danhMuc['ten_danh_muc'] ?>"
+                                                class="absolute inset-0 w-full h-full object-cover object-center"
+                                                onerror="this.src='<?= BASE_URL ?>public/images/no-image.png'">
+                                        </div>
+                                        <!-- Tên danh mục -->
+                                        <div class="collection-name heading5 text-center absolute left-1/2 -translate-x-1/2 bottom-4 
+                                                    lg:w-[200px] md:w-[160px] w-[140px] md:py-3 py-2 px-4
+                                                    bg-white rounded-xl shadow-lg">
+                                            <?= $danhMuc['ten_danh_muc'] ?>
+                                        </div>
+                                    </a>
 
-
-
-
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div class="text-center text-gray-500 py-8">
+                            Không có danh mục nào
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="benefit-block md:pt-20 pt-10">
     <div class="container">
@@ -394,7 +431,7 @@
     </div>
 </div>
 
-<div class="instagram-block md:pt-20 pt-10">
+<!-- <div class="instagram-block md:pt-20 pt-10">
     <div class="container">
         <div class="heading">
             <div class="heading3 text-center">Sport Zone On Instagram</div>
@@ -473,7 +510,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="brand-block md:py-[60px] py-[32px]">
     <div class="container">
@@ -961,11 +998,11 @@
                 </div>
                 <div class="block-button text-center p-6">
                     <div class="flex items-center gap-4">
-                        <a href="<?=url('?act=gio-hang')?>"
+                        <a href="<?= url('?act=gio-hang') ?>"
                             class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
                             Xem Giỏ Hàng
                         </a>
-                        <a href="<?=url('?act=dat-hang&san_pham_id='.$sanPham['id']) ?>" class="button-main basis-1/2 text-center uppercase">
+                        <a href="<?= url('?act=dat-hang&san_pham_id=' . $sanPham['id']) ?>" class="button-main basis-1/2 text-center uppercase">
                             Thanh Toán
                         </a>
                     </div>
@@ -1461,3 +1498,26 @@
 </div>
 <!--End Modal -->
 <?php require_once 'layout/footer.php'; ?>
+
+<script>
+    var swiperCollection = new Swiper(".swiper-collection", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 3,
+            },
+            1024: {
+                slidesPerView: 4,
+            },
+        }
+    });
+</script>

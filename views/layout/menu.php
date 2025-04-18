@@ -87,18 +87,13 @@
                                             <div class="nav-link basis-2/3 flex justify-between pr-12">
                                                 <div class="nav-item">
                                                     <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300 text-button-uppercase pb-2">
-                                                                Shop Breadcrumb 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html"
-                                                                class="link text-secondary duration-300 text-button-uppercase pb-2">
-                                                                Shop Breadcrumb 2
-                                                            </a>
-                                                        </li>
+                                                        <?php foreach ($listDanhMuc as $danhMuc) : ?>
+                                                            <li>
+                                                                <a href="<?= BASE_URL . '?act=danh-muc&id=' . $danhMuc['id'] ?>" class="link text-secondary duration-300 text-button-uppercase pb-2">
+                                                                    <?= $danhMuc['ten_danh_muc'] ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endforeach; ?>
                                                     </ul>
                                                 </div>
                                             </div>

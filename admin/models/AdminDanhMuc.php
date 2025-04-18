@@ -22,16 +22,17 @@ class AdminDanhMuc {
         }
     }
 
-    public function insertDanhMuc($ten_danh_muc, $mo_ta){
+    public function insertDanhMuc($ten_danh_muc, $mo_ta, $hinh_anh){
         try {
-            $sql = 'INSERT INTO danh_mucs (ten_danh_muc, mo_ta)
-                    VALUES (:ten_danh_muc, :mo_ta)';
+            $sql = 'INSERT INTO danh_mucs (ten_danh_muc, mo_ta, hinh_anh)
+                    VALUES (:ten_danh_muc, :mo_ta, :hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
                 ':ten_danh_muc' => $ten_danh_muc,
-                ':mo_ta' => $mo_ta
+                ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh
             ]);
 
             return true;
@@ -56,15 +57,16 @@ class AdminDanhMuc {
         }
     }
 
-    public function updateDanhMuc($id, $ten_danh_muc, $mo_ta){
+    public function updateDanhMuc($id, $ten_danh_muc, $mo_ta, $hinh_anh){
         try {
-            $sql = 'UPDATE danh_mucs SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta WHERE id = :id';
+            $sql = 'UPDATE danh_mucs SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta, hinh_anh = :hinh_anh WHERE id = :id';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
                 ':ten_danh_muc' => $ten_danh_muc,
                 ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh,
                 ':id' => $id
             ]);
 

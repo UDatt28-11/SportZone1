@@ -29,8 +29,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Thêm danh mục sản phẩm</h3>
                         </div>
-
-                        <form action="<?= BASE_URL_ADMIN . '?act=them-danh-muc' ?>" method="POST">
+                        <form action="<?= BASE_URL_ADMIN . '?act=them-danh-muc' ?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
@@ -39,14 +38,18 @@
                                         <p class="text-danger"><?= $errors['ten_danh_muc'] ?></p>
                                     <?php } ?>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Hình ảnh</label>
+                                    <input type="file" class="form-control" name="hinh_anh" accept="image/*">
+                                    <?php if (isset($errors['hinh_anh'])) { ?>
+                                        <p class="text-danger"><?= $errors['hinh_anh'] ?></p>
+                                    <?php } ?>
+                                </div>
                                 <div class="form-group">
                                     <label>Mô tả</label>
                                     <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả"></textarea>
                                 </div>
-                                
                             </div>
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

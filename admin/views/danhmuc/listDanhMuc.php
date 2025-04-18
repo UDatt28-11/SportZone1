@@ -39,33 +39,47 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên danh mục</th>
+                                        <th>Hình ảnh</th>
                                         <th>Mô tả</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($listDanhMuc as $key => $danhMuc) : ?>
-                                    <tr>
-                                        <td><?= $key + 1 ?></td>
-                                        <td><?= $danhMuc['ten_danh_muc'] ?></td>
-                                        <td><?= $danhMuc['mo_ta'] ?></td>
-                                        <td>
-                                            <a
-                                                href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>">
-                                                <button class="btn btn-warning">Sửa</button>
-                                            </a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>"
-                                                onclick="return confirm('Bạn có đồng ý xóa hay không?')">
-                                                <button class="btn btn-danger">Xóa</button>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?= $key + 1 ?></td>
+                                            <td><?= $danhMuc['ten_danh_muc'] ?></td>
+                                            <td>
+                                                <?php if (!empty($danhMuc['hinh_anh'])): ?>
+                                                    <img src="<?= BASE_URL . $danhMuc['hinh_anh'] ?>"
+                                                        alt="<?= $danhMuc['ten_danh_muc'] ?>"
+                                                        style="width: 100px; height: 100px; object-fit: cover;"
+                                                        onerror="this.src='<?= BASE_URL ?>assets/images/no-image.png'">
+                                                <?php else: ?>
+                                                    <img src="<?= BASE_URL ?>assets/images/no-image.png"
+                                                        alt="No image"
+                                                        style="width: 100px; height: 100px; object-fit: cover;">
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= $danhMuc['mo_ta'] ?></td>
+                                            <td>
+                                                <a
+                                                    href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>">
+                                                    <button class="btn btn-warning">Sửa</button>
+                                                </a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>"
+                                                    onclick="return confirm('Bạn có đồng ý xóa hay không?')">
+                                                    <button class="btn btn-danger">Xóa</button>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên danh mục</th>
+                                        <th>Hình ảnh</th>
                                         <th>Mô tả</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -92,23 +106,23 @@
 
 <!-- Page specific script -->
 <script>
-$(function() {
-    $("#example1").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
-});
 </script>
 <!-- Code injected by live-server -->
 

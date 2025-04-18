@@ -63,7 +63,7 @@ class AdminSanPhamController
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
-            
+
 
             if (empty($ten_san_pham)) {
                 $errors['ten_san_pham'] = 'Tên sản phẩm không được để trống';
@@ -86,9 +86,9 @@ class AdminSanPhamController
             if (empty($colors)) {
                 $errors['mau_sac'] = 'Phải chọn màu sắc';
             }
-            
+
             $_SESSION['error'] = $errors;
-            
+
             // Nếu ko có lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {
                 // Nếu ko có lỗi thì tiến hành thêm sản phẩm
@@ -135,71 +135,75 @@ class AdminSanPhamController
         }
     }
 
-    public function formAllBienThe(){
+    public function formAllBienThe()
+    {
         $id = $_GET['id_san_pham'];
         $listBienThe = $this->modelSanPham->getAllBienTheFromSP($id);
         $product = $this->modelSanPham->getDetailSanPham($id);
-        if($listBienThe){
+        if ($listBienThe) {
             require_once './views/sanpham/listBienThe.php';
-        }else{
+        } else {
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
     }
-    public function listMauCuaBienThe(){
+    public function listMauCuaBienThe()
+    {
         $id = $_GET['id_san_pham'];
         $listMauCuaBienThe = $this->modelSanPham->getAllMauCuaBienThe($id);
         $product = $this->modelSanPham->getDetailSanPham($id);
-        if($listMauCuaBienThe){
+        if ($listMauCuaBienThe) {
             require_once './views/sanpham/listMauCuaBienThe.php';
             deleteSessionError();
-        }else{
+        } else {
             header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
     }
-    public function formAddMauBienThe() {
+    public function formAddMauBienThe()
+    {
         $id = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($id);
         $listMauBienThe = $this->modelSanPham->getAllMauCuaBienThe($id);
         $colors = $this->modelMau->getAllColors();
-    
+
         $existingColors = array_column($listMauBienThe, 'mau_sac');
         $colorAdd = [];
-    
+
         foreach ($colors as $color) {
             if (!in_array($color['mau_sac'], $existingColors)) {
                 $colorAdd[] = $color;
             }
         }
-    
+
         // Thêm biến flag để biết có màu để thêm hay không
         $hasNewColors = !empty($colorAdd);
-    
+
         // Truyền vào view tất cả các màu (đã có & mới) + flag
         require_once './views/sanpham/addMauSanPham.php';
         deleteSessionError();
     }
-    
-    public function addMauBienThe() {
+
+    public function addMauBienThe()
+    {
         $id = $_GET['id_san_pham'];
         $sizes = $this->modelSize->getAllIdSizes();
         $product = $this->modelSanPham->getDetailSanPham($id);
-        
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $colors = $_POST['colors'];
             // var_dump($colors);die();
             // var_dump($sizes);die();
             // Kiểm tra xem $colors có phải là mảng không
-                foreach ($colors as $color) {
-                        foreach ($sizes as $size) {
-                            // var_dump($size);die();
-                                $this->modelSanPham->addMauBienThe(
-                                    $product['id'],
-                                    $color,
-                                    $size['id'],
-                                    $product['gia_khuyen_mai']
-                                );
+            foreach ($colors as $color) {
+                foreach ($sizes as $size) {
+                    // var_dump($size);die();
+                    $this->modelSanPham->addMauBienThe(
+                        $product['id'],
+                        $color,
+                        $size['id'],
+                        $product['gia_khuyen_mai']
+                    );
                 }
             }
             // Chuyển hướng sau khi thêm
@@ -207,22 +211,24 @@ class AdminSanPhamController
             exit;
         }
     }
-    public function deleteMauCuaBienThe(){
+    public function deleteMauCuaBienThe()
+    {
         $id = $_GET['id_san_pham'];
         $mau = $_GET['id_mau_sac'];
         try {
             $this->modelSanPham->deleteMauCuaBienThe($id, $mau);
-            header("Location: " . BASE_URL_ADMIN . '?act=list-mau-bien-the&id_san_pham='. $id);
-        } catch (Exception $e){
+            header("Location: " . BASE_URL_ADMIN . '?act=list-mau-bien-the&id_san_pham=' . $id);
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    public function postHinhAnh(){
+    public function postHinhAnh()
+    {
         $id = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $color_ids = $_POST['color_id'] ?? [];
-            
+
             foreach ($color_ids as $color_id) {
                 // var_dump($_FILES['images']);die;
                 if (isset($_FILES['images']['name'][$color_id])) {
@@ -231,7 +237,7 @@ class AdminSanPhamController
                     $errors = $_FILES['images']['error'][$color_id];
                     $sizes = $_FILES['images']['size'][$color_id];
                     $types = $_FILES['images']['type'][$color_id];
-    
+
                     foreach ($fileNames as $index => $name) {
                         if ($errors[$index] === UPLOAD_ERR_OK) {
                             // Tạo file giả giống $_FILES structure
@@ -252,36 +258,38 @@ class AdminSanPhamController
                             }
                         }
                     }
-                }else{
+                } else {
                     $this->modelSanPham->insertGoiAnhSanPham($product['id'], $color_id, null);
                 }
             }
-    
+
             $_SESSION['message'] = "Thêm gói ảnh thành công!";
             header("Location: " . BASE_URL_ADMIN . '?act=list-mau-bien-the&id_san_pham=' . $product['id']);
             exit();
         }
     }
-    public function listAnhMauSanPham(){
+    public function listAnhMauSanPham()
+    {
         $id = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($id);
         $id_color = $_GET['id_mau_sac'];
         $mauSanPham = $this->modelMau->getColorById($id_color);
         $goiAnh = $this->modelSanPham->getGoiAnhMauSanPham($id, $id_color);
-        if($goiAnh){
+        if ($goiAnh) {
             require_once './views/sanpham/listAnhSanPham.php';
             deleteSessionError();
-        }else{
+        } else {
             // header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
             exit();
         }
     }
-    public function postEditAnhMauSanPham(){
+    public function postEditAnhMauSanPham()
+    {
         $productId = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($productId);
         $colorId = $_GET['id_mau_sac'];
         $mauSanPham = $this->modelMau->getColorById($colorId);
-        if($_SERVER['REQUEST_METHOD']){
+        if ($_SERVER['REQUEST_METHOD']) {
             // var_dump($_FILES['new_image']);
             // var_dump($images);
             foreach ($_FILES['new_image']['name'] as $id => $name) {
@@ -312,7 +320,8 @@ class AdminSanPhamController
             exit();
         }
     }
-    public function deleteAnhMauSanPham(){
+    public function deleteAnhMauSanPham()
+    {
         $id_anh = $_GET['id_anh'];
         $productId = $_GET['id_san_pham'];
         $product = $this->modelSanPham->getDetailSanPham($productId);
@@ -328,7 +337,7 @@ class AdminSanPhamController
         exit;
     }
     public function formEditSanPham()
-    {   
+    {
         // Hàm này dùng để hiển thị form nhập
         // Lấy ra thông tin của sản phẩm cần sửa
         $id = $_GET['id_san_pham'];
@@ -343,35 +352,36 @@ class AdminSanPhamController
             exit();
         }
     }
-    public function postEditBienThe(){
+    public function postEditBienThe()
+    {
         $sanPham = $this->modelSanPham->getDetailSanPham($_GET['id_san_pham']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $variantIds = $_POST['variant_id'];
             $stocks = $_POST['ton_kho'];
             $prices = $_POST['don_gia'];
             $statuses = $_POST['trang_thai'];
-        try {
-            foreach ($variantIds as $index => $id) {
-                $ton_kho = $stocks[$index];
-                $don_gia = $prices[$index];
-                $trang_thai = $statuses[$index];
-        
-                $this->modelSanPham->editBienThe(
-                    $id,
-                    $ton_kho,
-                    $don_gia,
-                    $trang_thai
-                );
-            }
-            
-        
-            echo "<script>alert('Cập nhật thành công!');
+            try {
+                foreach ($variantIds as $index => $id) {
+                    $ton_kho = $stocks[$index];
+                    $don_gia = $prices[$index];
+                    $trang_thai = $statuses[$index];
+
+                    $this->modelSanPham->editBienThe(
+                        $id,
+                        $ton_kho,
+                        $don_gia,
+                        $trang_thai
+                    );
+                }
+
+
+                echo "<script>alert('Cập nhật thành công!');
                 window.location.href = '" . BASE_URL_ADMIN . "?act=list-bien-the&id_san_pham=" . $sanPham['id'] . "';
             
                 </script>";
                 // header("Location: " . BASE_URL_ADMIN . '?act=list-bien-the&id_san_pham=' . $sanPham['id']);
             } catch (PDOException $e) {
-                echo "Error: ". $e->getMessage();
+                echo "Error: " . $e->getMessage();
             }
         }
     }
@@ -387,11 +397,9 @@ class AdminSanPhamController
             // Lấy ra dữ liệu
             // Lấy ra dữ liệu cũ của sản phẩm 
 
-            $san_pham_id = $_POST['san_pham_id'] ?? '';
             // Truy vấn  
-            $sanPhamOld = $this->modelSanPham->getDetailSanPham($san_pham_id);
-            $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
 
+            $san_pham_id = $_POST['san_pham_id'] ?? '';
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_san_pham = $_POST['gia_san_pham'] ?? '';
             $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
@@ -400,6 +408,8 @@ class AdminSanPhamController
             $trang_thai = $_POST['trang_thai'] ?? '';
             $mo_ta = $_POST['mo_ta'] ?? '';
 
+            $sanPhamOld = $this->modelSanPham->getDetailSanPham($san_pham_id);
+            $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
 
 
@@ -602,7 +612,7 @@ class AdminSanPhamController
             if ($status) {
                 if ($name_view == 'detail_khach') {
                     header("Location: " . BASE_URL_ADMIN . '?act=chi-tiet-khach-hang&id_khach_hang=' . $binhLuan['tai_khoan_id']);
-                }else{
+                } else {
                     header("Location: " . BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $binhLuan['san_pham_id']);
                 }
             }
