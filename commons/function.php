@@ -24,16 +24,23 @@ function connectDB() {
 
 
 // Thêm file 
-function uploadFile($file, $folderUpload){
-    $pathStorage = $folderUpload . time() . $file['name'];
+function uploadFile($file, $folderUpload) {
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $fileName = time() . '_' . basename($file['name']);
+        $targetPath = $folderUpload . $fileName;
 
-    $from = $file['tmp_name'];
-    $to = PATH_ROOT . $pathStorage;
+        // Tạo thư mục nếu chưa tồn tại
+        if (!is_dir($folderUpload)) {
+            mkdir($folderUpload, 0777, true);
+        }
 
-    if (move_uploaded_file($from, $to)) {
-        return $pathStorage;
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            return $targetPath; // Trả về đường dẫn file đã upload
+        } else {
+            return null; // Upload thất bại
+        }
     }
-    return null;
+    return null; // Không có file hợp lệ
 }
 
 // Xóa file 
@@ -84,4 +91,4 @@ function checkLoginAdmin(){
 function formatPrice($price){
     return number_format($price, 0, ',', '.');
 }
-// Debug 
+// Debug

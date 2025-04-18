@@ -20,20 +20,27 @@ require_once './models/AdminDonHang.php';
 require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
 require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminBaoCaoThongKe.php';
 
 
 
 //Router
-$act = $_GET['act'] ?? 'san-pham';
+$act = $_GET['act'] ?? '/';
 
 if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
   checkLoginAdmin();
 }
 
+if (isset($_GET['act']) && $_GET['act'] === 'update-avatar') {
+    $controller = new AdminTaiKhoanController();
+    $controller->updateAvatar();
+}
+
 // Để đảm bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
-match ($act) {
     // route trang chủ
+match($act){
+    // route trang chủ Thống Kê
     '/' => (new AdminBaoCaoThongKeController())->home(),
     // route danh mục
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
@@ -52,6 +59,9 @@ match ($act) {
     'sua-album-anh-san-pham' => (new AdminSanPhamController())->postEditAnhSanPham(),
     'xoa-san-pham' => (new AdminSanPhamController())->deleteSanPham(),
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanPham(),
+    'lay-anh-theo-mau' => (new AdminSanPhamController())->getListAnhTheoMau(),
+    'lay-size-theo-mau' => (new AdminSanPhamController())->getListSizeTheoMau(),
+    'lay-thong-tin-bien-the' =>(new AdminSanPhamController())->layThongTinBienThe(),
 
     //route Màu sắc
     'list-mau-sac' => (new MauSacController())->danhSachMauSac(),
@@ -97,6 +107,12 @@ match ($act) {
     'them-quan-tri' => (new AdminTaiKhoanController())->postAddTaiKhoan(),
     'form-sua-quan-tri' => (new AdminTaiKhoanController())->formEditQuanTri(),
     'sua-quan-tri' => (new AdminTaiKhoanController())->postEditQuanTri(),
+
+    // route quản lý tài khoản khách hàng(quản trị viên)
+    'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
+    'form-sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
+    'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+    
 
     // route reset password
     'reset-password' => (new AdminTaiKhoanController())->resetPassword(),

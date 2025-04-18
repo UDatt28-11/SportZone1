@@ -83,6 +83,7 @@ class AdminSanPhamController
             if (empty($hinh_anh)) {
                 $errors['hinh_anh'] = 'Phải chọn ảnh sản phẩm';
             }
+
             if (empty($colors)) {
                 $errors['mau_sac'] = 'Phải chọn màu sắc';
             }
@@ -583,7 +584,27 @@ class AdminSanPhamController
 
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
 
+        $listMauSac = $this->modelSanPham->getAllMauCuaBienThe($id);
         // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+        
+        if ($_GET['act'] == 'lay-anh-theo-mau') {
+            $idSanPham = $_GET['id_san_pham'];
+            $idMauSac = $_GET['id_mau_sac'];
+            $listAnh = $this->modelSanPham->getGoiAnhMauSanPham($idSanPham, $idMauSac);
+            foreach ($listAnh as $anh) {
+                echo '<img style="width:100px; height:100px; margin:5px" src="' . BASE_URL . '../uploads/' . $anh['link_hinh_anh'] . '" />';
+            }
+            exit;
+        }
+        if ($_GET['act'] == 'lay-anh-theo-mau') {
+            $idSanPham = $_GET['id_san_pham'];
+            $idMauSac = $_GET['id_mau_sac'];
+            $listSize = $this->modelSanPham->getGoiSizeMauSanPham($idSanPham, $idMauSac);
+            foreach ($listSize as $Size) {
+                echo '<button type="button" onclick="setActiveSize(this)" class="btn btn-outline-dark">' . $Size['kich_co'] . '</button>';
+            }
+            exit;
+        }
 
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         // var_dump($listAnhSanPham);die;
@@ -595,6 +616,42 @@ class AdminSanPhamController
         }
     }
 
+    public function getListAnhTheoMau() {
+        $productId = $_GET['id_san_pham'];
+        $colorId = $_GET['id_mau_sac'];
+        $images = $this->modelSanPham->getGoiAnhMauSanPham($productId, $colorId);
+    
+        // Render view nhỏ chỉ chứa danh sách ảnh
+        include './views/sanpham/_partial_image_list.php';
+    }
+    public function getListSizeTheoMau() {
+        $productId = $_GET['id_san_pham'];
+        $colorId = $_GET['id_mau_sac'];
+        $listKichCo = $this->modelSanPham->getGoiSizeMauSanPham($productId, $colorId);
+    
+        // Render view nhỏ chỉ chứa danh sách ảnh
+        include './views/sanpham/_partial_size_list.php';
+    }
+    public function layThongTinBienThe() {
+        $idBienThe = $_GET['id_bien_the'];
+        $bienThe = $this->modelSanPham->getBienTheById($idBienThe);
+        // var_dump($bienThe);die;
+
+        if ($bienThe) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'don_gia' => $bienThe['don_gia'] ?? 0,
+                'ton_kho' => $bienThe['ton_kho'] ?? 0
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'error' => 'Không tìm thấy biến thể'
+            ]);
+        }
+        exit;
+    }
+    
     public function updateTrangThaiBinhLuan()
     {
         $id_binh_luan = $_POST['id_binh_luan'];

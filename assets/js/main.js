@@ -470,7 +470,7 @@ const continueCartIcon = document.querySelector(".modal-cart-main .continue");
 const addCartBtns = document.querySelectorAll(".add-cart-btn");
 
 const openModalCart = () => {
-  modalCartMain.classList.add("open");
+  // modalCartMain.classList.add("open");
 };
 
 const closeModalCart = () => {
@@ -2604,35 +2604,63 @@ if (document.querySelector('.tab-features-block.style-marketplace')) {
 
 // Featured product underwear
 const handleQuantity = () => {
-  const quantityBlock = document.querySelectorAll(".quantity-block");
+  const quantityBlocks = document.querySelectorAll(".quantity-block");
 
-  quantityBlock.forEach((item) => {
+  quantityBlocks.forEach((item) => {
     const minus = item.querySelector(".ph-minus");
     const plus = item.querySelector(".ph-plus");
-    const quantity = item.querySelector(".quantity");
+    const quantityInput = item.querySelector(".quantity");
 
-    if (Number(quantity.textContent) < 2) {
-      minus.classList.add("disabled");
+    // Thiết lập giá trị mặc định nếu không hợp lệ
+    if (!quantityInput.value || isNaN(quantityInput.value) || quantityInput.value < 1) {
+      quantityInput.value = 1;
     }
 
+    // Cập nhật trạng thái nút minus ban đầu
+    updateMinusButtonState();
+
+    // Xử lý sự kiện click nút giảm
     minus.addEventListener("click", (e) => {
-      e.stopPropagation()
-      if (Number(quantity.textContent) > 2) {
-        quantity.innerHTML = Number(quantity.innerHTML) - 1;
-        minus.classList.remove("disabled");
-      } else {
-        quantity.innerHTML = "1";
-        minus.classList.add("disabled");
+      e.preventDefault();
+      e.stopPropagation();
+      let currentVal = parseInt(quantityInput.value);
+      if (currentVal > 1) {
+        quantityInput.value = currentVal - 1;
+        updateMinusButtonState();
       }
     });
 
+    // Xử lý sự kiện click nút tăng
     plus.addEventListener("click", (e) => {
-      e.stopPropagation()
-      quantity.innerHTML = Number(quantity.innerHTML) + 1;
-      if (Number(quantity.textContent) >= 2) {
-        minus.classList.remove("disabled");
-      }
+      e.preventDefault();
+      e.stopPropagation();
+      let currentVal = parseInt(quantityInput.value);
+      quantityInput.value = currentVal + 1;
+      updateMinusButtonState();
     });
+
+    // Xử lý sự kiện input
+    quantityInput.addEventListener("input", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      let value = parseInt(e.target.value);
+      if (isNaN(value) || value < 1) {
+        e.target.value = 1;
+      }
+      updateMinusButtonState();
+    });
+
+    // Hàm cập nhật trạng thái nút minus
+    function updateMinusButtonState() {
+      const currentVal = parseInt(quantityInput.value);
+      if (currentVal <= 1) {
+        minus.classList.add("opacity-50", "cursor-not-allowed");
+        minus.classList.remove("cursor-pointer");
+      } else {
+        minus.classList.remove("opacity-50", "cursor-not-allowed");
+        minus.classList.add("cursor-pointer");
+      }
+    }
   });
 };
 
@@ -3600,3 +3628,79 @@ function removeOpen(index1) {
     }
   });
 }
+
+// Khởi tạo các chức năng khi trang web được tải
+document.addEventListener('DOMContentLoaded', function() {
+    // Khởi tạo menu mobile
+    if (menuMobileIcon) {
+        menuMobileIcon.addEventListener("click", openMenuMobile);
+        closeMenuMobileIcon.addEventListener("click", closeMenuMobile);
+    }
+
+    // Khởi tạo header fixed
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+            headerMain.classList.add("fixed");
+        } else {
+            headerMain.classList.remove("fixed");
+        }
+    });
+
+    // Khởi tạo chức năng tăng/giảm số lượng sản phẩm
+  //   document.querySelectorAll('.quantity-block').forEach(block => {
+  //     const input = block.querySelector('.quantity');
+  //     const minusBtn = block.querySelector('.ph-minus');
+  //     const plusBtn = block.querySelector('.ph-plus');
+  
+  //     minusBtn.addEventListener('click', () => {
+  //         let value = parseInt(input.value) || 1;
+  //         if (value > 1) {
+  //             input.value = value - 1;
+  //         }
+  //     });
+  
+  //     plusBtn.addEventListener('click', () => {
+  //         let value = parseInt(input.value) || 1;
+  //         input.value = value + 1;
+  //     });
+  // });
+  
+
+    // Khởi tạo chức năng thêm vào giỏ hàng
+    // const addToCartButtons = document.querySelectorAll('.add-cart-btn');
+    // addToCartButtons.forEach(button => {
+    //     button.addEventListener('click', function(e) {
+    //         e.preventDefault();
+    //         const form = this.closest('form');
+    //         const quantity = form.querySelector('.quantity').value;
+    //         const variant = form.querySelector('input[name="variant"]')?.value;
+            
+    //         // Thêm logic xử lý thêm vào giỏ hàng ở đây
+    //         console.log('Thêm vào giỏ hàng:', { quantity, variant });
+    //     });
+    // });
+
+    // Khởi tạo chức năng chuyển đổi ảnh sản phẩm
+    const mainImage = document.getElementById('main-image');
+    const imageList = document.getElementById('image-list');
+    
+    if (mainImage && imageList) {
+        imageList.addEventListener('click', function(e) {
+            const imgElement = e.target.closest('img');
+            if (imgElement) {
+                mainImage.src = imgElement.src;
+            }
+        });
+    }
+
+    const menuItems = document.querySelectorAll('.group');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const megaMenu = this.querySelector('.mega-menu');
+            if (megaMenu) {
+                megaMenu.classList.toggle('hidden');
+            }
+        });
+    });
+});

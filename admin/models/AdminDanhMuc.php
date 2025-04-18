@@ -91,4 +91,17 @@ class AdminDanhMuc {
             echo "lỗi" . $e->getMessage();
         }
     }
+
+    public function hasProducts($id) {
+        try {
+            $sql = 'SELECT COUNT(*) as product_count FROM san_phams WHERE danh_muc_id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            $result = $stmt->fetch();
+            return $result['product_count'] > 0; // Trả về true nếu có sản phẩm
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false;
+        }
+    }
 }

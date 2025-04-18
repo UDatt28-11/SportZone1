@@ -108,10 +108,74 @@
                                     </div>
 
                                 <?php } else { ?>
+                            <div
+                                class="product-tag text-button-uppercase text-white bg-red px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                Giảm Giá</div>
+                            <?php }  ?>
+                            <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
+                                <div
+                                    class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        Thêm Vào Yêu Thích
+                                    </div>
+                                    <i class="ph ph-heart text-lg"></i>
+                                </div>
+                                <div
+                                    class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        So Sánh Sản Phẩm
+                                    </div>
+                                    <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
+                                    <i class="ph ph-check-circle text-lg checked-icon"></i>
+                                </div>
+                            </div>
+                            <div class="product-img w-full h-full aspect-[3/4]">
+                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">
+                                    <img class="w-full h-full object-cover duration-700"
+                                        src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                    <img class="w-full h-full object-cover duration-700"
+                                        src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                </a>
+                            </div>
+                            <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
+                                <div
+                                    class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
+                                        Chi Tiết</a>
+                                </div>
+                                <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
+                                    class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                    Thêm Vào Giỏ
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-infor mt-4 lg:mb-7">
+                            <div class="product-sold sm:pb-4 pb-2">
+                                <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
+                                    <div class="progress-sold bg-red absolute left-0 top-0 h-full"></div>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
+                                    <div class="text-button-uppercase">
+                                        <span class="text-secondary2 max-sm:text-xs">Sold:
+                                        </span>
+                                        <span class="max-sm:text-xs">12</span>
+                                    </div>
+                                    <div class="text-button-uppercase">
+                                        <span class="text-secondary2 max-sm:text-xs">Available:
+                                        </span>
+                                        <span class="max-sm:text-xs">88</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-name text-title duration-300">
+                                <?= $sanPham['ten_san_pham'] ?>
+                            </div>
+                            <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
+                                <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
                                     <div
                                         class="product-tag text-button-uppercase text-white bg-red px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
                                         Giảm Giá</div>
-                                <?php }  ?>
+                                <?php ?>
                                 <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                     <div
                                         class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
@@ -565,12 +629,12 @@
     </div>
 </div>
 
-<!-- foooter -->
-
 <a class="scroll-to-top-btn" href="#top-nav"><i class="ph-bold ph-caret-up"></i></a>
 
 <!-- Modal -->
 <!-- <div class="modal-newsletter">
+<!-- slide show -->
+<div class="modal-newsletter">
     <div class="container h-full flex items-center justify-center w-full">
         <div class="modal-newsletter-main">
             <div class="main-content flex rounded-[20px] overflow-hidden w-full">
@@ -693,8 +757,10 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
+</div>
+<!-- Tìm kiếm sản phẩm -->
 <div class="modal-search-block">
     <div class="modal-search-main md:p-10 p-6 rounded-[32px]" style="padding-bottom: 500px;">
         <div class="form-search relative w-full">
@@ -707,128 +773,161 @@
             <div class="list-keyword flex items-center flex-wrap gap-3 mt-4">
                 <button
                     class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                    Dress
+                    Nike
                 </button>
                 <button
                     class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                    T-shirt
+                    Adidas
                 </button>
                 <button
                     class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                    Underwear
+                    Puma
                 </button>
                 <button
                     class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                    Top
+                    Fila
                 </button>
             </div>
         </div>
         <div class="list-recent mt-8">
             <div class="heading6">Sản Phẩm Đã Xem Gần Đây</div>
             <div
-                class="list-product pb-5 hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 mt-4">
-                <div class="product-item grid-type" data-item="14">
-                    <div class="product-main cursor-pointer block">
-                        <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                            <div
-                                class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
-                                New
-                            </div>
-                            <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
+                class="list-product four-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 md:mt-10 mt-6">
+                <!-- List four product -->
+                <?php foreach($listSanPham as $key => $sanPham) : ?>
+                <div class=" pb-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 mt-4">
+                    <div class="product-item grid-type" data-item="11">
+                        <div class="product-main cursor-pointer block">
+                            <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
+                                <?php 
+                                    $ngayNhap = new DateTime($sanPham['ngay_nhap']);
+                                    $ngayHienTai = new DateTime();
+                                    $tinhNgay = $ngayHienTai->diff($ngayNhap);
+                                    if($tinhNgay->days <= 7){
+                                        ?>
                                 <div
-                                    class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
-                                        Thêm Vào Yêu Thích
-                                    </div>
-                                    <i class="ph ph-heart text-lg"></i>
+                                    class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                    New
                                 </div>
-                                <div
-                                    class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
-                                        So Sánh Sản Phẩm
-                                    </div>
-                                    <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
-                                    <i class="ph ph-check-circle text-lg checked-icon"></i>
-                                </div>
-                            </div>
-                            <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700"
-                                    src="./assets/images/product/fashion/14-1.png" alt="img" />
-                                <img class="w-full h-full object-cover duration-700"
-                                    src="./assets/images/product/fashion/14-2.png" alt="img" />
-                            </div>
-                            <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div
-                                    class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
-                                    Xem Chi Tiết
-                                </div>
-                                <div
-                                    class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
-                                    Thêm Vào Giỏ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-infor mt-4 lg:mb-7">
-                            <div class="product-sold sm:pb-4 pb-2">
-                                <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
-                                    <div class="progress-sold bg-red absolute left-0 top-0 h-full"></div>
-                                </div>
-                                <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
-                                    <div class="text-button-uppercase">
-                                        <span class="text-secondary2 max-sm:text-xs">Sold:
-                                        </span>
-                                        <span class="max-sm:text-xs">12</span>
-                                    </div>
-                                    <div class="text-button-uppercase">
-                                        <span class="text-secondary2 max-sm:text-xs">Available:
-                                        </span>
-                                        <span class="max-sm:text-xs">88</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-name text-title duration-300">
-                                Faux-leather trousers
-                            </div>
-                            <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                <div class="color-item bg-black w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Black
-                                    </div>
-                                </div>
-                                <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Green
-                                    </div>
-                                </div>
-                                <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Red
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div
-                                class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
-                                <div class="product-price text-title">$28.00</div>
-                                <div class="product-origin-price caption1 text-secondary2">
-                                    <del>$36.00</del>
+                                <?php } else { ?>
+                                <div
+                                    class="product-tag text-button-uppercase text-white bg-red px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                    Giảm Giá</div>
+                                <?php }  ?>
+                                <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
+                                    <div
+                                        class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
+                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                            Thêm Vào Yêu Thích
+                                        </div>
+                                        <i class="ph ph-heart text-lg"></i>
+                                    </div>
+                                    <div
+                                        class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
+                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                            So Sánh Sản Phẩm
+                                        </div>
+                                        <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
+                                        <i class="ph ph-check-circle text-lg checked-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="product-img w-full h-full aspect-[3/4]">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">
+                                        <img class="w-full h-full object-cover duration-700"
+                                            src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                        <img class="w-full h-full object-cover duration-700"
+                                            src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
+                                    </a>
                                 </div>
                                 <div
                                     class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
                                     -20%
+                                    class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
+                                    <div
+                                        class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                        <a
+                                            href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
+                                            Chi Tiết</a>
+                                    </div>
+                                    <div
+                                        class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                        Thêm Vào Giỏ
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-infor mt-4 lg:mb-7">
+                                <div class="product-sold sm:pb-4 pb-2">
+                                    <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
+                                        <div class="progress-sold bg-red absolute left-0 top-0 h-full"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
+                                        <div class="text-button-uppercase">
+                                            <span class="text-secondary2 max-sm:text-xs">Sold:
+                                            </span>
+                                            <span class="max-sm:text-xs">12</span>
+                                        </div>
+                                        <div class="text-button-uppercase">
+                                            <span class="text-secondary2 max-sm:text-xs">Available:
+                                            </span>
+                                            <span class="max-sm:text-xs">88</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-name text-title duration-300">
+                                    <?= $sanPham['ten_san_pham'] ?>
+                                </div>
+                                <div
+                                    class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
+                                    <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
+                                        <div
+                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                            Red
+                                        </div>
+                                    </div>
+                                    <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
+                                        <div
+                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                            yellow
+                                        </div>
+                                    </div>
+                                    <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
+                                        <div
+                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                            green
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
+                                    <?php if($sanPham['gia_khuyen_mai']) { ?>
+                                    <div class="product-price text-title">
+                                        <?= formatPrice( $sanPham['gia_khuyen_mai']). 'VNĐ'; ?>
+                                    </div>
+                                    <div class="product-origin-price caption1 text-secondary2">
+                                        <del>><?= formatPrice($sanPham['gia_san_pham']) . 'VNĐ'; ?></del>
+                                    </div>
+                                    <?php } else {?>
+                                    <div class="product-price text-title">
+                                        <?= formatPrice( $sanPham['gia_san_pham']) . 'VNĐ'; ?>
+                                    </div>
+                                    <?php } ?>
+                                    <div
+                                        class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                        -20%
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
 </div>
-
+<!-- Danh sách yêu thích-->
 <div class="modal-wishlist-block">
     <div class="modal-wishlist-main py-6">
         <div class="heading px-6 pb-3 flex items-center justify-between relative">
@@ -848,7 +947,7 @@
         </div>
     </div>
 </div>
-
+<!-- Giỏ hàng  -->
 <div class="modal-cart-block">
     <div class="modal-cart-main flex">
         <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
@@ -1109,7 +1208,7 @@
         </div>
     </div>
 </div>
-
+<!-- Chưa biết trang nào -->
 <div class="modal-sizeguide-block">
     <div class="modal-sizeguide-main md:p-10 p-6 rounded-[32px]">
         <div
@@ -1228,7 +1327,7 @@
         </table>
     </div>
 </div>
-
+<!-- Chưa biết trang nào -->
 <div class="modal-compare-block">
     <div class="modal-compare-main py-6">
         <div
@@ -1252,7 +1351,7 @@
         </div>
     </div>
 </div>
-
+<!-- Chưa biết trang nào -->
 <div class="modal-quickview-block">
     <div class="modal-quickview-main py-6">
         <div class="flex h-full max-md:flex-col-reverse gap-y-6">
@@ -1403,10 +1502,10 @@
                                 <div class="quantity body1 font-semibold">1</div>
                                 <i class="ph-bold ph-plus cursor-pointer body1"></i>
                             </div>
-                            <div
+                            <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
                                 class="add-cart-btn button-main w-full text-center bg-white text-black border border-black">
                                 Thêm Vào Giỏ
-                            </div>
+                            </a>
                         </div>
                         <div class="button-block mt-5">
                             <a href="checkout.html" class="button-main w-full text-center">Buy It Now</a>
