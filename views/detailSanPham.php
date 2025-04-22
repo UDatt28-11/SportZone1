@@ -166,21 +166,20 @@ $sanPham = $productDetail; // Restore original data
                                     const colorId = button.getAttribute('data-color-id');
                                     const productId = button.getAttribute('data-product-id');
 
-                                // Load ảnh theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
-                                    .then(response => response.text())
-                                    .then(data => {
-                                        document.getElementById('image-list').innerHTML = data;
-                                    });
+                                    // Load ảnh theo màu
+                                    fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('image-list').innerHTML = data;
+                                        });
 
-                                // Load size theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
-                                    .then(response => response.text())
-                                    .then(data => {
-                                        document.getElementById('size-list').innerHTML = data;
-                                        // console.log(data);
-                                    });
-                            }
+                                    // Load size theo màu
+                                    fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('size-list').innerHTML = data;
+                                        });
+                                }
 
                                 function changeMainImage(imgElement) {
                                     const mainImage = document.getElementById('main-image');
@@ -315,7 +314,7 @@ $sanPham = $productDetail; // Restore original data
                          </div>
 
                         <!-- Nút Mua ngay -->
-                        <a href="checkout.html"
+                        <a href="#"
                             class="button-main px-5 py-3 text-center rounded-lg bg-black text-white w-full sm:flex-1 min-w-[160px]">
                             Mua ngay
                         </a>
@@ -541,7 +540,7 @@ $sanPham = $productDetail; // Restore original data
                         </div>
                         <div class="list-review mt-8">
                             <div class="heading flex items-center justify-between flex-wrap gap-4">
-                                <div class="heading4">03 Bình luận</div>
+                                <div class="heading4"><?= count($listBinhLuan)?> Bình luận</div>
                                 <div class="right flex items-center gap-3">
                                     <label for="select-filter" class="uppercase">Sắp xếp theo:</label>
                                     <div class="select-block relative">
@@ -583,11 +582,8 @@ $sanPham = $productDetail; // Restore original data
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="text-secondary2"><?= $binhLuan['ngay_dang']; ?></div>
-                                                <div class="text-secondary2">-</div>
-                                                <div class="text-secondary2">
-                                                    <span>Vàng</span> /
-                                                    <span>XL</span>
-                                                </div>
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -596,43 +592,21 @@ $sanPham = $productDetail; // Restore original data
                                     </div>
                                 </div>
                                 <div class="mt-3"><?= $binhLuan['noi_dung']; ?></div>
-                                <div class="action mt-3">
-                                    <div class="flex items-center gap-4">
-                                        <div class="like-btn flex items-center gap-1 cursor-pointer">
-                                            <i class="ph ph-hands-clapping text-lg"></i>
-                                            <div class="text-button">20</div>
-                                        </div>
-                                        <a href="#form-review"
-                                            class="reply-btn text-button text-secondary cursor-pointer hover:text-black">Trả
-                                            lời</a>
-                                    </div>
-                                </div>
+                                
                                 <?php endforeach ;?>
                             </div>
                         </div>
                         <div id="form-review" class="form-review pt-8">
                             <div class="heading4">Để lại bình luận</div>
-                            <form class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-6">
-                                <div class="name">
-                                    <input class="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username"
-                                        type="text" placeholder="Tên của bạn *" required />
-                                </div>
-                                <div class="mail">
-                                    <input class="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="email" type="email"
-                                        placeholder="Email của bạn *" required />
-                                </div>
+                            <form action="<?= BASE_URL . '?act=binh-luan'?>" method="post" class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-6">
+                                
+                                <input type="hidden" name="id_san_pham" value="<?=$sanPham['id']?>">
                                 <div class="col-span-full message">
                                     <textarea class="border border-line px-4 py-3 w-full rounded-lg" id="message"
-                                        name="message" rows="3" placeholder="Tin nhắn của bạn *" required></textarea>
-                                </div>
-                                <div class="col-span-full flex items-start -mt-2 gap-2">
-                                    <input type="checkbox" id="saveAccount" name="saveAccount" class="mt-1.5" />
-                                    <label class="" for="saveAccount">Lưu tên, email và website của tôi trong trình
-                                        duyệt
-                                        này cho lần bình luận sau.</label>
+                                        name="noi_dung" rows="3" placeholder="Tin nhắn của bạn *" required></textarea>
                                 </div>
                                 <div class="col-span-full sm:pt-3">
-                                    <button class="button-main bg-white text-black border border-black">Gửi Đánh
+                                    <button <?= $_SESSION['user_id'] ?? 'disabled' ?> class=" <?= $_SESSION['user_id'] ?? 'btn-disabled' ?> button-main bg-white text-black border border-black">Gửi Đánh
                                         Giá</button>
                                 </div>
                             </form>

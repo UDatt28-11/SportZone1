@@ -3,18 +3,166 @@
 class AdminDonHangController
 {
     public $modelDonHang;
+    public $modelSanPham;
 
     public function __construct()
     {
         $this->modelDonHang = new AdminDonHang();
+        $this->modelSanPham = new AdminSanPham();
     }
 
     public function danhSachDonHang()
     {
+        try {
+            // Lấy danh sách trạng thái
+            $trangThaiModel = new TrangThai();
+            $trangThaiList = $trangThaiModel->getAllTrangThai();
+            
+            // Lấy danh sách đơn hàng theo trạng thái được chọn
+            $trangThaiIds = [];
+            if (isset($_GET['trang_thai']) && is_array($_GET['trang_thai']) && !empty($_GET['trang_thai'])) {
+                $trangThaiIds = array_map('intval', $_GET['trang_thai']);
+            }
+            
+            $donHangModel = new AdminDonHang();
+            $listDonHang = $donHangModel->getDonHangByStatus($trangThaiIds);
+            
+            // Lấy thông tin chi tiết cho mỗi đơn hàng
+            foreach ($listDonHang as &$donHang) {
+                $donHang['chi_tiet'] = $donHangModel->getListSpDonHang($donHang['id']);
+            }
+            $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+            require_once 'views/donhang/listDonHang.php';
+        } catch (Exception $e) {
+            error_log("Lỗi trong danhSachDonHang: " . $e->getMessage());
+            $_SESSION['error'] = "Có lỗi xảy ra khi lấy danh sách đơn hàng";
+            header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
+            exit;
+        }
+    }
+    public function postEditStatus()  {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $_POST['id_don_hang'] ?? null;
+            $trang_thai_id = $_POST['trang_thai_id'] ?? null;
+            $yCH = $_POST['yeuCauHuy'] ?? 'n';
+            $return = true;
+        
+            if (!$id || !$trang_thai_id) {
+                $_SESSION['error'] = "Thiếu thông tin đơn hàng";
+                header("Location: ...");
+                exit;
+            }
+            $chiTiet = $this->modelDonHang->getListSpDonHang($id);
+            if($trang_thai_id == 2){
+                
+                
+                $duHang = true;
+                foreach($chiTiet as $item){
+                    $id_variant = intval($item['bien_the_id']);
+                    $soLuongHienTai = $this->modelSanPham->getBienTheById($id_variant);
 
-        $listDonHang = $this->modelDonHang->getAllDonHang();
+                    if(intval($soLuongHienTai['ton_kho']) < intval($item['so_luong'])){
+                        $duHang = false;
+                        break;
+                    }
+                }
 
-        require_once './views/donhang/listDonHang.php';
+                if(!$duHang){
+                    $_SESSION['error'] = "Không đủ hàng trong kho để xử lý đơn hàng";
+                    $return = false;
+                } else {
+                    // Trừ kho thật sự
+                    foreach($chiTiet as $item){
+                        $id_variant = intval($item['bien_the_id']);
+                        $soLuongHienTai = $this->modelSanPham->getBienTheById($id_variant);
+                        $soLuongMoi = intval($soLuongHienTai['ton_kho']) - intval($item['so_luong']);
+                        $this->modelSanPham->editSLBienThe($id_variant, $soLuongMoi);
+                    }
+                }
+
+                // die();
+            }
+
+            if($trang_thai_id == 13 || $yCH == "y"){
+                
+                // echo '<pre>'; var_dump($chiTiet); die;
+                foreach($chiTiet as $item){
+                    $soLuongHienTai = $this->modelSanPham->getBienTheById($item['bien_the_id']);
+                    $soLuongMoi = $soLuongHienTai['ton_kho'] + $item['so_luong'];
+                    $this->modelSanPham->editSLBienThe($item['bien_the_id'], $soLuongMoi);
+                }
+            }
+            
+            if($return == false){
+                $_SESSION['error'] = "Không đủ hàng trong kho để xử lý đơn hàng";
+                $redirect = $_SESSION['redirect_url'] ?? BASE_URL_ADMIN . '?act=don-hang';
+                unset($_SESSION['redirect_url']);
+                echo '
+                <script>
+                alert("'.$_SESSION['error'] .'");
+                window.location.href = "'. $redirect .'";
+                </script>';
+                
+                exit;
+            }else{
+                $this->modelDonHang->updateTrangThaiDonHang($id, $trang_thai_id);
+                $redirect = $_SESSION['redirect_url'] ?? BASE_URL_ADMIN . '?act=don-hang';
+                unset($_SESSION['redirect_url']);
+                echo '
+                <script>
+                alert("Đã cập nhật trạng thái đơn hàng ");
+                window.location.href = "'. $redirect .'";
+                </script>';
+                
+                exit;
+            }
+            
+        }
+        
+    }
+    public function cancel(){
+        try {
+            // Kiểm tra và lấy ID đơn hàng
+            $donHangId = isset($_GET['id_don_hang']) ? intval($_GET['id_don_hang']) : 0;
+            
+            if ($donHangId <= 0) {
+                throw new Exception("Không tìm thấy đơn hàng");
+            }
+
+            // Lấy thông tin đơn hàng
+            $donHang = $this->modelDonHang->getDonHangById($donHangId);
+
+            if (!$donHang) {
+                throw new Exception("Đơn hàng không tồn tại");
+            }
+            
+            // Kiểm tra xem đơn hàng có thuộc về người dùng hiện tại không
+            if ($donHang['tai_khoan_id'] != $_SESSION['user_id']) {
+                throw new Exception("Bạn không có quyền thực hiện thao tác này");
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if ($donHang['trang_thai_id'] != 1 && $donHang['trang_thai_id'] != 2) {
+                throw new Exception("Không thể hủy đơn hàng ở trạng thái này");
+            }
+
+            // Hủy đơn hàng (cập nhật trạng thái thành 11 - Đã hủy)
+            $result = $this->modelDonHang->updateTrangThaiDonHang($donHangId, 11);
+
+            if (!$result) {
+                throw new Exception("Không thể hủy đơn hàng");
+            }
+
+            $_SESSION['success'] = "Đã hủy đơn hàng thành công";
+            header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
+            exit();
+
+        } catch (Exception $e) {
+            error_log("Error in DonHangController::huyDonHang(): " . $e->getMessage());
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
+            exit();
+        }
     }
 
     public function detailDonHang()

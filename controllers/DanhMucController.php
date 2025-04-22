@@ -21,8 +21,8 @@ class DanhMucController {
             }
 
             // Lấy thông tin danh mục
-            $danhMuc = $this->danhMucModel->getDanhMucById($idDanhMuc);
-            if (!$danhMuc) {
+            $danhMucc = $this->danhMucModel->getDanhMucById($idDanhMuc);
+            if (!$danhMucc) {
                 throw new Exception("Danh mục không tồn tại");
             }
 

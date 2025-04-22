@@ -51,7 +51,9 @@
                             <td class="border border-gray-300 px-4 py-2 text-center">
                                 <input type="number" name="so_luong[<?= $item['bien_the_id'] ?>]" 
                                        value="<?= $item['so_luong'] ?>" min="1"
+                                       max="<?=$item['ton_kho']?>"
                                        class="w-16 border border-gray-300 rounded text-center focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                       
                             </td>
                             <td class="border border-gray-300 px-4 py-2 text-center">
                                 <?= number_format($item['don_gia'] * $item['so_luong'], 0, ',', '.') ?> đ
@@ -86,10 +88,23 @@
                             class="btn btn-warning bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
                         Cập nhật giỏ hàng
                     </button>
-                    <a href="<?= BASE_URL ?>?act=checkout" 
-                       class="btn btn-primary btn-payment-submit bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 ml-4">
-                        Thanh toán
-                    </a>
+                        <?php
+                        $isDisabled = false;
+                        foreach($listGioHang as $item){
+                            if ($item['ton_kho'] == 0) {
+                                $isDisabled = true;
+                                break;
+                            }
+                        }
+                        ?>
+                        
+                        <a href="<?= BASE_URL ?>?act=checkout"
+                           class="btn btn-primary btn-payment-submit bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 ml-4 <?= $isDisabled ? 'pointer-events-auto opacity-50' : '' ?>"
+                           <?= $isDisabled ? 'onclick="alert(\'Trong giỏ hàng có sản phẩm đã hết hàng. Vui lòng kiểm tra lại!\'); return false;"' : '' ?>>
+                            Thanh toán
+                        </a>
+                        
+
                 </div>
             </div>
         </form>

@@ -81,7 +81,7 @@ class GioHang{
             throw new Exception("Không thể kết nối cơ sở dữ liệu");
         }
 
-        $stmt = $this->conn->prepare("SELECT ctgh.*, sp.ten_san_pham, bt.don_gia
+        $stmt = $this->conn->prepare("SELECT ctgh.*, sp.ten_san_pham, bt.ton_kho , bt.don_gia
             FROM chi_tiet_gio_hangs ctgh
             JOIN bien_the_sp bt ON ctgh.bien_the_id = bt.id
             JOIN san_phams sp ON bt.sp_id = sp.id

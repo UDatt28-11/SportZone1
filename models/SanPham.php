@@ -65,6 +65,21 @@ class SanPham{
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function binhLuan($id_san_pham, $id_user , $noi_dung){
+        try {
+            $sql = 'INSERT INTO binh_luans (san_pham_id, tai_khoan_id, noi_dung) 
+                    VALUES (:id_san_pham, :id_user, :noi_dung)';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id_san_pham' => $id_san_pham,
+                ':id_user'     => $id_user,
+                ':noi_dung'    => $noi_dung
+            ]);
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    
     public function getListSanPhamDanhMuc($danh_muc_id){
         try {
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc

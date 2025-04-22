@@ -219,11 +219,11 @@
         <div class="heading3 text-center">Khám Phá Bộ Sưu Tập</div>
     </div>
     <div class="list-collection relative section-swiper-navigation md:mt-10 mt-6 sm:px-5 px-4">
-        <div class="swiper-button-prev lg:left-10 left-6"></div>
+        <!-- <div class="swiper-button-prev lg:left-10 left-6"></div> -->
         <div class="swiper swiper-collection h-full relative">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <a href="shop-breadcrumb1.html"
+                    <a href="http://localhost/SportZone1/?act=chi-tiet-san-pham&id_san_pham=45"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
                             <img src="./assets/images/collection/tenisImage.png" alt="" />
@@ -296,53 +296,16 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-button-next lg:right-10 right-6"></div>
+        <!-- <div class="swiper-button-next lg:right-10 right-6"></div> -->
     </div>
 </div>
 
-<div class="tab-features-block filter-product-block md:pt-20 pt-10">
-    <div class="container">
-        <div class="heading flex flex-col items-center text-center">
-            <div class="menu-tab bg-surface rounded-2xl">
-                <div class="menu flex items-center gap-2 p-1">
-                    <div class="indicator absolute top-1 bottom-1 bg-white rounded-full shadow-md duration-300">
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black active"
-                        data-item="best sellers">
-                        BÁN CHẠY
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black"
-                        data-item="on sale">
-                        SALE 50%
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black"
-                        data-item="new arrivals">
-                        MỚI NHẤT
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div
-            class="list-product six-product hide-product-sold relative section-swiper-navigation style-outline style-small-border md:mt-10 mt-6">
-            <div class="swiper-button-prev2 sm:left-10 left-6">
-                <i class="ph-bold ph-caret-left text-xl"></i>
-            </div>
-            <div class="swiper swiper-list-product h-full relative">
-                <div class="swiper-wrapper">
-                    <!-- List six product -->
-                </div>
-            </div>
-            <div class="swiper-button-next2 sm:right-10 right-6">
-                <i class="ph-bold ph-caret-right text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="banner-block style-one grid sm:grid-cols-2 gap-5 md:pt-20 pt-10">
-    <a href="shop-breadcrumb-img.html" class="banner-item relative block overflow-hidden duration-500">
+    <a href="http://localhost/SportZone1/?act=danh-muc&id=7" class="banner-item relative block overflow-hidden duration-500">
         <div class="banner-img">
-            <img src="./assets/images/banner/1.png" class="duration-1000" alt="img" />
+            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Section_Banner_888x600.jpg" class="duration-1000" alt="img" />
         </div>
         <div class="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
             <div class="heading2 text-white">BÁN CHẠY</div>
@@ -351,9 +314,9 @@
             </div>
         </div>
     </a>
-    <a href="shop-breadcrumb-img.html" class="banner-item relative block overflow-hidden duration-500">
+    <a href="http://localhost/SportZone1/?act=danh-muc&id=1" class="banner-item relative block overflow-hidden duration-500">
         <div class="banner-img">
-            <img src="./assets/images/banner/2.png" class="duration-1000" alt="img" />
+            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Active_women_1.jpg" class="duration-1000" alt="img" />
         </div>
         <div class="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
             <div class="heading2 text-white">MỚI NHẤT</div>
@@ -401,137 +364,7 @@
     </div>
 </div>
 
-<div class="testimonial-block md:pt-20 md:pb-16 pt-10 pb-8 md:mt-20 mt-10 bg-surface">
-    <div class="container">
-        <div class="heading3 text-center">Mọi người bình luận </div>
-        <div class="list-testimonial pagination-mt40 md:mt-10 mt-6">
-            <div class="swiper swiper-list-testimonial h-full relative">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Variety of Styles!</div>
-                                <div class="desc mt-2">
-                                    "Fantastic shop! Great selection, fair prices, and
-                                    friendly staff. Highly recommended. The quality of the
-                                    products is exceptional, and the prices are very
-                                    reasonable!"
-                                </div>
-                                <div class="text-button name mt-4">Lisa K.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Quality of Clothing!</div>
-                                <div class="desc mt-2">
-                                    "Anvouge's fashion collection is a game-changer! Their
-                                    unique and trendy pieces have completely transformed my
-                                    style. It's comfortable, stylish, and always on-trend."
-                                </div>
-                                <div class="text-button name mt-4">Elizabeth A.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Customer Service!</div>
-                                <div class="desc mt-2">
-                                    "I absolutely love this shop! The products are
-                                    high-quality and the customer service is excellent. I
-                                    always leave with exactly what I need and a smile on my
-                                    face."
-                                </div>
-                                <div class="text-button name mt-4">Christin H.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Quality of Clothing!</div>
-                                <div class="desc mt-2">
-                                    "I can't get enough of Anvouge's high-quality clothing.
-                                    It's comfortable, stylish, and always on-trend. The
-                                    products are high-quality and the customer service is
-                                    excellent."
-                                </div>
-                                <div class="text-button name mt-4">Emily G.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Customer Service!</div>
-                                <div class="desc mt-2">
-                                    "I love this shop! The products are always top-quality,
-                                    and the staff is incredibly friendly and helpful. They go
-                                    out of their way to make sure that I'm satisfied my
-                                    purchase."
-                                </div>
-                                <div class="text-button name mt-4">Carolina C.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="instagram-block md:pt-20 pt-10">
     <div class="container">
@@ -545,7 +378,7 @@
                     <div class="swiper-slide">
                         <a href="https://www.instagram.com/" target="_blank"
                             class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/0.png" alt="0"
+                            <img src="https://sneakerbardetroit.com/wp-content/uploads/2023/12/Anthony-Edwards-adidas-AE-1-Coral.jpeg" alt="0"
                                 class="h-full w-full duration-500 relative" />
                             <div
                                 class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
@@ -553,61 +386,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/1.png" alt="1"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/2.png" alt="2"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/3.png" alt="3"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/4.png" alt="4"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/5.png" alt="5"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -669,132 +448,7 @@
 
 <a class="scroll-to-top-btn" href="#top-nav"><i class="ph-bold ph-caret-up"></i></a>
 
-<!-- slide show -->
-<!-- <div class="modal-newsletter">
-    <div class="container h-full flex items-center justify-center w-full">
-        <div class="modal-newsletter-main">
-            <div class="main-content flex rounded-[20px] overflow-hidden w-full">
-                <div
-                    class="left lg:w-1/2 sm:w-2/5 max-sm:hidden bg-green flex flex-col items-center justify-center gap-5 py-14">
-                    <div class="text-xs font-semibold uppercase text-center">
-                        Ưu Đãi Đặc Biệt
-                    </div>
-                    <div
-                        class="lg:text-[70px] text-4xl lg:leading-[78px] leading-[42px] font-bold uppercase text-center">
-                        NGÀY <br /> THỨ SÁU
-                    </div>
-                    <div class="text-button-uppercase text-center">
-                        KHÁCH HÀNG MỚI TIẾT KIỆM<span class="text-red">30%</span> <br>VỚI MÃ
-                        GIẢM GIÁ
-                    </div>
-                    <div class="text-button-uppercase text-red bg-white py-2 px-4 rounded-lg">
-                        GET20off
-                    </div>
-                    <div class="button-main w-fit bg-black text-white hover:bg-white uppercase">
-                        COPY NGAY
-                    </div>
-                </div>
-                <div class="right lg:w-1/2 sm:w-3/5 w-full bg-white sm:pt-10 sm:pl-10 max-sm:p-6 relative">
-                    <div
-                        class="close-newsletter-btn w-10 h-10 flex items-center justify-center border border-line rounded-full absolute right-5 top-5 cursor-pointer">
-                        <i class="ph-bold ph-x text-xl"></i>
-                    </div>
-                    <div class="heading5 pb-5">CÓ THỂ BẠN CŨNG THÍCH</div>
-                    <div class="list overflow-x-auto sm:pr-6">
-                        <div class="product-item item pb-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="1">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/1-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price caption1 text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="2">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/2-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price caption1 text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="3">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/3-3.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price caption1 text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3" data-item="4">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/4-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price caption1 text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- Tìm kiếm sản phẩm -->
+
 <div class="modal-search-block">
     <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
         <div class="form-search relative w-full">

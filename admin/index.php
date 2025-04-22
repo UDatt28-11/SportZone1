@@ -20,6 +20,7 @@ require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBaoCaoThongKe.php';
+require_once './models/AdminTrangThai.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
@@ -99,8 +100,10 @@ match($act){
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
     'form-sua-don-hang' => (new AdminDonHangController())->formEditDonHang(),
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
+    'xac-nhan-don-hang' => (new AdminDonHangController())->postEditStatus(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
     // 'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),
+    'cancel' => (new AdminDonHangController())->cancel(),
 
     // route tài khoản
     'list-tai-khoan-quan-tri' => (new AdminTaiKhoanController())->danhSachQuanTri(),

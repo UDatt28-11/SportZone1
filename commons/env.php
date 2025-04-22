@@ -4,6 +4,8 @@
 // Khai báo dưới dạng HẰNG SỐ để không phải dùng $GLOBALS
 
 define('BASE_URL'       , 'http://localhost/SportZone1/');
+define('PAY_URL', 'https://tall-experts-own.loca.lt/SportZone1/');
+
 
 // Đường dẫn vào phần admin
 define('BASE_URL_ADMIN'       , 'http://localhost/SportZone1/admin/'); 

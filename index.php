@@ -19,6 +19,8 @@ require_once './controllers/CheckoutController.php';
 require_once './controllers/DonHangController.php';
 require_once './controllers/DanhMucController.php';
 require_once './controllers/SearchController.php';
+// require_once './controllers/ThanhToanController.php';
+require_once './controllers/PayOSController.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -50,6 +52,7 @@ match($act) {
     '/' => (new HomeController())->home(), // route trang chủ
     
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
+    'binh-luan' =>(new HomeController())->binhLuan(),
     'gio-hang' => (new HomeController())->formGioHang(),
     'lay-anh-theo-mau' => (new HomeController())->getListAnhTheoMau(),
     'lay-size-theo-mau' => (new HomeController())->getListSizeTheoMau(),
@@ -78,11 +81,23 @@ match($act) {
     'don-hang' => (new DonHangController())->index(),
     'huy-don-hang' => (new DonHangController())->huyDonHang(),
     'yeu-cau-huy-don' => (new DonHangController())->yeuCauHuyDon(),
+    'thanh-toan-thanh-cong'=> (new DonHangController())->thanhToanThanhCong(),
+    'nhan-hang' => (new DonHangController())->nhanHang(),
+    'hoan-hang' =>(new DonHangController())->hoanHang(),
+    
 
     'danh-muc' => (new DanhMucController())->index(),
+    'blog' => require_once "./views/blog.php",
+    'about' => require_once "./views/about.php",
     
     // Route tìm kiếm
     'search' => (new SearchController())->search(),
+
+
+
+    // Thêm route cho thanh toán PayOS
+    'thanh-toan-payos' => (new PaymentController())->createPayment(),
+    // 'payos-callback' => (new PayOSController())->callback(),
 
     default => (new HomeController())->home()
 };

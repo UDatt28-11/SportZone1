@@ -121,6 +121,75 @@ require_once './views/layout/menu.php';
                             <i class="bi bi-exclamation-triangle me-1"></i>
                             Yêu cầu hủy
                         </button>
+                        <div class="">
+                        <?php if($donHang['phuong_thuc_thanh_toan_id'] == 1) {?> <small>*bạn vẫn có thể thanh toán trước</small> <?php };?> 
+                            <a href="<?= BASE_URL ?>?act=thanh-toan-payos&don_hang_id=<?= $donHang['id'] ?>" 
+                               class="btn btn-success">
+                               
+                                <i class="fas fa-credit-card"></i> Thanh toán PayOS
+                            </a>
+                            
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 3): ?>
+                        <div class="">
+                            <?php if($donHang['phuong_thuc_thanh_toan_id'] == 1) {?> <small>*bạn vẫn có thể thanh toán trước</small> <?php };?>                            <a href="<?= BASE_URL ?>?act=thanh-toan-payos&don_hang_id=<?= $donHang['id'] ?>" 
+                               class="btn btn-success">
+                               
+                                <i class="fas fa-credit-card"></i> Thanh toán PayOS
+                            </a>
+                            
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 4): ?>
+                        <span class="text-success">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Đã thanh toán, người bán đang chuẩn bị hàng
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 5): ?>
+                        <span class="text-info">
+                            <i class="bi bi-box-seam me-1"></i>
+                            Hàng đang được chuẩn bị, sẽ vận chuyển sớm nhất có thể
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 6): ?>
+                        <span class="text-info">
+                            <i class="bi bi-truck me-1"></i>
+                            Hàng đang được vận chuyển, sẽ giao hàng sớm nhất có thể
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 7): ?>
+                        <button onclick="nhanHang(<?= $donHang['id'] ?>)" 
+                            class="btn btn-success">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Đã nhận được hàng
+                        </button>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 8): ?>
+                        <button onclick="hoanHang(<?= $donHang['id'] ?>)" 
+                            class="btn btn-warning">
+                            <i class="bi bi-arrow-return-left me-1"></i>
+                            Hoàn hàng
+                        </button>
+                        <button onclick="danhGia(<?= $donHang['id'] ?>)" 
+                            class="btn btn-success">
+                            <i class="bi bi-star me-1"></i>
+                            Đánh giá
+                        </button>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 9): ?>
+                        <button onclick="danhGia(<?= $donHang['id'] ?>)" 
+                            class="btn btn-success">
+                            <i class="bi bi-star me-1"></i>
+                            Đánh giá
+                        </button>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 10): ?>
+                        <span class="text-warning">
+                            <i class="bi bi-clock-history me-1"></i>
+                            Chờ xác nhận hoàn hàng
+                        </span>
                     <?php endif; ?>
                     <?php if ($donHang['trang_thai_id'] == 12): ?>
                         <span class="badge bg-warning text-dark">
@@ -132,6 +201,12 @@ require_once './views/layout/menu.php';
                         <span class="badge bg-warning text-dark">
                             <i class="bi bi-clock-history me-1"></i>
                             Đã hủy
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($donHang['trang_thai_id'] == 13): ?>
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-clock-history me-1"></i>
+                            Đã hoàn hàng, vận chuyển sẽ liên lạc lại với bạn qua số điện thoại trên đơn, nếu thông tin thay đổi vui lòng liên hệ với chúng tôi
                         </span>
                     <?php endif; ?>
                 </div>
@@ -202,6 +277,38 @@ function yeuCauHuyDon(donHangId) {
         const url = new URL('<?= BASE_URL ?>');
         url.searchParams.append('act', 'yeu-cau-huy-don');
         url.searchParams.append('id', donHangId);
+        console.log(url.toString());
+
+        
+        // Chuyển hướng
+        window.location.href = url.toString();
+    }
+}
+function nhanHang(donHangId) {
+    if (confirm('Bạn đã nhận được hàng?')) {
+        // Thêm debug để kiểm tra
+        console.log(' đơn hàng ID:', donHangId);
+        
+        // Tạo URL với tham số
+        const url = new URL('<?= BASE_URL ?>');
+        url.searchParams.append('act', 'nhan-hang');
+        url.searchParams.append('id_don_hang', donHangId);
+        console.log(url.toString());
+
+        
+        // Chuyển hướng
+        window.location.href = url.toString();
+    }
+}
+function hoanHang(donHangId) {
+    if (confirm('Bạn có chắc chắn muốn hoàn đơn hàng này?')) {
+        // Thêm debug để kiểm tra
+        console.log(' đơn hàng ID:', donHangId);
+        
+        // Tạo URL với tham số
+        const url = new URL('<?= BASE_URL ?>');
+        url.searchParams.append('act', 'hoan-hang');
+        url.searchParams.append('id_don_hang', donHangId);
         console.log(url.toString());
 
         

@@ -71,7 +71,7 @@ class DonHangController {
             }
 
             // Kiểm tra trạng thái đơn hàng
-            if ($donHang['trang_thai_id'] != 1 && $donHang['trang_thai_id'] != 3) {
+            if ($donHang['trang_thai_id'] != 1 && $donHang['trang_thai_id'] != 2) {
                 throw new Exception("Không thể hủy đơn hàng ở trạng thái này");
             }
 
@@ -134,6 +134,138 @@ class DonHangController {
 
         } catch (Exception $e) {
             error_log("Error in DonHangController::yeuCauHuyDon(): " . $e->getMessage());
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+        }
+    }
+    public function thanhToanThanhCong() {
+        // print_r($_SESSION['user_id']);die;
+        try {
+            // Kiểm tra và lấy ID đơn hàng
+            $donHangId = isset($_GET['id_don_hang']) ? intval($_GET['id_don_hang']) : 0;
+            
+            if ($donHangId <= 0) {
+                throw new Exception("Không tìm thấy đơn hàng");
+            }
+
+            // Lấy thông tin đơn hàng
+            $donHang = $this->donHangModel->getDonHangById($donHangId);
+
+            if (!$donHang) {
+                throw new Exception("Đơn hàng không tồn tại");
+            }
+            
+            // Kiểm tra xem đơn hàng có thuộc về người dùng hiện tại không
+            if ($donHang['tai_khoan_id'] != $_SESSION['user_id']) {
+                throw new Exception("Bạn không có quyền thực hiện thao tác này");
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if ($donHang['trang_thai_id'] != 2 && $donHang['trang_thai_id'] != 3) {
+                throw new Exception("Không thể thanh toán đơn hàng ở trạng thái này");
+            }
+
+            $result = $this->donHangModel->capNhatTrangThaiDonHang($donHangId, 4);
+
+            if (!$result) {
+                throw new Exception("Không thể thanh toán đơn hàng");
+            }
+
+            $_SESSION['success'] = "Đã thanh toán đơn hàng thành công";
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+
+        } catch (Exception $e) {
+            error_log("Error in DonHangController::huyDonHang(): " . $e->getMessage());
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+        }
+    }
+    public function nhanHang() {
+        // print_r($_SESSION['user_id']);die;
+        try {
+            // Kiểm tra và lấy ID đơn hàng
+            $donHangId = isset($_GET['id_don_hang']) ? intval($_GET['id_don_hang']) : 0;
+            
+            if ($donHangId <= 0) {
+                throw new Exception("Không tìm thấy đơn hàng");
+            }
+
+            // Lấy thông tin đơn hàng
+            $donHang = $this->donHangModel->getDonHangById($donHangId);
+
+            if (!$donHang) {
+                throw new Exception("Đơn hàng không tồn tại");
+            }
+            
+            // Kiểm tra xem đơn hàng có thuộc về người dùng hiện tại không
+            if ($donHang['tai_khoan_id'] != $_SESSION['user_id']) {
+                throw new Exception("Bạn không có quyền thực hiện thao tác này");
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if ($donHang['trang_thai_id'] != 7) {
+                throw new Exception("Không thể xác nhận đơn hàng ở trạng thái này");
+            }
+
+            $result = $this->donHangModel->capNhatTrangThaiDonHang($donHangId, 8);
+
+            if (!$result) {
+                throw new Exception("Không thể xác nhận đơn hàng");
+            }
+
+            $_SESSION['success'] = "Đã xác nhận đơn hàng thành công";
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+
+        } catch (Exception $e) {
+            error_log("Error in DonHangController::huyDonHang(): " . $e->getMessage());
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+        }
+    }
+    public function hoanHang() {
+        // print_r($_SESSION['user_id']);die;
+        try {
+            // Kiểm tra và lấy ID đơn hàng
+            $donHangId = isset($_GET['id_don_hang']) ? intval($_GET['id_don_hang']) : 0;
+            
+            if ($donHangId <= 0) {
+                throw new Exception("Không tìm thấy đơn hàng");
+            }
+
+            // Lấy thông tin đơn hàng
+            $donHang = $this->donHangModel->getDonHangById($donHangId);
+
+            if (!$donHang) {
+                throw new Exception("Đơn hàng không tồn tại");
+            }
+            
+            // Kiểm tra xem đơn hàng có thuộc về người dùng hiện tại không
+            if ($donHang['tai_khoan_id'] != $_SESSION['user_id']) {
+                throw new Exception("Bạn không có quyền thực hiện thao tác này");
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if ($donHang['trang_thai_id'] != 8) {
+                throw new Exception("Không thể hoàn đơn hàng ở trạng thái này");
+            }
+
+            $result = $this->donHangModel->capNhatTrangThaiDonHang($donHangId, 10);
+
+            if (!$result) {
+                throw new Exception("Không thể hoàn đơn hàng");
+            }
+
+            $_SESSION['success'] = "Đã hoàn đơn hàng thành công";
+            header('Location: ' . BASE_URL . '?act=don-hang');
+            exit();
+
+        } catch (Exception $e) {
+            error_log("Error in DonHangController::huyDonHang(): " . $e->getMessage());
             $_SESSION['error'] = $e->getMessage();
             header('Location: ' . BASE_URL . '?act=don-hang');
             exit();

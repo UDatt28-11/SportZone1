@@ -73,7 +73,7 @@ $soLuongHangTrongGio = initSoLuongHangTrongGio();
                                 </a>
                             </li>
                             <li class="h-full">
-                                <a href="<?= BASE_URL ?>"
+                                <a href="<?= BASE_URL .'?act=about' ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Giới Thiệu
                                 </a>
@@ -100,7 +100,7 @@ $soLuongHangTrongGio = initSoLuongHangTrongGio();
 
 
                             <li class="h-full relative">
-                                <a href="<?= BASE_URL ?>"
+                                <a href="<?= BASE_URL .'?act=blog' ?>" 
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Tin Tức
                                 </a>

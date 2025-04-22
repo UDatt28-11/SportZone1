@@ -6,7 +6,7 @@
         ?>
         <div class="mt-3 btn-group btn-size-group">
             <button type="button"
-                class="btn btn-outline-dark <?= $kichCo['ton_kho'] ? '' : 'disabled' ?>"
+                class="btn btn-outline-dark <?= $kichCo['ton_kho'] ? '' : 'btn-disabled disabled' ?>"
                 <?= $kichCo['ton_kho'] ? 'onclick="setActiveSize(this)"' : 'disabled' ?>
                 data-bienthe-id="<?= $kichCo['id'] ?>">
                 <?= $kichCo['kich_co'] ?>

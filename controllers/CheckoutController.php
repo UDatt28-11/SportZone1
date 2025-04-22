@@ -33,7 +33,6 @@ class CheckoutController {
             $phuongThucThanhToan = [
                 ['id' => 1, 'ten' => 'Thanh toán khi nhận hàng (COD)'],
                 ['id' => 2, 'ten' => 'Chuyển khoản ngân hàng'],
-                ['id' => 3, 'ten' => 'Ví điện tử']
             ];
 
             // Tính tổng tiền
@@ -109,22 +108,11 @@ class CheckoutController {
                     break;
 
                 case 2: // Chuyển khoản ngân hàng
-                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '3');
-                    $_SESSION['payment_info'] = [
-                        'bank_name' => 'Vietcombank',
-                        'account_number' => '1234567890',
-                        'account_name' => 'SportZone',
-                        'amount' => $tongTien,
-                        'order_id' => $donHangId
-                    ];
-                    header('Location: ' . BASE_URL . '?act=thanh-toan-chuyen-khoan');
-                    break;
-
-                case 3: // Ví điện tử
-                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '3');
-                    $_SESSION['success'] = 'Đặt hàng thành công! Vui lòng thanh toán qua ví điện tử.';
+                    $this->gioHangModel->capNhatTrangThaiDonHang($donHangId, '1');
+                    $_SESSION['success'] = 'Đặt hàng thành công! Vui lòng kiểm tra tài khoản ngân hàng của bạn để hoàn tất thanh toán.';
                     header('Location: ' . BASE_URL . '?act=order-confirmation&id=' . $donHangId);
                     break;
+
 
                 default:
                     throw new Exception('Phương thức thanh toán không hợp lệ');
