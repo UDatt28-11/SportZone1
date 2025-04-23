@@ -4,12 +4,14 @@ class AdminSanPhamController
 {
     public $modelSanPham;
     public $modelDanhMuc;
+    public $modelDonHang;
     public $modelMau;
     public $modelSize;
 
     public function __construct()
     {
         $this->modelSanPham = new AdminSanPham();
+        $this->modelDonHang = new AdminDonHang();
         $this->modelDanhMuc = new AdminDanhMuc();
         $this->modelMau = new Color();
         $this->modelSize = new Size();
@@ -423,8 +425,8 @@ class AdminSanPhamController
             if (empty($trang_thai)) {
                 $errors['trang_thai'] = 'trạng thái sản phẩm phải chọn';
             }
-
-            $_SESSION['error'] = $errors;
+            
+            
             // var_dump($errors);die;
 
             // logic sửa ảnh 
@@ -463,6 +465,7 @@ class AdminSanPhamController
             } else {
                 // Trả về form và lỗi
                 // Đặt chỉ thị xóa session sau khi hiển thị form 
+                $_SESSION['error'] = $errors;
                 $_SESSION['flash'] = true;
 
                 header("Location: " . BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $san_pham_id);
@@ -545,8 +548,28 @@ class AdminSanPhamController
 
     public function deleteSanPham()
     {
-        $id = $_GET['id_san_pham'];
-        $sanPham = $this->modelSanPham->getDetailSanPham($id);
+
+
+        $id = $_GET['id_san_pham'] ?? null;
+
+        if (!$id) {
+            $_SESSION['error'] = 'Không xác định được sản phẩm cần xử lý.';
+            // Có thể redirect hoặc return ở đây
+            return;
+        }
+
+        $sanPhamInDon = $this->modelDonHang->getDonHangByAPId($id);
+        // var_dump($sanPhamInDon);die;
+
+        if (empty($sanPhamInDon)) {
+            $sanPham = $this->modelSanPham->getDetailSanPham($id);
+            // Tiếp tục xử lý với $sanPham
+        } else {
+            $_SESSION['error'] = 'Sản phẩm này không thể xóa vì đã được đặt hàng.';
+            // Có thể redirect hoặc hiển thị thông báo lỗi
+        }
+
+        
 
         // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
 

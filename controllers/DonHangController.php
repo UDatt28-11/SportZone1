@@ -31,12 +31,12 @@ class DonHangController {
             }
 
             // Lấy thông tin chi tiết cho mỗi đơn hàng
-            foreach ($donHangList as &$donHang) {
-                $chiTiet = $this->donHangModel->getChiTietDonHang($donHang['id']);
+            foreach ($donHangList as &$donHangCT) {
+                $chiTiet = $this->donHangModel->getChiTietDonHang($donHangCT['id']);
                 if ($chiTiet === false) {
-                    throw new Exception("Không thể lấy chi tiết đơn hàng #" . $donHang['id']);
+                    throw new Exception("Không thể lấy chi tiết đơn hàng #" . $donHangCT['id']);
                 }
-                $donHang['chi_tiet'] = $chiTiet;
+                $donHangCT['chi_tiet'] = $chiTiet;
             }
 
             // Hiển thị view

@@ -207,7 +207,7 @@ $sanPham = $productDetail; // Restore original data
                             <div class="caption1 size-guide text-red underline cursor-pointer">Hướng dẫn kích thước</div>
                         </div>
                         <div class="list-size flex items-center gap-4 mt-3">
-                            <div id="size-list" class="btn-size-group flex items-center gap-4">
+                            <div id="size-list" class="btn-size-group items-center">
                                 <!-- Các nút size sẽ được render vào đây -->
                             </div>
                         </div>

@@ -158,6 +158,7 @@ class HomeController{
             if (is_array($user)) {
                 // Đăng nhập thành công
                 $_SESSION['user'] = $user;
+                $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['chuc_vu_id'] = $user['chuc_vu_id'];
                 
@@ -287,6 +288,7 @@ class HomeController{
                 // Lưu user nếu cần
                 $_SESSION['user'] = $user;
                 $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_email'] = $user['email'];
                 $_SESSION['chuc_vu_id'] = $user['chuc_vu_id'];
             
                 // Hiển thị thông báo và chuyển hướng sau khi đăng ký thành công

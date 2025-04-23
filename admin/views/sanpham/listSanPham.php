@@ -31,6 +31,22 @@
                                 <button class="btn btn-success">Thêm sản phẩm mới</button>
                             </a>
                         </div>
+                        <?php if (isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger">
+                            <?php 
+                            if (is_array($_SESSION['error'])) {
+                                // Hiển thị từng phần tử của mảng
+                                foreach ($_SESSION['error'] as $error) {
+                                    echo htmlspecialchars($error);
+                                }
+                            } else {
+                                // Hiển thị chuỗi lỗi
+                                echo htmlspecialchars($_SESSION['error']);
+                            }
+                            ?>
+                        </div>
+                        <?php unset($_SESSION['error']); ?>
+                        <?php endif; ?>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -50,7 +66,7 @@
                                     <?php foreach ($listSanPham as $key => $sanPham) : ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $sanPham['ten_san_pham']; var_dump($sanPham['hinh_anh'])?></td>
+                                        <td><?= $sanPham['ten_san_pham'];?></td>
                                         <td>
                                             <img src="<?= BASE_URL . $sanPham['hinh_anh'];  ?>" style="width: 100px"
                                                 alt="" onerror="this.onerror=null; this.src=''">

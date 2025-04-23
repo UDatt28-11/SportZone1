@@ -122,7 +122,7 @@ class AdminDonHangController
     }
     public function cancel(){
         try {
-            // Kiểm tra và lấy ID đơn hàng
+            // Kiểm tra và lấy ID đơn hàngf1
             $donHangId = isset($_GET['id_don_hang']) ? intval($_GET['id_don_hang']) : 0;
             
             if ($donHangId <= 0) {

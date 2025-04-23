@@ -7,7 +7,7 @@ if (empty($gioHang)) {
 
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
-
+<br><br><br><br>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
@@ -15,37 +15,37 @@ if (empty($gioHang)) {
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Thông tin thanh toán</h4>
                 </div>
-                <div class="card-body">
+                <div class="row card-body">
                     <form action="<?php echo BASE_URL; ?>?act=process-payment" method="POST" id="checkoutForm">
-                        <div class="mb-3">
-                            <label for="ten_nguoi_nhan" class="form-label">Họ tên người nhận</label>
+                        <div class=" form-group">
+                            <label for="ten_nguoi_nhan" class="form-label">Họ tên người nhận</label><br>
                             <input type="text" class="form-control" id="ten_nguoi_nhan" name="ten_nguoi_nhan" 
                                 value="<?php echo $userInfo['ho_ten'] ?? ''; ?>" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="email_nguoi_nhan" class="form-label">Email</label>
+                        <div class=" form-group">
+                            <label for="email_nguoi_nhan" class="form-label">Email</label><br>
                             <input type="email" class="form-control" id="email_nguoi_nhan" name="email_nguoi_nhan" 
                                 value="<?php echo $userInfo['email'] ?? ''; ?>" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="sdt_nguoi_nhan" class="form-label">Số điện thoại</label>
+                        <div class=" form-group">
+                            <label for="sdt_nguoi_nhan" class="form-label">Số điện thoại</label><br>
                             <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan" 
                                 value="<?php echo $userInfo['so_dien_thoai'] ?? ''; ?>" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="dia_chi_nguoi_nhan" class="form-label">Địa chỉ nhận hàng</label>
+                        <div class=" form-group">
+                            <label for="dia_chi_nguoi_nhan" class="form-label">Địa chỉ nhận hàng</label><br>
                             <textarea class="form-control" id="dia_chi_nguoi_nhan" name="dia_chi_nguoi_nhan" rows="3" required></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="ghi_chu" class="form-label">Ghi chú</label>
+                        <div class=" form-group">
+                            <label for="ghi_chu" class="form-label">Ghi chú</label><br>
                             <textarea class="form-control" id="ghi_chu" name="ghi_chu" rows="3"></textarea>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="">
                             <label class="form-label">Phương thức thanh toán</label>
                             <div class="list-group">
                                 <?php foreach ($phuongThucThanhToan as $pttt): ?>
@@ -63,7 +63,11 @@ if (empty($gioHang)) {
                 </div>
             </div>
         </div>
-
+        <style>
+            .form-control{
+                width: 1194px !important;
+            }
+        </style>
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">

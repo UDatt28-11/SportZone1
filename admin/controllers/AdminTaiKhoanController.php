@@ -185,7 +185,7 @@ public function resetPassword(){
             if (empty($trang_thai)) {
                 $errors['gioi_tinh'] = 'Vui lòng chọn trạng thái tài khoản';
             }
-            $_SESSION['error'] = $errors;
+            
             // Nếu ko có lỗi thì tiến hành thêm tai khoản
             if (empty($errors)) {
                
@@ -203,6 +203,7 @@ public function resetPassword(){
                 exit();
             } else {
                 // Trả về form và lỗi
+                $_SESSION['error'] = $errors;
                 $_SESSION['flash']= true;
                 header("Location: " . BASE_URL_ADMIN . '?act=form-sua-khach-hang&id_khach_hang='.$khach_hang_id);
                 exit();
@@ -230,9 +231,10 @@ public function resetPassword(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // lấy email và pass gửi lên từ form 
                 $email = $_POST['email'];
+                // var_dump($email);die;
                 $password = $_POST['password'];
                 
-                // var_dump($email);die;
+                
     
                 // Xử lý kiểm tra thông tin đăng nhập
                 $user = $this->modelTaiKhoan->checkLogin($email, $password);
@@ -273,7 +275,8 @@ public function resetPassword(){
     }
 
     public function formEditCaNhanQuanTri(){
-        $email = $_SESSION['user'];
+        $email = $_SESSION['user_email'];
+        // var_dump($_SESSION['user']);
         $thongTin = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
         // var_dump($thongTin);die();
         require_once './views/taikhoan/canhan/editCaNhan.php';

@@ -233,7 +233,7 @@ $soLuongHangTrongGio = initSoLuongHangTrongGio();
                             <div
                                 class="list-product four-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 md:mt-10 mt-6">
                                 <!-- List four product -->
-                                <?php foreach($listSanPham as $key => $sanPham) : ?>
+                                <?php foreach(array_slice($listSanPham, 0, 4) as $key => $sanPham): ?>
                                 <div class=" pb-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 mt-4">
                                     <div class="product-item grid-type" data-item="11">
                                         <div class="product-main cursor-pointer block">

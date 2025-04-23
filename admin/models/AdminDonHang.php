@@ -186,4 +186,22 @@ class AdminDonHang
             return null;
         }
     }
+    public function getDonHangByAPId($sanPhamId) {
+        try {
+            $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.ten_san_pham, san_phams.hinh_anh
+            FROM chi_tiet_don_hangs
+            INNER JOIN bien_the_sp ON chi_tiet_don_hangs.bien_the_id = bien_the_sp.id
+            INNER JOIN san_phams ON bien_the_sp.sp_id = san_phams.id
+            WHERE san_phams.id = :id
+            ';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $sanPhamId]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }

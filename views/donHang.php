@@ -19,7 +19,7 @@ require_once './views/layout/menu.php';
 
     <?php if (isset($_SESSION['error'])): ?>
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
-            <?= $_SESSION['error'] ?>
+            <?= $_SESSION['error'] ?? '' ?>
             <?php unset($_SESSION['error']); ?>
         </div>
     <?php endif; ?>
@@ -30,7 +30,10 @@ require_once './views/layout/menu.php';
         </div>
     <?php else: ?>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <?php foreach ($donHangList as $donHang): ?>
+    <?php
+    // echo '<pre>';
+    // var_dump($donHangList);
+    foreach ($donHangList as $donHang): ?>
         <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden flex flex-col h-full">
             <!-- Header -->
             <div class="bg-gray-100 px-5 py-4 border-b">
