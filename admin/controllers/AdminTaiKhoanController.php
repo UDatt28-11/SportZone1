@@ -185,7 +185,7 @@ public function resetPassword(){
             if (empty($trang_thai)) {
                 $errors['gioi_tinh'] = 'Vui lòng chọn trạng thái tài khoản';
             }
-            $_SESSION['error'] = $errors;
+            
             // Nếu ko có lỗi thì tiến hành thêm tai khoản
             if (empty($errors)) {
                
@@ -203,6 +203,7 @@ public function resetPassword(){
                 exit();
             } else {
                 // Trả về form và lỗi
+                $_SESSION['error'] = $errors;
                 $_SESSION['flash']= true;
                 header("Location: " . BASE_URL_ADMIN . '?act=form-sua-khach-hang&id_khach_hang='.$khach_hang_id);
                 exit();
@@ -230,16 +231,21 @@ public function resetPassword(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // lấy email và pass gửi lên từ form 
                 $email = $_POST['email'];
+                // var_dump($email);die;
                 $password = $_POST['password'];
                 
-                // var_dump($email);die;
+                
     
                 // Xử lý kiểm tra thông tin đăng nhập
                 $user = $this->modelTaiKhoan->checkLogin($email, $password);
-    
+                $user_info = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
+                // var_dump($user_info);die;
                 if ($user == $email) { // Trường hợp đăng nhập thành công
                     // Lưu thông tin vào session 
-                    $_SESSION['user_admin'] = $user;
+                    $_SESSION['user'] = $user;
+                    
+                    $_SESSION['user_id'] = $user_info['id'];
+                    
                     echo "<script type='text/javascript'>
                     alert('Đăng nhập Admin thành công');
                     window.location.href = '" . BASE_URL_ADMIN . "';
@@ -259,14 +265,18 @@ public function resetPassword(){
             }
         }
     public function logout(){
-        if (isset($_SESSION['user_admin'])) {
-            unset($_SESSION['user_admin']);
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+            unset($_SESSION['user_id']);
+            unset($_SESSION['flash']);
+            unset($_SESSION['error']);
             header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
         }
     }
 
     public function formEditCaNhanQuanTri(){
-        $email = $_SESSION['user_admin'];
+        $email = $_SESSION['user_email'];
+        // var_dump($_SESSION['user']);
         $thongTin = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
         // var_dump($thongTin);die();
         require_once './views/taikhoan/canhan/editCaNhan.php';
@@ -280,7 +290,7 @@ public function resetPassword(){
             $confirm_pass = $_POST['confirm_pass'] ?? '';
 
             // Lấy thông tin người dùng từ session
-            $user = $this->modelTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_admin']);
+            $user = $this->modelTaiKhoan->getTaiKhoanFormEmail($_SESSION['user']);
             $errors = [];
 
             // Kiểm tra mật khẩu cũ
@@ -379,6 +389,7 @@ public function resetPassword(){
     public function updateAvatar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_SESSION['user_id']; // Lấy ID người dùng từ session
+            // print_r($id);die();
             $avatar = $_FILES['avatar'] ?? null;
 
             $errors = [];

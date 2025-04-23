@@ -1,67 +1,85 @@
 <?php require_once 'layout/header.php'; ?>
-<?php require_once 'layout/menu.php'; ?>
+<?php require_once './views/layout/menu.php'; ?>
+
+<style>
+    .swiper-slide {
+        height: 75vh; /* Chiều cao bằng 75% chiều cao màn hình */
+    }
+</style>
 
 <!-- Slider -->
-<div
-    class="slider-block style-one bg-linear xl:h-[860px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
-    <div class="slider-main h-full w-full">
-        <div class="swiper swiper-slider h-full relative">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Bộ sưu tập giảm giá mùa hè
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div class="sub-img absolute sm:w-1/2 w-3/5 2xl:-right-[60px] -right-[16px] bottom-0">
-                                <img src="./assets/images/slider/bg1-1.png" alt="bg1-1" />
-                            </div>
-                        </div>
+<div class="slider-block relative">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Bộ sưu tập giảm giá mùa hè</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Xu hướng của thời đại
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div class="sub-img absolute w-1/2 2xl:-right-[60px] -right-[0] sm:-bottom-[60px] bottom-0">
-                                <img src="./assets/images/slider/bg3-1.png" alt="bg1-2" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slider-item h-full w-full relative">
-                        <div class="container w-full h-full flex items-center relative">
-                            <div class="text-content basis-1/2">
-                                <div class="text-sub-display">Giảm Giá Lên Tới 50% !</div>
-                                <div class="text-display md:mt-5 mt-2">
-                                    Phong cách thể thao bốn mùa
-                                </div>
-                                <a href="shop-breadcrumb-img.html" class="button-main md:mt-8 mt-3">Mua Ngay
-                                </a>
-                            </div>
-                            <div
-                                class="sub-img absolute sm:w-1/2 w-2/3 2xl:-right-[60px] -right-[36px] sm:bottom-0 -bottom-[30px]">
-                                <img src="./assets/images/slider/bg1-3.png" alt="bg1-3" />
-                            </div>
-                        </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider1.png" alt="Bộ sưu tập mùa hè" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Xu hướng của thời đại</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider2.png" alt="Xu hướng thời đại" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slider3.png" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slide7.png" height="760px" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="slider-content flex items-center h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <div class="text-content w-1/2 px-8">
+                        <h2 class="text-4xl font-bold mb-4">Giảm Giá Lên Tới 50% !</h2>
+                        <p class="text-xl mb-6">Phong cách thể thao bốn mùa</p>
+                        <a href="<?= BASE_URL ?>?act=san-pham" class="btn-primary inline-block">Mua Ngay</a>
+                    </div>
+                    <div class="image-content w-1/2 h-full">
+                        <img src="<?= BASE_URL ?>assets/images/slider/slide8.png" height="760px" alt="Phong cách thể thao" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 </div>
 <div class="what-new-block filter-product-block md:pt-20 pt-10">
@@ -74,15 +92,15 @@
                     </div>
                     <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="top">
-                        Bán Chạy
+                        Bền bỉ
                     </div>
-                    <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black active"
+                    <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="t-shirt">
-                        Sale 50%
+                        Ưu đãi
                     </div>
                     <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
                         data-item="dress">
-                        Mới Nhất
+                        Chất lượng
                     </div>
 
                 </div>
@@ -137,16 +155,12 @@
                                         src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="img" />
                                 </a>
                             </div>
-                            <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
+                            <div class="list-action px-5 absolute w-full bottom-5 max-lg:hidden">
                                 <div
                                     class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
                                     <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
                                         Chi Tiết</a>
                                 </div>
-                                <a href="<?= BASE_URL . '?act=them-gio-hang' ?>"
-                                    class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
-                                    Thêm Vào Giỏ
-                                </a>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -170,26 +184,7 @@
                             <div class="product-name text-title duration-300">
                                 <?= $sanPham['ten_san_pham'] ?>
                             </div>
-                            <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Red
-                                    </div>
-                                </div>
-                                <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        yellow
-                                    </div>
-                                </div>
-                                <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div
-                                        class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        green
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <div
                                 class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
@@ -207,7 +202,7 @@
                                 <?php } ?>
                                 <div
                                     class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
-                                    -20%
+                                    <?= round(100 - ($sanPham['gia_khuyen_mai'] * 100 / $sanPham['gia_san_pham'])) ?>%
                                 </div>
                             </div>
                         </div>
@@ -224,18 +219,18 @@
         <div class="heading3 text-center">Khám Phá Bộ Sưu Tập</div>
     </div>
     <div class="list-collection relative section-swiper-navigation md:mt-10 mt-6 sm:px-5 px-4">
-        <div class="swiper-button-prev lg:left-10 left-6"></div>
+        <!-- <div class="swiper-button-prev lg:left-10 left-6"></div> -->
         <div class="swiper swiper-collection h-full relative">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <a href="shop-breadcrumb1.html"
+                    <a href="http://localhost/SportZone1/?act=chi-tiet-san-pham&id_san_pham=45"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/swimwear.png" alt="swimwear" />
+                            <img src="./assets/images/collection/tenisImage.png" alt="" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
-                            Nike
+                            Asics
                         </div>
                     </a>
                 </div>
@@ -243,7 +238,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/top.png" alt="top" />
+                            <img src="./assets/images/collection/adidasImage.png" alt="top" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -255,7 +250,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/sets.png" alt="sets" />
+                            <img src="./assets/images/collection/.png" alt="sets" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -267,7 +262,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/outerwear.png" alt="outerwear" />
+                            <img src="./assets/images/collection/.png" alt="outerwear" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -279,7 +274,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/underwear.png" alt="underwear" />
+                            <img src="./assets/images/collection/.png" alt="underwear" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -291,7 +286,7 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/t-shirt.png" alt="t-shirt" />
+                            <img src="./assets/images/collection/.png" alt="t-shirt" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -301,53 +296,16 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-button-next lg:right-10 right-6"></div>
+        <!-- <div class="swiper-button-next lg:right-10 right-6"></div> -->
     </div>
 </div>
 
-<div class="tab-features-block filter-product-block md:pt-20 pt-10">
-    <div class="container">
-        <div class="heading flex flex-col items-center text-center">
-            <div class="menu-tab bg-surface rounded-2xl">
-                <div class="menu flex items-center gap-2 p-1">
-                    <div class="indicator absolute top-1 bottom-1 bg-white rounded-full shadow-md duration-300">
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black active"
-                        data-item="best sellers">
-                        BÁN CHẠY
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black"
-                        data-item="on sale">
-                        SALE 50%
-                    </div>
-                    <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black"
-                        data-item="new arrivals">
-                        MỚI NHẤT
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div
-            class="list-product six-product hide-product-sold relative section-swiper-navigation style-outline style-small-border md:mt-10 mt-6">
-            <div class="swiper-button-prev2 sm:left-10 left-6">
-                <i class="ph-bold ph-caret-left text-xl"></i>
-            </div>
-            <div class="swiper swiper-list-product h-full relative">
-                <div class="swiper-wrapper">
-                    <!-- List six product -->
-                </div>
-            </div>
-            <div class="swiper-button-next2 sm:right-10 right-6">
-                <i class="ph-bold ph-caret-right text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="banner-block style-one grid sm:grid-cols-2 gap-5 md:pt-20 pt-10">
-    <a href="shop-breadcrumb-img.html" class="banner-item relative block overflow-hidden duration-500">
+    <a href="http://localhost/SportZone1/?act=danh-muc&id=7" class="banner-item relative block overflow-hidden duration-500">
         <div class="banner-img">
-            <img src="./assets/images/banner/1.png" class="duration-1000" alt="img" />
+            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Section_Banner_888x600.jpg" class="duration-1000" alt="img" />
         </div>
         <div class="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
             <div class="heading2 text-white">BÁN CHẠY</div>
@@ -356,9 +314,9 @@
             </div>
         </div>
     </a>
-    <a href="shop-breadcrumb-img.html" class="banner-item relative block overflow-hidden duration-500">
+    <a href="http://localhost/SportZone1/?act=danh-muc&id=1" class="banner-item relative block overflow-hidden duration-500">
         <div class="banner-img">
-            <img src="./assets/images/banner/2.png" class="duration-1000" alt="img" />
+            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Active_women_1.jpg" class="duration-1000" alt="img" />
         </div>
         <div class="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
             <div class="heading2 text-white">MỚI NHẤT</div>
@@ -406,137 +364,7 @@
     </div>
 </div>
 
-<div class="testimonial-block md:pt-20 md:pb-16 pt-10 pb-8 md:mt-20 mt-10 bg-surface">
-    <div class="container">
-        <div class="heading3 text-center">Mọi người bình luận </div>
-        <div class="list-testimonial pagination-mt40 md:mt-10 mt-6">
-            <div class="swiper swiper-list-testimonial h-full relative">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Variety of Styles!</div>
-                                <div class="desc mt-2">
-                                    "Fantastic shop! Great selection, fair prices, and
-                                    friendly staff. Highly recommended. The quality of the
-                                    products is exceptional, and the prices are very
-                                    reasonable!"
-                                </div>
-                                <div class="text-button name mt-4">Lisa K.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Quality of Clothing!</div>
-                                <div class="desc mt-2">
-                                    "Anvouge's fashion collection is a game-changer! Their
-                                    unique and trendy pieces have completely transformed my
-                                    style. It's comfortable, stylish, and always on-trend."
-                                </div>
-                                <div class="text-button name mt-4">Elizabeth A.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Customer Service!</div>
-                                <div class="desc mt-2">
-                                    "I absolutely love this shop! The products are
-                                    high-quality and the customer service is excellent. I
-                                    always leave with exactly what I need and a smile on my
-                                    face."
-                                </div>
-                                <div class="text-button name mt-4">Christin H.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Quality of Clothing!</div>
-                                <div class="desc mt-2">
-                                    "I can't get enough of Anvouge's high-quality clothing.
-                                    It's comfortable, stylish, and always on-trend. The
-                                    products are high-quality and the customer service is
-                                    excellent."
-                                </div>
-                                <div class="text-button name mt-4">Emily G.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-item style-one h-full">
-                            <div class="testimonial-main bg-white p-8 rounded-2xl h-full">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                    <i class="ph-fill ph-star text-yellow"></i>
-                                </div>
-                                <div class="heading6 title mt-4">Customer Service!</div>
-                                <div class="desc mt-2">
-                                    "I love this shop! The products are always top-quality,
-                                    and the staff is incredibly friendly and helpful. They go
-                                    out of their way to make sure that I'm satisfied my
-                                    purchase."
-                                </div>
-                                <div class="text-button name mt-4">Carolina C.</div>
-                                <div class="caption2 date text-secondary2 mt-1">
-                                    August 13, 2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="instagram-block md:pt-20 pt-10">
     <div class="container">
@@ -550,7 +378,7 @@
                     <div class="swiper-slide">
                         <a href="https://www.instagram.com/" target="_blank"
                             class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/0.png" alt="0"
+                            <img src="https://sneakerbardetroit.com/wp-content/uploads/2023/12/Anthony-Edwards-adidas-AE-1-Coral.jpeg" alt="0"
                                 class="h-full w-full duration-500 relative" />
                             <div
                                 class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
@@ -558,61 +386,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/1.png" alt="1"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/2.png" alt="2"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/3.png" alt="3"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/4.png" alt="4"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://www.instagram.com/" target="_blank"
-                            class="item relative block rounded-[32px] overflow-hidden">
-                            <img src="./assets/images/instagram/5.png" alt="5"
-                                class="h-full w-full duration-500 relative" />
-                            <div
-                                class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
-                                <div class="icon-instagram text-2xl text-black"></div>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -674,132 +448,7 @@
 
 <a class="scroll-to-top-btn" href="#top-nav"><i class="ph-bold ph-caret-up"></i></a>
 
-<!-- slide show -->
-<div class="modal-newsletter">
-    <div class="container h-full flex items-center justify-center w-full">
-        <div class="modal-newsletter-main">
-            <div class="main-content flex rounded-[20px] overflow-hidden w-full">
-                <div
-                    class="left lg:w-1/2 sm:w-2/5 max-sm:hidden bg-green flex flex-col items-center justify-center gap-5 py-14">
-                    <div class="text-xs font-semibold uppercase text-center">
-                        Ưu Đãi Đặc Biệt
-                    </div>
-                    <div
-                        class="lg:text-[70px] text-4xl lg:leading-[78px] leading-[42px] font-bold uppercase text-center">
-                        NGÀY <br /> THỨ SÁU
-                    </div>
-                    <div class="text-button-uppercase text-center">
-                        KHÁCH HÀNG MỚI TIẾT KIỆM<span class="text-red">30%</span> <br>VỚI MÃ
-                        GIẢM GIÁ
-                    </div>
-                    <div class="text-button-uppercase text-red bg-white py-2 px-4 rounded-lg">
-                        GET20off
-                    </div>
-                    <div class="button-main w-fit bg-black text-white hover:bg-white uppercase">
-                        COPY NGAY
-                    </div>
-                </div>
-                <div class="right lg:w-1/2 sm:w-3/5 w-full bg-white sm:pt-10 sm:pl-10 max-sm:p-6 relative">
-                    <div
-                        class="close-newsletter-btn w-10 h-10 flex items-center justify-center border border-line rounded-full absolute right-5 top-5 cursor-pointer">
-                        <i class="ph-bold ph-x text-xl"></i>
-                    </div>
-                    <div class="heading5 pb-5">CÓ THỂ BẠN CŨNG THÍCH</div>
-                    <div class="list overflow-x-auto sm:pr-6">
-                        <div class="product-item item pb-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="1">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/1-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="2">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/2-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
-                            data-item="3">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/3-3.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                        <div class="product-item item py-5 flex items-center justify-between gap-3" data-item="4">
-                            <div class="infor flex items-center gap-5">
-                                <div class="bg-img">
-                                    <img src="./assets/images/product/fashion/4-2.png" alt="img"
-                                        class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
-                                </div>
-                                <div class="">
-                                    <div class="name text-button">Faux-leather trousers</div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <div class="product-price text-title">$15.00</div>
-                                        <div class="product-origin-price text-title text-secondary2">
-                                            <del>$25.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="quick-view-btn button-main sm:py-3 py-2 sm:px-5 px-4 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
-                                Xem Chi Tiết
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Tìm kiếm sản phẩm -->
+
 <div class="modal-search-block">
     <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
         <div class="form-search relative w-full">
@@ -1634,3 +1283,48 @@
 </div>
 <!--End Modal -->
 <?php require_once 'layout/footer.php'; ?>
+
+<!-- Initialize Swiper -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Main Slider
+    new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        speed: 800,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        // Thêm các cấu hình mới
+        wrapperClass: 'swiper-wrapper',
+        slideClass: 'swiper-slide',
+        slideActiveClass: 'swiper-slide-active',
+        slideNextClass: 'swiper-slide-next',
+        slidePrevClass: 'swiper-slide-prev',
+        slideVisibleClass: 'swiper-slide-visible',
+        slideDuplicateClass: 'swiper-slide-duplicate',
+        slideDuplicateNextClass: 'swiper-slide-duplicate-next',
+        slideDuplicatePrevClass: 'swiper-slide-duplicate-prev',
+        // Cấu hình observer để tự động cập nhật khi DOM thay đổi
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true
+    });
+
+    // ... existing code ...
+});
+</script>

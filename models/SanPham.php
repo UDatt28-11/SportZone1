@@ -65,6 +65,21 @@ class SanPham{
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function binhLuan($id_san_pham, $id_user , $noi_dung){
+        try {
+            $sql = 'INSERT INTO binh_luans (san_pham_id, tai_khoan_id, noi_dung) 
+                    VALUES (:id_san_pham, :id_user, :noi_dung)';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id_san_pham' => $id_san_pham,
+                ':id_user'     => $id_user,
+                ':noi_dung'    => $noi_dung
+            ]);
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    
     public function getListSanPhamDanhMuc($danh_muc_id){
         try {
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
@@ -131,6 +146,26 @@ class SanPham{
             return $stmt->fetchAll();
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
+        }
+    }
+
+    public function searchSanPham($keyword) {
+        try {
+            $sql = "SELECT * FROM san_phams 
+                    WHERE (ten_san_pham LIKE :keyword 
+                    OR mo_ta LIKE :keyword)
+                    AND trang_thai = 1
+                    ORDER BY ngay_nhap DESC";
+            
+            $stmt = $this->conn->prepare($sql);
+            $searchKeyword = "%$keyword%";
+            $stmt->bindParam(':keyword', $searchKeyword, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error in SanPham::searchSanPham(): " . $e->getMessage());
+            return [];
         }
     }
 }

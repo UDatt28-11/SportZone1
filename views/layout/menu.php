@@ -1,3 +1,12 @@
+<?php
+$listDanhMuc = initDanhMuc();
+$listSanPham = initSanPham();
+// var_dump($listSanPham);
+// var_dump($listDanhMuc);
+$soLuongHangTrongGio = initSoLuongHangTrongGio();
+
+?>
+
 <div id="top-nav" class="top-nav style-one bg-black md:h-[44px] h-[30px]">
     <div class="container mx-auto h-full">
         <div class="top-nav-main flex justify-between max-md:justify-center h-full">
@@ -59,56 +68,39 @@
                         <ul class="flex items-center gap-8 h-full">
                             <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
-                                    class="text-button-uppercase duration-300 h-full flex items-center justify-center gap-1 active">
+                                    class="text-button-uppercase duration-300 h-full flex items-center justify-center gap-1">
                                     Trang Chủ
                                 </a>
                             </li>
                             <li class="h-full">
-                                <a href="<?= BASE_URL ?>"
+                                <a href="<?= BASE_URL .'?act=about' ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Giới Thiệu
                                 </a>
                             </li>
-                            <li class="h-full">
+                            <li class="h-full relative">
                                 <a href="<?= BASE_URL ?>"
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
-                                    Danh mục
+                                    Danh Mục
                                 </a>
-                                <div class="mega-menu absolute top-[74px] left-0px bg-white ">
-                                    <div class="container">
-                                        <div class="flex justify-between py-8">
-                                            <div class="nav-link basis-2/3 flex justify-between pr-12">
-                                                <div class="nav-item">
-                                                    
-                                                    <ul>
-                                                        <?php
-                                                        foreach ($listDanhMuc as $danhMuc){
-                                                            ?><li>
-                                                                <a href="shop-breadcrumb2.html"
-                                                                    class="link text-secondary duration-300">
-                                                                    <?=$danhMuc['ten_danh_muc']?>
-                                                                </a>
-                                                                
-                                                            </li>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                        
-
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
+                                    <ul class="w-full">
+                                        <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                            <li>
+                                                <a href="<?= BASE_URL ?>?act=danh-muc&id=<?= $danhMuc['id'] ?>"
+                                                    class="link text-secondary duration-300">
+                                                    <?= $danhMuc['ten_danh_muc'] ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
                                 </div>
                             </li>
                             
 
 
                             <li class="h-full relative">
-                                <a href="<?= BASE_URL ?>"
+                                <a href="<?= BASE_URL .'?act=blog' ?>" 
                                     class="text-button-uppercase duration-300 h-full flex items-center justify-center">
                                     Tin Tức
                                 </a>
@@ -120,11 +112,6 @@
                                 </a>
                                 <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
                                     <ul class="w-full">
-                                        <li>
-                                            <a href="about.html" class="link text-secondary duration-300">
-                                                About Us
-                                            </a>
-                                        </li>
                                         <li>
                                             <a href="contact.html" class="link text-secondary duration-300">
                                                 Contact Us
@@ -171,8 +158,8 @@
                         <div class="user-icon flex items-center justify-center cursor-pointer">
                             <label for="">
                                 <?php
-                        if (isset($_SESSION['user_client'])) {
-                            echo htmlspecialchars($_SESSION['user_client']['email']);
+                        if (isset($_SESSION['user'])) {
+                            echo htmlspecialchars($_SESSION['user']['email']);
                         }
                                  ?>
                             </label>
@@ -180,7 +167,7 @@
                             </i>
                             <div
                                 class="login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-sm">
-                                <?php if (!isset($_SESSION['user_client'])) { ?>
+                                <?php if (!isset($_SESSION['user'])) { ?>
                                 <a href="<?= BASE_URL . '?act=login' ?>" class="button-main w-full text-center">Đăng
                                     Nhập</a>
                                 <div class="text-secondary text-center mt-3 pb-4">
@@ -193,11 +180,25 @@
                                     class="button-main bg-white text-black border border-black w-full text-center">Hỗ
                                     Trợ</a>
                                 <?php } else { ?>
-                                <a href="#"
-                                    style="justify-content: space-between; margin-right: 30px; margin-left: 30px;">Tài
-                                    khoản</a>
+                                    
+                                    <a href="<?= BASE_URL . '?act=don-hang' ?>"
+                                    class="button-main w-full text-center">
+                                    Đơn Hàng
+                                    </a><br><br>
+                                    <?php
+                                    if($_SESSION['chuc_vu_id'] == 1){
+                                        ?>
+                                        <a href="<?= BASE_URL_ADMIN . '?act=/' ?>" class="button-main
+                                        w-full text-center">
+                                        Quản Lý
+                                        </a>
+                                        <?php
+                                    }
+                                    ?>
+                                    <br><br>
                                 <a href="<?= BASE_URL . '?act=logout-client' ?>"
-                                    onclick="return confirm('Bạn muốn đăng xuất tài khoản?')">Đăng Xuất</a>
+                                    onclick="return confirm('Bạn muốn đăng xuất tài khoản?')"
+                                    class="button-main bg-white text-black border border-black w-full text-center">Đăng Xuất</a>
                                 <?php } ?>
 
                             </div>
@@ -219,39 +220,20 @@
                 <!-- Tìm kiếm sản phẩm -->
                 <div class="modal-search-block">
                     <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
-                        <div class="form-search relative w-full">
-                            <i
-                                class="ph ph-magnifying-glass absolute heading5 right-6 top-1/2 -translate-y-1/2 cursor-pointer"></i>
-                            <input type="text" placeholder="Nhập Tên Sản Phẩm"
+                        <form action="<?= BASE_URL ?>?act=search" method="GET" class="form-search relative w-full flex items-center gap-2">
+                            <input type="hidden" name="act" value="search">
+                            <input type="text" name="keyword" placeholder="Nhập Tên Sản Phẩm"
                                 class="text-button-lg h-14 rounded-2xl border border-line w-full pl-6 pr-12" />
-                        </div>
-                        <div class="keyword mt-8">
-                            <div class="heading5">Từ Khóa Đặc Sắc Hôm Nay</div>
-                            <div class="list-keyword flex items-center flex-wrap gap-3 mt-4">
-                                <button
-                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                                    Nike
-                                </button>
-                                <button
-                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                                    Adidas
-                                </button>
-                                <button
-                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                                    Puma
-                                </button>
-                                <button
-                                    class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
-                                    Fila
-                                </button>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn-search bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition-colors">
+                                <i class="ph ph-magnifying-glass text-xl"></i>
+                            </button>
+                        </form>
                         <div class="list-recent mt-8">
-                            <div class="heading6">Sản Phẩm Đã Xem Gần Đây</div>
+                            <div class="heading6">Bạn có thể thích</div>
                             <div
                                 class="list-product four-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 md:mt-10 mt-6">
                                 <!-- List four product -->
-                                <?php foreach($listSanPham as $key => $sanPham) : ?>
+                                <?php foreach(array_slice($listSanPham, 0, 4) as $key => $sanPham): ?>
                                 <div class=" pb-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 mt-4">
                                     <div class="product-item grid-type" data-item="11">
                                         <div class="product-main cursor-pointer block">
@@ -309,10 +291,7 @@
                                                             href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>">Xem
                                                             Chi Tiết</a>
                                                     </div>
-                                                    <div
-                                                        class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
-                                                        Thêm Vào Giỏ
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="product-infor mt-4 lg:mb-7">
@@ -339,30 +318,7 @@
                                                 <div class="product-name text-title duration-300">
                                                     <?= $sanPham['ten_san_pham'] ?>
                                                 </div>
-                                                <div
-                                                    class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                                    <div
-                                                        class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                                        <div
-                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                                            Red
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                                        <div
-                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                                            yellow
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                                        <div
-                                                            class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                                            green
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
 
                                                 <div
                                                     class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
@@ -380,7 +336,7 @@
                                                     <?php } ?>
                                                     <div
                                                         class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
-                                                        -20%
+                                                        <?= round(100 - ($sanPham['gia_khuyen_mai'] * 100 / $sanPham['gia_san_pham'])) ?>%
                                                     </div>
                                                 </div>
                                             </div>
@@ -1511,9 +1467,11 @@
             <a href="<?= BASE_URL ?>?act=gio-hang" class="menu_bar-link flex flex-col items-center gap-1">
                 <div class="cart-icon relative">
                     <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
-                        <?= $soLuongHangTrongGio ?? 0 ?>
-                    </span>
+                    <?php if(isset($_SESSION['user_id'])): ?>
+                        <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                            <?= isset($soLuongHangTrongGio) ? $soLuongHangTrongGio : 0 ?>
+                        </span>
+                    <?php endif; ?>
                 </div>
                 <span class="menu_bar-title caption2 font-semibold">Giỏ Hàng</span>
             </a>
@@ -1521,6 +1479,12 @@
                 <span class="ph-bold ph-user text-2xl block"></span>
                 <span class="menu_bar-title caption2 font-semibold">Tài Khoản</span>
             </a>
+            <?php if (isset($_SESSION['user'])): ?>
+            <a href="<?= BASE_URL ?>?act=don-hang" class="menu_bar-link flex flex-col items-center gap-1">
+                <span class="ph-bold ph-clipboard-text text-2xl block"></span>
+                <span class="menu_bar-title caption2 font-semibold">Đơn Hàng</span>
+            </a>
+            <?php endif; ?>
         </div>
     </div>
 

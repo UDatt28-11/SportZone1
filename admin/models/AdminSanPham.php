@@ -180,7 +180,8 @@ class AdminSanPham {
             $sql = "SELECT * FROM bien_the_sp WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id'=>$id]);
-            return $stmt->fetch();
+            $variant = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $variant;
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
         }
@@ -257,6 +258,25 @@ class AdminSanPham {
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function editSLBienThe($id, $ton_kho){
+        try{
+            $this->conn->beginTransaction();
+            $sql = "UPDATE bien_the_sp 
+                SET ton_kho = :ton_kho 
+                WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':ton_kho' => $ton_kho,
+                ':id' => $id
+            ]);
+            $this->conn->commit();
+            return true;
+        }catch (Exception $e){
+            $this->conn->rollBack();
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+
 
     public function getDetailAnhSanPham($id){
         try {

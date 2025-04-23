@@ -57,12 +57,8 @@ class AdminDonHang
         try {
             $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.ten_san_pham, san_phams.hinh_anh
             FROM chi_tiet_don_hangs
-<<<<<<< Updated upstream
-            INNER JOIN san_phams ON chi_tiet_don_hangs.bien_the_id = san_phams.id
-=======
             INNER JOIN bien_the_sp ON chi_tiet_don_hangs.bien_the_id = bien_the_sp.id
             INNER JOIN san_phams ON bien_the_sp.sp_id = san_phams.id
->>>>>>> Stashed changes
             WHERE chi_tiet_don_hangs.don_hang_id = :id
             ';
 
@@ -137,4 +133,75 @@ class AdminDonHang
         }
     }
 
+    public function getDonHangByStatus($trangThaiIds = []) {
+        try {
+            $sql = "SELECT dh.*, tt.ten_trang_thai 
+                    FROM don_hangs dh 
+                    JOIN trang_thai_don_hangs tt ON dh.trang_thai_id = tt.id";
+            
+            if (!empty($trangThaiIds)) {
+                $placeholders = str_repeat('?,', count($trangThaiIds) - 1) . '?';
+                $sql .= " WHERE dh.trang_thai_id IN ($placeholders)";
+            }
+            
+            $sql .= " ORDER BY dh.ngay_dat DESC";
+            
+            $stmt = $this->conn->prepare($sql);
+            
+            if (!empty($trangThaiIds)) {
+                $stmt->execute($trangThaiIds);
+            } else {
+                $stmt->execute();
+            }
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Lỗi khi lấy đơn hàng theo trạng thái: " . $e->getMessage());
+            return [];
+        }
+    }
+    public function updateTrangThaiDonHang($id, $trang_thai_id){
+        try {
+            $sql = 'UPDATE don_hangs SET trang_thai_id = :trang_thai_id WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id, ':trang_thai_id'=>$trang_thai_id]);
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            error_log("Lỗi khi cập nhật trạng thái đơn hàng: " . $e->getMessage());
+        }
+    }
+    public function getDonHangById($donHangId) {
+        try {
+            $sql = "SELECT dh.*, pttt.ten_phuong_thuc, ttdh.ten_trang_thai
+                    FROM don_hangs dh
+                    LEFT JOIN phuong_thuc_thanh_toans pttt ON dh.phuong_thuc_thanh_toan_id = pttt.id
+                    LEFT JOIN trang_thai_don_hangs ttdh ON dh.trang_thai_id = ttdh.id
+                    WHERE dh.id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $donHangId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error in DonHang::getDonHangById(): " . $e->getMessage());
+            return null;
+        }
+    }
+    public function getDonHangByAPId($sanPhamId) {
+        try {
+            $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.ten_san_pham, san_phams.hinh_anh
+            FROM chi_tiet_don_hangs
+            INNER JOIN bien_the_sp ON chi_tiet_don_hangs.bien_the_id = bien_the_sp.id
+            INNER JOIN san_phams ON bien_the_sp.sp_id = san_phams.id
+            WHERE san_phams.id = :id
+            ';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $sanPhamId]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 }

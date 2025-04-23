@@ -20,19 +20,19 @@ require_once './models/adminMauSac.php';
 require_once './models/adminKichCo.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBaoCaoThongKe.php';
+require_once './models/AdminTrangThai.php';
 
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php'; // Quản lý tài khoản admin
-//Require toàn bộ file Models
-// require_once './models/AdminDanhMuc.php';
-// require_once './models/AdminSanPham.php';
-// require_once './models/AdminTaiKhoan.php';
 
 //Router
 $act = $_GET['act'] ?? '/';
 
-if ($act !== 'login-admin'  && $act !== 'check-login-admin' && $act !== 'logout-admin') {
-  checkLoginAdmin();
+checkLoginAdmin();
+
+if($_SESSION['chuc_vu_id'] == 2){
+  header('Location: '. BASE_URL .'?act=/');
+  exit;
 }
 
 if (isset($_GET['act']) && $_GET['act'] === 'update-avatar') {
@@ -100,8 +100,10 @@ match($act){
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
     'form-sua-don-hang' => (new AdminDonHangController())->formEditDonHang(),
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
+    'xac-nhan-don-hang' => (new AdminDonHangController())->postEditStatus(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
     // 'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),
+    'cancel' => (new AdminDonHangController())->cancel(),
 
     // route tài khoản
     'list-tai-khoan-quan-tri' => (new AdminTaiKhoanController())->danhSachQuanTri(),
@@ -126,8 +128,8 @@ match($act){
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
     
     // Route Auth
-    'login-admin' => (new AdminTaiKhoanController())->formLogin(),
-    'check-login-admin' => (new AdminTaiKhoanController())->login(),
-    'logout-admin' => (new AdminTaiKhoanController())->logout(),
+    // 'login-admin' => (new AdminTaiKhoanController())->formLogin(),
+    // 'check-login-admin' => (new AdminTaiKhoanController())->login(),
+    // 'logout-admin' => (new AdminTaiKhoanController())->logout(),
     default => $act,
 };

@@ -157,19 +157,21 @@ public function resetPassword($id, $mat_khau){
         }
     }
     
-    public function getTaiKhoanFormEmail($email){
+    public function getTaiKhoanFormEmail($email) {
         try {
             $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
-
             $stmt = $this->conn->prepare($sql);
+            // var_dump($email);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            
+            $stmt->execute();
 
-            $stmt->execute([
-                ':email' => $email
-            ]);
-
-            return $stmt->fetch();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC); // Trả về mảng kết hợp
+            return $result ?: null; // Trả về null nếu không tìm thấy
         } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
+            // Ghi log lỗi thay vì in ra màn hình
+            error_log("Lỗi trong getTaiKhoanFormEmail: " . $e->getMessage());
+            return null; // Trả về null nếu có lỗi
         }
     }
 

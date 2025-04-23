@@ -3704,3 +3704,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Khởi tạo Swiper cho slider chính
+const mainSlider = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    speed: 800,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    effect: 'fade',
+    fadeEffect: {
+        crossFade: true
+    },
+    // Cấu hình observer
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true
+});
+
+// Khởi tạo Swiper cho slider thương hiệu
+const brandsSlider = new Swiper('.brands-swiper', {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 3000,
+    },
+    breakpoints: {
+        320: {
+            slidesPerView: 2,
+        },
+        480: {
+            slidesPerView: 3,
+        },
+        768: {
+            slidesPerView: 4,
+        },
+        1024: {
+            slidesPerView: 5,
+        }
+    }
+});

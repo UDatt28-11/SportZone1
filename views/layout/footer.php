@@ -59,19 +59,7 @@
                     </div>
                     <div class="newsletter basis-1/3 pl-7 max-md:basis-full max-md:pl-0">
                         <div class="text-button-uppercase">Bản tin</div>
-                        <div class="caption1 mt-3">
-                            Đăng ký nhận bản tin của chúng tôi và nhận ưu đãi giảm 10% cho lần mua hàng đầu tiên!
-                        </div>
-                        <div class="input-block w-full h-[52px] mt-4">
-                            <form class="w-full h-full relative" action="https://anvogue-html.vercel.app/post">
-                                <input type="email" placeholder="Nhập email của bạn"
-                                    class="caption1 w-full h-full pl-4 pr-14 rounded-xl border border-line" required />
-                                <button
-                                    class="w-[44px] h-[44px] bg-black flex items-center justify-center rounded-xl absolute top-1 right-1">
-                                    <i class="ph ph-arrow-right text-xl text-white"></i>
-                                </button>
-                            </form>
-                        </div>
+                        
                         <div class="list-social flex items-center gap-6 mt-4">
                             <a href="https://www.facebook.com/" target="_blank">
                                 <div class="icon-facebook text-2xl text-black"></div>

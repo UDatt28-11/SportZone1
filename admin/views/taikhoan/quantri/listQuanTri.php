@@ -71,9 +71,11 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên danh mục</th>
-                                        <th>Mô tả</th>
-                                        <th>Thao tác</th>
+                                        <th>Họ Và Tên</th>
+                                        <th>Email</th>
+                                        <th>Số điện Thoại</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Thao Tác</th>
                                     </tr>
                                 </tfoot>
                             </table>
