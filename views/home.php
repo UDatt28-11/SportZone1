@@ -231,7 +231,8 @@
                     <a href="shop-breadcrumb1.html"
                         class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
                         <div class="bg-img">
-                            <img src="./assets/images/collection/swimwear.png" alt="swimwear" />
+                            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Section_Banner_888x600.jpg"
+                                alt="swimwear" />
                         </div>
                         <div
                             class="collection-name heading5 text-center sm:bottom-8 bottom-4 lg:w-[200px] md:w-[160px] w-[100px] md:py-3 py-1.5 bg-white rounded-xl duration-500">
@@ -347,7 +348,8 @@
 <div class="banner-block style-one grid sm:grid-cols-2 gap-5 md:pt-20 pt-10">
     <a href="shop-breadcrumb-img.html" class="banner-item relative block overflow-hidden duration-500">
         <div class="banner-img">
-            <img src="./assets/images/banner/1.png" class="duration-1000" alt="img" />
+            <img src="https://media3.coolmate.me/cdn-cgi/image/width=1800,height=1200,quality=80,format=auto/uploads/March2025/Section_Banner_888x600.jpg"
+                class="duration-1000" alt="img" />
         </div>
         <div class="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
             <div class="heading2 text-white">BÁN CHẠY</div>

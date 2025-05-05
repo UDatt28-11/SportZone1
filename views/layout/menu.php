@@ -79,21 +79,21 @@
                                         <div class="flex justify-between py-8">
                                             <div class="nav-link basis-2/3 flex justify-between pr-12">
                                                 <div class="nav-item">
-                                                    
+
                                                     <ul>
                                                         <?php
                                                         foreach ($listDanhMuc as $danhMuc){
                                                             ?><li>
-                                                                <a href="shop-breadcrumb2.html"
-                                                                    class="link text-secondary duration-300">
-                                                                    <?=$danhMuc['ten_danh_muc']?>
-                                                                </a>
-                                                                
-                                                            </li>
-                                                            <?php
+                                                            <a href="shop-breadcrumb2.html"
+                                                                class="link text-secondary duration-300">
+                                                                <?=$danhMuc['ten_danh_muc']?>
+                                                            </a>
+
+                                                        </li>
+                                                        <?php
                                                         }
                                                         ?>
-                                                        
+
 
                                                     </ul>
                                                 </div>
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                             </li>
-                            
+
 
 
                             <li class="h-full relative">
@@ -211,7 +211,8 @@
                             <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
                                 <i class="ph-bold ph-handbag text-2xl"></i>
                                 <div
-                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full"><?=$soLuongHangTrongGio ?? 0 ; ?></div>
+                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                                    <?=$soLuongHangTrongGio ?? 0 ; ?></div>
                             </div>
                         </a>
                     </div>
@@ -431,7 +432,8 @@
                                         <div class="">
                                             <div class="name text-button"><?=$sanPham['ten_san_pham']?></div>
                                             <div class="flex items-center gap-2 mt-2">
-                                                <div class="product-price text-title"><?=$sanPham['gia_khuyen_mai']?></div>
+                                                <div class="product-price text-title"><?=$sanPham['gia_khuyen_mai']?>
+                                                </div>
                                                 <div class="product-origin-price text-title text-secondary2">
                                                     <del><?=$sanPham['gia_san_pham']?></del>
                                                 </div>
@@ -444,7 +446,7 @@
                                     </div>
                                 </div>
                                 <?php } ?>
-                            
+
                             </div>
                         </div>
                         <div class="right cart-block md:w-1/2 w-full py-6 relative overflow-hidden">
@@ -1511,7 +1513,8 @@
             <a href="<?= BASE_URL ?>?act=gio-hang" class="menu_bar-link flex flex-col items-center gap-1">
                 <div class="cart-icon relative">
                     <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
+                    <span
+                        class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">
                         <?= $soLuongHangTrongGio ?? 0 ?>
                     </span>
                 </div>
