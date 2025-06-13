@@ -2,7 +2,7 @@
 // var_dump($sanPham);
 $productDetail = $sanPham; // Store original data
 require_once 'layout/header.php';
-require_once 'layout/menu.php';
+require_once './views/layout/menu.php';
 $sanPham = $productDetail; // Restore original data
 //  var_dump($sanPham);
  ?>
@@ -166,21 +166,20 @@ $sanPham = $productDetail; // Restore original data
                                     const colorId = button.getAttribute('data-color-id');
                                     const productId = button.getAttribute('data-product-id');
 
-                                // Load ảnh theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
-                                    .then(response => response.text())
-                                    .then(data => {
-                                        document.getElementById('image-list').innerHTML = data;
-                                    });
+                                    // Load ảnh theo màu
+                                    fetch(`<?= BASE_URL ?>?act=lay-anh-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('image-list').innerHTML = data;
+                                        });
 
-                                // Load size theo màu
-                                fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
-                                    .then(response => response.text())
-                                    .then(data => {
-                                        document.getElementById('size-list').innerHTML = data;
-                                        // console.log(data);
-                                    });
-                            }
+                                    // Load size theo màu
+                                    fetch(`<?= BASE_URL ?>?act=lay-size-theo-mau&id_san_pham_tt=${productId}&id_mau_sac=${colorId}`)
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            document.getElementById('size-list').innerHTML = data;
+                                        });
+                                }
 
                                 function changeMainImage(imgElement) {
                                     const mainImage = document.getElementById('main-image');
@@ -204,64 +203,64 @@ $sanPham = $productDetail; // Restore original data
                     </div>
                     <div class="choose-size mt-5">
                         <div class="heading flex items-center justify-between">
-                            <div class="choose-size mt-5">
-                                <div class="text-title">Kích thước:</div>
-                                <div id="size-list" class="size-list mt-2">
-                                    <!-- Các nút size sẽ được render vào đây -->
-                                </div>
+                            <div class="text-title">Kích thước:</div>
+                            <div class="caption1 size-guide text-red underline cursor-pointer">Hướng dẫn kích thước</div>
+                        </div>
+                        <div class="list-size flex items-center gap-4 mt-3">
+                            <div id="size-list" class="btn-size-group items-center">
+                                <!-- Các nút size sẽ được render vào đây -->
                             </div>
+                        </div>
+                        
+                        <script>
+                            function setActiveSize(button) {
+                                const buttons = document.querySelectorAll('.btn-size-group .btn');
+                                buttons.forEach(btn => {
+                                    btn.classList.remove('active');
+                                });
+                                button.classList.add('active');
+                                
+                                // Kích hoạt nút thêm vào giỏ hàng
+                                const addToCartBtn = document.querySelector('.add-cart-btn');
+                                if (addToCartBtn) {
+                                    addToCartBtn.disabled = false;
+                                }
 
-                                <script>
-                                    function setActiveSize(button) {
-                                        const buttons = document.querySelectorAll('.btn-size-group .btn');
-                                        buttons.forEach(btn => {
-                                            btn.classList.remove('active');
-                                        });
-                                        button.classList.add('active');
-                                        const bienTheId = button.getAttribute('data-bienthe-id');
-                                        fetch(`<?= BASE_URL ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
-                                            .then(res => res.text())
-                                            .then(text => {
-                                                // console.log("Raw response:", text);
-                                                const data = JSON.parse(text); // nếu lỗi sẽ hiện rõ
-                                                // console.log(data);
-                                                // Xử lý như cũ
-                                                const priceElement = document.getElementById('product-price');
-                                                if (priceElement && data.don_gia) {
-                                                priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
-                                                } else {
-                                                priceElement.innerText = "Không xác định";
-                                                }
-                                                const stockElement = document.getElementById('stock-info');
-                                                // console.log(stockElement);
-                                                if (stockElement && data.ton_kho) {
-                                                    stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
-                                                    const maxQty = document.getElementById('soLuong');
-                                                    maxQty.max = parseInt(data.ton_kho);
-                                                } else {
-                                                    stockElement.innerText = "Không xác định";
-                                                }
-                                                const addToCartForm = document.getElementById('addToCart');
-                                                
-                                                if (addToCartForm) {
-                                                    const variant = data.id;
-                                                    const inputElement = document.getElementById('bienTheId');
-                                                    inputElement.value = variant;
-
-                                                }
-                                                // console.log(addToCartForm);
-                                            })
-                                            .catch(err => {
-                                                console.error("Lỗi khi load giá biến thể:", err);
-                                            });
-
+                                const bienTheId = button.getAttribute('data-bienthe-id');
+                                fetch(`<?= BASE_URL ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
+                                    .then(res => res.text())
+                                    .then(text => {
+                                        const data = JSON.parse(text);
+                                        const priceElement = document.getElementById('product-price');
+                                        if (priceElement && data.don_gia) {
+                                            priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
+                                        }
+                                        const stockElement = document.getElementById('stock-info');
+                                        if (stockElement && data.ton_kho) {
+                                            stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                            const maxQty = document.getElementById('soLuong');
+                                            maxQty.max = parseInt(data.ton_kho);
+                                        }
+                                        const addToCartForm = document.getElementById('addToCart');
+                                        if (addToCartForm) {
+                                            const variant = data.id;
+                                            const inputElement = document.getElementById('bienTheId');
+                                            inputElement.value = variant;
+                                        }
+                                    })
+                                    .catch(err => {
+                                        console.error("Lỗi khi load giá biến thể:", err);
+                                    });
                             }
-                            </script>
-                            <div class="caption1 size-guide text-red underline">Hướng dẫn kích thước</div>
-                        </div>
-                        <div class="list-size flex items-center gap-2 flex-wrap mt-3">
-                            <!-- size-item -->
-                        </div>
+
+                            // Vô hiệu hóa nút thêm vào giỏ hàng khi trang load
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const addToCartBtn = document.querySelector('.add-cart-btn');
+                                if (addToCartBtn) {
+                                    addToCartBtn.disabled = true;
+                                }
+                            });
+                        </script>
                     </div>
                     <div id="stock-info" class="text-title mt-5">Số lượng : <?= $sanPham['so_luong']; ?></div>
                     <div class="choose-quantity flex flex-col sm:flex-row flex-wrap gap-4 mt-3">
@@ -315,7 +314,7 @@ $sanPham = $productDetail; // Restore original data
                          </div>
 
                         <!-- Nút Mua ngay -->
-                        <a href="checkout.html"
+                        <a href="#"
                             class="button-main px-5 py-3 text-center rounded-lg bg-black text-white w-full sm:flex-1 min-w-[160px]">
                             Mua ngay
                         </a>
@@ -541,7 +540,7 @@ $sanPham = $productDetail; // Restore original data
                         </div>
                         <div class="list-review mt-8">
                             <div class="heading flex items-center justify-between flex-wrap gap-4">
-                                <div class="heading4">03 Bình luận</div>
+                                <div class="heading4"><?= count($listBinhLuan)?> Bình luận</div>
                                 <div class="right flex items-center gap-3">
                                     <label for="select-filter" class="uppercase">Sắp xếp theo:</label>
                                     <div class="select-block relative">
@@ -583,11 +582,8 @@ $sanPham = $productDetail; // Restore original data
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="text-secondary2"><?= $binhLuan['ngay_dang']; ?></div>
-                                                <div class="text-secondary2">-</div>
-                                                <div class="text-secondary2">
-                                                    <span>Vàng</span> /
-                                                    <span>XL</span>
-                                                </div>
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -596,43 +592,21 @@ $sanPham = $productDetail; // Restore original data
                                     </div>
                                 </div>
                                 <div class="mt-3"><?= $binhLuan['noi_dung']; ?></div>
-                                <div class="action mt-3">
-                                    <div class="flex items-center gap-4">
-                                        <div class="like-btn flex items-center gap-1 cursor-pointer">
-                                            <i class="ph ph-hands-clapping text-lg"></i>
-                                            <div class="text-button">20</div>
-                                        </div>
-                                        <a href="#form-review"
-                                            class="reply-btn text-button text-secondary cursor-pointer hover:text-black">Trả
-                                            lời</a>
-                                    </div>
-                                </div>
+                                
                                 <?php endforeach ;?>
                             </div>
                         </div>
                         <div id="form-review" class="form-review pt-8">
                             <div class="heading4">Để lại bình luận</div>
-                            <form class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-6">
-                                <div class="name">
-                                    <input class="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username"
-                                        type="text" placeholder="Tên của bạn *" required />
-                                </div>
-                                <div class="mail">
-                                    <input class="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="email" type="email"
-                                        placeholder="Email của bạn *" required />
-                                </div>
+                            <form action="<?= BASE_URL . '?act=binh-luan'?>" method="post" class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-6">
+                                
+                                <input type="hidden" name="id_san_pham" value="<?=$sanPham['id']?>">
                                 <div class="col-span-full message">
                                     <textarea class="border border-line px-4 py-3 w-full rounded-lg" id="message"
-                                        name="message" rows="3" placeholder="Tin nhắn của bạn *" required></textarea>
-                                </div>
-                                <div class="col-span-full flex items-start -mt-2 gap-2">
-                                    <input type="checkbox" id="saveAccount" name="saveAccount" class="mt-1.5" />
-                                    <label class="" for="saveAccount">Lưu tên, email và website của tôi trong trình
-                                        duyệt
-                                        này cho lần bình luận sau.</label>
+                                        name="noi_dung" rows="3" placeholder="Tin nhắn của bạn *" required></textarea>
                                 </div>
                                 <div class="col-span-full sm:pt-3">
-                                    <button class="button-main bg-white text-black border border-black">Gửi Đánh
+                                    <button <?= $_SESSION['user_id'] ?? 'disabled' ?> class=" <?= $_SESSION['user_id'] ?? 'btn-disabled' ?> button-main bg-white text-black border border-black">Gửi Đánh
                                         Giá</button>
                                 </div>
                             </form>
@@ -1535,8 +1509,7 @@ $sanPham = $productDetail; // Restore original data
                     <div class="list-product flex items-center w-full gap-4"></div>
                     <div class="block-button flex flex-col gap-4 flex-shrink-0">
                         <a href="compare.html" class="button-main whitespace-nowrap"> Compare Products</a>
-                        <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">Clear
-                            All
+                        <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">Clear All
                             Products</div>
                     </div>
                 </div>
@@ -1655,22 +1628,104 @@ $sanPham = $productDetail; // Restore original data
                             <div class="choose-size mt-5">
                                 <div class="heading flex items-center justify-between">
                                     <div class="text-title">Kích cỡ: <span class="text-title size"></span></div>
-                                    <div class="caption1 size-guide text-red underline">Hướng dẫn kích cỡ</div>
+                                    <div class="caption1 size-guide text-red underline cursor-pointer">Hướng dẫn kích cỡ</div>
                                 </div>
-                                <div class="list-size flex items-center gap-2 flex-wrap mt-3">
-                                    <div
-                                        class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
-                                        S</div>
-                                    <div
-                                        class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line active">
-                                        M</div>
-                                    <div
-                                        class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
-                                        L</div>
-                                    <div
-                                        class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
-                                        XL</div>
+                                <div class="list-size flex items-center gap-4 mt-3">
+                                    <div class="btn-size-group flex items-center gap-4">
+                                        <!-- Các nút size sẽ được render vào đây -->
+                                    </div>
                                 </div>
+                                <style>
+                                    .btn-size-group {
+                                        display: flex;
+                                        gap: 12px;
+                                        margin-top: 8px;
+                                    }
+                                    .btn-size-group .btn {
+                                        padding: 8px 16px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                        transition: all 0.3s ease;
+                                        background-color: #fff;
+                                        color: #000;
+                                        min-width: 40px;
+                                        text-align: center;
+                                    }
+                                    .btn-size-group .btn:hover {
+                                        background-color: #f0f0f0;
+                                    }
+                                    .btn-size-group .btn.active {
+                                        background-color: #000;
+                                        color: #fff;
+                                        border-color: #000;
+                                    }
+                                    .add-cart-btn {
+                                        padding: 12px 24px;
+                                        background-color: #000;
+                                        color: #fff;
+                                        border: none;
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                        transition: all 0.3s ease;
+                                        width: 100%;
+                                        margin-top: 16px;
+                                    }
+                                    .add-cart-btn:disabled {
+                                        background-color: #ccc;
+                                        cursor: not-allowed;
+                                        opacity: 0.7;
+                                    }
+                                </style>
+                                <script>
+                                    function setActiveSize(button) {
+                                        const buttons = document.querySelectorAll('.btn-size-group .btn');
+                                        buttons.forEach(btn => {
+                                            btn.classList.remove('active');
+                                        });
+                                        button.classList.add('active');
+                                        
+                                        // Kích hoạt nút thêm vào giỏ hàng
+                                        const addToCartBtn = document.querySelector('.add-cart-btn');
+                                        if (addToCartBtn) {
+                                            addToCartBtn.disabled = false;
+                                        }
+
+                                        const bienTheId = button.getAttribute('data-bienthe-id');
+                                        fetch(`<?= BASE_URL ?>?act=lay-thong-tin-bien-the&id_bien_the=${bienTheId}`)
+                                            .then(res => res.text())
+                                            .then(text => {
+                                                const data = JSON.parse(text);
+                                                const priceElement = document.getElementById('product-price');
+                                                if (priceElement && data.don_gia) {
+                                                    priceElement.innerText = parseInt(data.don_gia).toLocaleString('vi-VN') + ' đ';
+                                                }
+                                                const stockElement = document.getElementById('stock-info');
+                                                if (stockElement && data.ton_kho) {
+                                                    stockElement.innerText = 'Số lượng: ' + parseInt(data.ton_kho);
+                                                    const maxQty = document.getElementById('soLuong');
+                                                    maxQty.max = parseInt(data.ton_kho);
+                                                }
+                                                const addToCartForm = document.getElementById('addToCart');
+                                                if (addToCartForm) {
+                                                    const variant = data.id;
+                                                    const inputElement = document.getElementById('bienTheId');
+                                                    inputElement.value = variant;
+                                                }
+                                            })
+                                            .catch(err => {
+                                                console.error("Lỗi khi load giá biến thể:", err);
+                                            });
+                                    }
+
+                                    // Vô hiệu hóa nút thêm vào giỏ hàng khi trang load
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const addToCartBtn = document.querySelector('.add-cart-btn');
+                                        if (addToCartBtn) {
+                                            addToCartBtn.disabled = true;
+                                        }
+                                    });
+                                </script>
                             </div>
                             <div class="text-title mt-5">Số lượng:</div>
                             <div class="choose-quantity flex items-center flex-wrap lg:justify-between gap-5 mt-3">
@@ -1779,6 +1834,117 @@ $sanPham = $productDetail; // Restore original data
     <script src="assets/js/magnific-popup.min.js"></script>
     <script src="assets/js/product-detail.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        const colorSelect = document.querySelector('.color-select');
+        const sizeSelect = document.querySelector('.size-select');
+        const quantityInput = document.querySelector('.quantity-input');
+        const errorMessage = document.querySelector('.error-message');
+
+        // Kiểm tra và cập nhật trạng thái nút thêm vào giỏ hàng
+        function updateAddToCartButton() {
+            const hasColor = colorSelect && colorSelect.value !== '';
+            const hasSize = sizeSelect && sizeSelect.value !== '';
+            const hasQuantity = quantityInput && quantityInput.value > 0;
+
+            if (addToCartBtn) {
+                if (hasColor && hasSize && hasQuantity) {
+                    addToCartBtn.disabled = false;
+                    addToCartBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+
+        // Hiển thị thông báo lỗi
+        function showError(message) {
+            if (errorMessage) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    errorMessage.classList.add('hidden');
+                }, 3000);
+            }
+        }
+
+        // Xử lý sự kiện thêm vào giỏ hàng
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Kiểm tra đã chọn màu sắc chưa
+                if (colorSelect && colorSelect.value === '') {
+                    showError('Vui lòng chọn màu sắc');
+                    return;
+                }
+
+                // Kiểm tra đã chọn kích thước chưa
+                if (sizeSelect && sizeSelect.value === '') {
+                    showError('Vui lòng chọn kích thước');
+                    return;
+                }
+
+                // Kiểm tra số lượng
+                if (quantityInput && (quantityInput.value <= 0 || quantityInput.value > 10)) {
+                    showError('Số lượng phải từ 1 đến 10');
+                    return;
+                }
+
+                // Lấy thông tin sản phẩm
+                const bienTheId = sizeSelect ? sizeSelect.value : '';
+                const soLuong = quantityInput ? quantityInput.value : 1;
+
+                // Gửi request thêm vào giỏ hàng
+                fetch('?act=add-gio-hang', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: new URLSearchParams({
+                        bien_the_id: bienTheId,
+                        so_luong: soLuong
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Hiển thị thông báo thành công
+                        alert('Thêm vào giỏ hàng thành công!');
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        const cartCount = document.querySelector('.cart-count');
+                        if (cartCount) {
+                            cartCount.textContent = data.tongSoLuong;
+                        }
+                    } else {
+                        showError(data.message || 'Thêm vào giỏ hàng thất bại');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showError('Có lỗi xảy ra khi thêm vào giỏ hàng');
+                });
+            });
+        }
+
+        // Thêm event listeners cho các input
+        if (colorSelect) {
+            colorSelect.addEventListener('change', updateAddToCartButton);
+        }
+        if (sizeSelect) {
+            sizeSelect.addEventListener('change', updateAddToCartButton);
+        }
+        if (quantityInput) {
+            quantityInput.addEventListener('change', updateAddToCartButton);
+        }
+
+        // Kiểm tra ban đầu
+        updateAddToCartButton();
+    });
+    </script>
     </body>
 
     <!-- Mirrored from anvogue-html.vercel.app/product-bought-together.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Mar 2025 09:43:11 GMT -->

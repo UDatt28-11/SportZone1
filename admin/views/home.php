@@ -50,7 +50,7 @@
                                     <div class="small-box bg-warning">
                                         <div class="inner">
                                             <h3 _msttexthash="10140" _msthash="140">
-                                                <?= number_format($totalRevenue, 0, ',', '.') ?> VNĐ
+                                                <?= number_format($totalRevenue ?? 0, 0, ',', '.') ?> VNĐ
                                             </h3>
 
                                             <p _msttexthash="2062528" _msthash="141">Tổng doanh thu</p>

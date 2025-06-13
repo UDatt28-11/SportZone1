@@ -4,6 +4,7 @@
             <img 
                 onclick="changeMainImage(this)" 
                 src="<?= BASE_URL . $img['link_hinh_anh'] ?>" 
+                
                 alt="Thumbnail"
                 style="
                     width: 120px; 

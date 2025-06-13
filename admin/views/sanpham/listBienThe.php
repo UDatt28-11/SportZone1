@@ -29,6 +29,7 @@
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-bien-the&id_san_pham=' . $product['id'] ?>" method="post">
                             <div class="card-header">
                             <button type="submit" class="btn btn-primary">Cập nhật số liệu biến thể</button>
+                            <a href="http://localhost/SportZone1/admin/?act=san-pham" class="btn btn-secondary">Quay về danh sách</a>
                             </div>
                         
                             <!-- /.card-header -->

@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/dist/output-scss.css" />
     <link rel="stylesheet" href="./assets/dist/output-tailwind.css" />
-    <link rel="stylesheet" href="./assets/dist/css/adminlte.min.css">
+    <!-- <link rel="stylesheet" href="./assets/dist/css/adminlte.min.css"> -->
+    <script src="https://cdn.payos.vn/payos-checkout/v1/stable/payos-initialize.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
